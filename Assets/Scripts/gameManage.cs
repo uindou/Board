@@ -24,7 +24,8 @@ public class gameManage : MonoBehaviour
         switch (obj.GetComponent<interFace>().GetName())
         {
             case "Soldier":
-                
+                List<(int, int)> area = obj.GetComponent<interFace>().Movable();
+
                 break;
             default:
                 break;

@@ -9335,6 +9335,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552853a5227bf6346aec78f1babc1086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  images:
+  - {fileID: 21300000, guid: a6cf6c2670ecb0a42a670a6cc2731577, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1987651708
 Transform:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class Soldier : CharaParent
     {
         initMoveRange();
         this.HitPoint = 3;
+        this.charaName = "Soldier";
     }
 
     private void initMoveRange()
