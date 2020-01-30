@@ -4,6 +4,7 @@ using static DataBase;
 
 public class CharaParent : MonoBehaviour,interFace
 {
+    private string charaName;
     private int HitPoint;
     private int AttackPower;
     NowPoint now = new NowPoint();
@@ -22,6 +23,11 @@ public class CharaParent : MonoBehaviour,interFace
     {
         HitPoint -= damage;
         if (HitPoint < 0) Erase();
+    }
+
+    public string GetName()
+    {
+        return charaName;
     }
     public List<(int,int)> Movable()
     {
