@@ -2,55 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gameManager : MonoBehaviour
+public class gameManage : MonoBehaviour
 {
-    Queue<Action> battleQueue;
+    private static Queue<Action> battleQueue;
     [SerializeField] private GameObject attackObj;
     [SerializeField] private GameObject receiveObj;
-    [SerializeField] AnimationClip preAnimationClip;
+    [SerializeField] AnimationClip moveAnimationClip;
     [SerializeField] AnimationClip attackAnimationClip;
     [SerializeField] AnimationClip receiveAnimationClip;
-    [SerializeField] ParticleSystem preParticle;
-    [SerializeField] ParticleSystem attackParticle;
-    [SerializeField] ParticleSystem receiveParticle;
-    private Queue<Action> battleQueue;
-    public enum AbnormalState
+    [SerializeField] ParticleSystem moveParticle;
+    public enum NowState
     {
-        Poison,
-        Paralize,
-        Freeze,
-        None
+        MoveSelect,
+        Move,
+        AttackSelect,
+        Attack
     };
+    public static void requestEnqueue(GameObject obj)
+    {
+        switch (obj.GetComponent<interFace>().GetName())
+        {
+            case "Soldier":
+                print("a");
+                break;
+            default:
+                break;
+        }
+    }
 
-    void Enqueue(GameObject chara,)
+    void Enqueue(GameObject obj,AnimationClip animationClip)
+    {
+        Action action1 = new Action()
+        {
+            p = new Performance { chara = attackObj, animationClip = animationClip, particle = moveParticle }
+        };
+        battleQueue.Enqueue(action1);
+    }
     void Start()
     {
         battleQueue = new Queue<Action>();
-        Action action1 = new Action()
-        {
-            p = new Performance { chara = attackObj, animationClip = preAnimationClip, particle = preParticle }
-        };
-        battleQueue.Enqueue(action1);
-
-        Action action2 = new Action()
-        {
-            p = new Performance { chara = attackObj, animationClip = attackAnimationClip, particle = attackParticle }
-        };
-        battleQueue.Enqueue(action2);
-
-        Action action3 = new Action()
-        {
-            p = new Performance { chara = receiveObj, animationClip = receiveAnimationClip, particle = receiveParticle }
-        };
-        battleQueue.Enqueue(action3);
-
+        while (!isGameEnd()) { 
+    /*
         Action action4 = new Action()
         {
             d = new Damage { attackChara = attackObj, receiveChara = receiveObj, mp_use = 10, damage = 30, abnormalState = AbnormalState.Poison }
         };
         battleQueue.Enqueue(action4);
-
+        */
         StartCoroutine(ActionCoroutine());
+    }
     }
 
     IEnumerator ActionCoroutine()
@@ -65,7 +65,10 @@ public class gameManager : MonoBehaviour
 
         }
     }
-
+    private bool isGameEnd()
+    {
+        return true;
+    }
     public struct Action
     {
         public Performance p;
@@ -95,11 +98,10 @@ public class gameManager : MonoBehaviour
         public GameObject receiveChara;
         public int mp_use;
         public int damage;
-        public AbnormalState abnormalState;
 
         public void Method()
         {
-            attackChara.GetComponent<CharaStatus>().mpSet -= mp_use;
+            /*attackChara.GetComponent<CharaStatus>().mpSet -= mp_use;
             receiveChara.GetComponent<CharaStatus>().hpSet -= damage;
             if (abnormalState != AbnormalState.None)
             {
@@ -107,6 +109,7 @@ public class gameManager : MonoBehaviour
                 temp.Add(abnormalState);
                 receiveChara.GetComponent<CharaStatus>().abnormalSet = temp;
             }
+            */
         }
     }
 }

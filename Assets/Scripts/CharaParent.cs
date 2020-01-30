@@ -2,7 +2,7 @@
 using UnityEngine;
 using static DataBase;
 
-public class CharaParent : MonoBehaviour
+public class CharaParent : MonoBehaviour,interFace
 {
     private int HitPoint;
     private int AttackPower;
