@@ -23,7 +23,7 @@ public class gameManage : MonoBehaviour
         switch (obj.GetComponent<interFace>().GetName())
         {
             case "Soldier":
-                print("a");
+                
                 break;
             default:
                 break;

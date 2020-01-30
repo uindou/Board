@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DataBase : MonoBehaviour
 {
+    public static List<(int,int,bool,string)> stage;
     private static int[,] board;
     public int vertical;
     public int horizontal;
@@ -11,7 +12,7 @@ public class DataBase : MonoBehaviour
     {
         board = new int[vertical, horizontal];
     }
-    public void Set(int x,int y,int mobColor)
+    public static void Set(int x,int y,int mobColor)
     {
         board[x, y] = mobColor;
     }
