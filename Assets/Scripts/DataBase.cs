@@ -20,5 +20,9 @@ public class DataBase : MonoBehaviour
     {
         return board[x, y] == 0;
     }
-
+    public static List<(int, int, bool, string)> makeStage()
+    {
+        stage.Add((1, 1, true, "Soldier"));
+        return stage;
+    }
 }
