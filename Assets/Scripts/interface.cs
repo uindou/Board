@@ -5,5 +5,6 @@ using UnityEngine;
 public interface interFace
 {
     void AddDamage(int damage);
+    string GetName();
 
 }

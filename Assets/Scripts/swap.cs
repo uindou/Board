@@ -14,7 +14,7 @@ public class swap : MonoBehaviour
 
     public void OnClick()
     {
-        gameManage.requestEnqueue(this.gameObject,);
+        gameManage.requestEnqueue(this.gameObject);
         GameObject obj1 = this.gameObject;
         GameObject obj2 = obj;
         Vector2 A_POS = obj1.transform.position;
