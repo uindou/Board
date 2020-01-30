@@ -5,11 +5,11 @@ using static DataBase;
 public class CharaParent : MonoBehaviour,interFace
 {
     private string charaName;
-    private int HitPoint;
+    protected int HitPoint;
     private int AttackPower;
     NowPoint now = new NowPoint();
-    private List<(int,int)> moveRange = new List<(int,int)>();
-    private List<(int,int)> attackRange = new List<(int, int)>();
+    protected List<(int,int)> moveRange = new List<(int,int)>();
+    protected List<(int,int)> attackRange = new List<(int, int)>();
     public void Init(int x, int y)
     {
         now.xAxis = x;

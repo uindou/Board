@@ -20,6 +20,7 @@ public class gameManage : MonoBehaviour
     };
     public static void requestEnqueue(GameObject obj)
     {
+
         switch (obj.GetComponent<interFace>().GetName())
         {
             case "Soldier":

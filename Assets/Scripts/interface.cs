@@ -6,5 +6,8 @@ public interface interFace /* CharaParentにかく関数は全部ここに書く
 {
     void AddDamage(int damage);
     string GetName();
+    void Erase();
+    List<(int, int)> Movable();
+    List<(int, int)> Attackable();
 
 }

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static DataBase;
 
 public class Init : MonoBehaviour
 {
+    public Sprite[] images = new Sprite[10];
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,9 @@ public class Init : MonoBehaviour
             switch(name)
             {
                 case "Soldier":
+                    
                     obj.AddComponent<CharaParent>();
+                    obj.transform.GetChild(0).GetComponent<Image>().sprite = images[0];
                     break;
                 default:
                     obj.AddComponent<swap>();
