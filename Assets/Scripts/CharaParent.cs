@@ -4,10 +4,10 @@ using static DataBase;
 
 public class CharaParent : MonoBehaviour,interFace
 {
-    private string charaName;
+    protected string charaName;
     protected int HitPoint;
     private int AttackPower;
-    NowPoint now = new NowPoint();
+    protected NowPoint now = new NowPoint();
     protected List<(int,int)> moveRange = new List<(int,int)>();
     protected List<(int,int)> attackRange = new List<(int, int)>();
     public void Init(int x, int y)
@@ -35,9 +35,9 @@ public class CharaParent : MonoBehaviour,interFace
         foreach((int,int) T in moveRange)
         {
             var (i, j) = T;
-            if (DataBase.CanSet(i, j))
+            if (DataBase.CanSet(now.xAxis + i, now.yAxis+j))
             {
-                res.Add((i, j));
+                res.Add((now.xAxis + i, now.yAxis + j));
             }
         }
         return res;

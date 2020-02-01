@@ -22,9 +22,13 @@ public class Init : MonoBehaviour
             switch(name)
             {
                 case "Soldier":
-                    
-                    obj.AddComponent<CharaParent>();
+                    obj.AddComponent<Soldier>();
+                    obj.GetComponent<interFace>().Init(i, j);
                     obj.transform.GetChild(0).GetComponent<Image>().sprite = images[0];
+                    if (team)
+                    {
+                        obj.transform.Rotate(0, 180f, 0);
+                    }
                     break;
                 default:
                     obj.AddComponent<swap>();

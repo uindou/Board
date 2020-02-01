@@ -20,12 +20,23 @@ public class gameManage : MonoBehaviour
     };
     public static void requestEnqueue(GameObject obj)
     {
-
+        Debug.Log("ゲームマネージャー起動");
         switch (obj.GetComponent<interFace>().GetName())
         {
             case "Soldier":
+                Debug.Log("分岐");
                 List<(int, int)> area = obj.GetComponent<interFace>().Movable();
+                foreach((int,int)T in area)
+                {
+                    Debug.Log("送信");
+                    var (i, j) = T;
+                    GameObject obj1 = GameObject.Find("Grid(" + i + "," + j + ")");
+                    Debug.Log("送信2");
+                    Debug.Log(i);
+                    Debug.Log(j);
+                    obj1.GetComponent<clickReceiver>().Flash();
 
+                }
                 break;
             default:
                 break;

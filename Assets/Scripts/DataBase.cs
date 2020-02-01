@@ -5,12 +5,14 @@ using UnityEngine;
 public class DataBase : MonoBehaviour
 {
     public static List<(int,int,bool,string)> stage;
+    public GameObject[,] objs;
     private static int[,] board;
     public int vertical;
     public int horizontal;
     private void Start()
     {
         board = new int[vertical, horizontal];
+        objs = new GameObject[vertical, horizontal];
     }
     public static void Set(int x,int y,int mobColor)
     {
@@ -23,7 +25,23 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
-        stage.Add((1, 1, true, "Soldier"));
+        stage.Add((4, 3, true, "Soldier"));
         return stage;
+    }
+
+    void Start()
+    {
+        objSearch();
+    }
+
+    void objSearch()
+    {
+        for(int i = 0; i < vertical; i++)
+        {
+            for(int j = 0; j < horizontal; j++)
+            {
+
+            }
+        }
     }
 }

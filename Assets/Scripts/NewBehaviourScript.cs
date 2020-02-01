@@ -21,9 +21,9 @@ public class NewBehaviourScript : MonoBehaviour
     void Update()
     {
         //durationの時間ごとに色が変わる
-        float phi = Time.time / duration * 2 * Mathf.PI;
-        float amplitude = Mathf.Cos(phi) * 0.5F + 0.5F;
+        //float phi = Time.time / duration * 2 * Mathf.PI;
+        //float amplitude = Mathf.Cos(phi) * 0.5F + 0.5F;
         //色をRGBではなくHSVで指定
-        cube1.GetComponent<Image>().color = new Color(amplitude,170,amplitude);
+       // cube1.GetComponent<Image>().color = new Color(amplitude,170,amplitude);
     }
 }
