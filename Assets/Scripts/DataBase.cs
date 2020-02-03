@@ -35,12 +35,25 @@ public class DataBase : MonoBehaviour
             return false;
         }
     }
+    public static bool CanAttack(int x, int y,bool enemycolor)
+    {
+        int mobcolor = enemycolor ? 1 : 0;
+        if (x >= 0 & x < vertical & y >= 0 & y < horizontal)
+        {
+            return board[x, y] == mobcolor;
+        }
+        else
+        {
+            return false;
+        }
+    }
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
-        stage.Add((1, 2, true, "Soldier"));
-        stage.Add((1, 3, true, "Soldier"));
-        stage.Add((1, 4, true, "Soldier"));
+        stage.Add((2, 2, true, "Soldier"));
+        stage.Add((2, 3, true, "Soldier"));
+        stage.Add((2, 4, true, "Soldier"));
+        stage.Add((4, 3, false, "Soldier"));
         return stage;
     }
     public static (int, int) objSearch(GameObject obj)
@@ -93,7 +106,6 @@ public class DataBase : MonoBehaviour
     {
         return moveFlug;
     }
-
     public static void MoveRequest(int i, int j)
     {
         if (!moveFlug)

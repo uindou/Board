@@ -7,13 +7,15 @@ public class CharaParent : MonoBehaviour,interFace
     protected string charaName;
     protected int HitPoint;
     private int AttackPower;
+    protected bool team;
     protected NowPoint now = new NowPoint();
     protected List<(int,int)> moveRange = new List<(int,int)>();
     protected List<(int,int)> attackRange = new List<(int, int)>();
-    public void Init(int x, int y)
+    public void Init(int x, int y,bool team)
     {
         now.xAxis = x;
         now.yAxis = y;
+        this.team = team;
     }
     public void Erase()
     {
@@ -23,6 +25,10 @@ public class CharaParent : MonoBehaviour,interFace
     {
         HitPoint -= damage;
         if (HitPoint < 0) Erase();
+    }
+    public bool IsTeam()
+    {
+        return team;
     }
 
     public string GetName()
@@ -50,9 +56,9 @@ public class CharaParent : MonoBehaviour,interFace
         foreach ((int, int) T in attackRange)
         {
             var (i, j) = T;
-            if (DataBase.CanSet(now.xAxis+i, now.yAxis+j))
+            if (DataBase.CanAttack(now.xAxis+i, now.yAxis+j,false))
             {
-                res.Add((i, j));
+                res.Add((now.xAxis + i, now.yAxis + j));
             }
         }
         return res;

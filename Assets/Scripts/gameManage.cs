@@ -50,9 +50,12 @@ public class gameManage : MonoBehaviour
                 }
                 break;
             case situation.attackselect:
-                if (true)
+                if (obj.GetComponent<interFace>() != null)
                 {
-                    
+                    int i3, j3;
+                    (i3, j3) = DataBase.selectMove;
+                    GameObject obj1 = DataBase.objs[i3, j3];
+                    AttackFlash(obj1, true);
                 }
                 break;
             default:
@@ -75,6 +78,26 @@ public class gameManage : MonoBehaviour
             else
             {
                 obj1.GetComponent<clickReceiver>().StopFlash();
+            }
+        }
+    }
+    public static void AttackFlash(GameObject obj,bool isflash)
+    {
+        List<(int, int)> area = obj.GetComponent<interFace>().Attackable();
+        foreach ((int, int) T in area)
+        {
+            var (i2, j2) = T;
+            GameObject obj1 = DataBase.objs[i2-1, j2-1];
+            if (obj1.GetComponent<interFace>() != null /*& obj1.GetComponent<interFace>().IsTeam() == false*/)
+            {
+                if (isflash)
+                {
+                    obj1.GetComponent<clickReceiver>().Flash();
+                }
+                else
+                {
+                    obj1.GetComponent<clickReceiver>().StopFlash();
+                }
             }
         }
     }
@@ -137,6 +160,7 @@ public class Move:State{
             Vector3 c = obj.transform.position;
             obj.transform.position = obj1.transform.position;
             obj1.transform.position = c;
+            gameManage.receiveMode = situation.attackselect;
             return new AttackSelect();
         }else if(gameManage.moveReset){
             gameManage.moveReset = false;

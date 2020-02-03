@@ -23,7 +23,7 @@ public class Init : MonoBehaviour
             {
                 case "Soldier":
                     obj.AddComponent<Soldier>();
-                    obj.GetComponent<interFace>().Init(i, j);
+                    obj.GetComponent<interFace>().Init(i, j,team);
                     obj.transform.GetChild(0).GetComponent<Image>().sprite = images[0];
                     if (team)
                     {
