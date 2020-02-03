@@ -27,7 +27,7 @@ public class Init : MonoBehaviour
                     obj.transform.GetChild(0).GetComponent<Image>().sprite = images[0];
                     if (team)
                     {
-                        obj.transform.Rotate(0, 180f, 0);
+                        //obj.transform.Rotate(0, 180f, 0);
                     }
                     break;
                 default:

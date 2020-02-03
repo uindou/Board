@@ -10,6 +10,7 @@ public class clickReceiver : MonoBehaviour
     public bool trigger;
     public void OnClick()
     {
+        Debug.Log("Clicked");
         gameManage.requestEnqueue(this.gameObject);
     }
    public void Flash()

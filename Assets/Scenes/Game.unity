@@ -483,7 +483,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 53506134}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53506136}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &53506134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1367,7 +1378,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 153111693}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 153111695}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &153111693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1646,7 +1668,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 226872954}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 226872956}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &226872954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9776,8 +9809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126dff83c5754394bbe6ad4ba835bb60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertical: 5
-  horizontal: 7
 --- !u!114 &1987651707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9827,12 +9858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e62a544fe7dd0547bc9995746fc7a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackObj: {fileID: 0}
-  receiveObj: {fileID: 0}
-  moveAnimationClip: {fileID: 0}
-  attackAnimationClip: {fileID: 0}
-  receiveAnimationClip: {fileID: 0}
-  moveParticle: {fileID: 0}
 --- !u!1 &2025395137
 GameObject:
   m_ObjectHideFlags: 0

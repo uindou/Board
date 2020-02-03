@@ -35,10 +35,12 @@ public class CharaParent : MonoBehaviour,interFace
         foreach((int,int) T in moveRange)
         {
             var (i, j) = T;
-            if (DataBase.CanSet(now.xAxis + i, now.yAxis+j))
-            {
-                res.Add((now.xAxis + i, now.yAxis + j));
-            }
+            
+                if (DataBase.CanSet(now.xAxis + i, now.yAxis + j))
+                {
+                    res.Add((now.xAxis + i, now.yAxis + j));
+                }
+            
         }
         return res;
     }
