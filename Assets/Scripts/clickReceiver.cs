@@ -43,7 +43,7 @@ public class clickReceiver : MonoBehaviour
         {
             if (!isFlash) break;
             // 残り時間が0以上の場合はタイマーを更新　
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
             float phi = Time.time / duration * 2 * Mathf.PI;
             float amplitude = Mathf.Cos(phi) * 0.5F + 0.5F;
             this.GetComponent<Image>().color = new Color(amplitude, 170, amplitude);
