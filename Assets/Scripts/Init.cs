@@ -30,6 +30,16 @@ public class Init : MonoBehaviour
                         obj.transform.Rotate(0, 0, 180f);
                     }
                     break;
+
+                case "Tank":
+                    obj.AddComponent<Tank>();
+                    obj.GetComponent<interFace>().Init(i, j, team);
+                    obj.transform.GetChild(0).GetComponent<Image>().sprite = images[1];
+                    if (team)
+                    {
+                        obj.transform.Rotate(0, 0, 180f);
+                    }
+                    break;
                 default:
                     obj.AddComponent<swap>();
                     break;
