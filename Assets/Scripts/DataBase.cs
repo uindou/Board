@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DataBase : MonoBehaviour
 {
+    public static Sprite[] images = new Sprite[10];
     public static List<(int,int,bool,string)> stage;
     public static GameObject[,] objs;
     private static int[,] board;
@@ -19,6 +20,16 @@ public class DataBase : MonoBehaviour
         board = new int[vertical, horizontal];
         objs = new GameObject[vertical, horizontal];
         objInit();
+        ImageInit();
+    }
+    private void ImageInit()
+    {
+        images[0] = GameObject.Find("Soldier").GetComponent<SpriteRenderer>().sprite;
+        images[1] = GameObject.Find("Tank").GetComponent<SpriteRenderer>().sprite;
+    }
+    public static Sprite image(int i)
+    {
+        return images[i];
     }
     public static void Set(int x,int y,int mobColor)
     {

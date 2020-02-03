@@ -6,7 +6,6 @@ using static DataBase;
 
 public class Init : MonoBehaviour
 {
-    public Sprite[] images = new Sprite[10];
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +25,7 @@ public class Init : MonoBehaviour
                 case "Soldier":
                     obj.AddComponent<Soldier>();
                     obj.GetComponent<interFace>().Init(i, j,team);
-                    obj.transform.GetChild(0).GetComponent<Image>().sprite = images[0];
+                    obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(0);
                     if (team)
                     {
                         obj.transform.Rotate(0, 0, 180f);
@@ -36,7 +35,7 @@ public class Init : MonoBehaviour
                 case "Tank":
                     obj.AddComponent<Tank>();
                     obj.GetComponent<interFace>().Init(i, j, team);
-                    obj.transform.GetChild(0).GetComponent<Image>().sprite = images[1];
+                    obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(1);
                     if (team)
                     {
                         obj.transform.Rotate(0, 0, 180f);
