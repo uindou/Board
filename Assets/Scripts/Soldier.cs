@@ -5,13 +5,34 @@ using UnityEngine;
 public class Soldier : CharaParent
 {
 
+    private int i;
     // Start is called before the first frame update
     void Start()
     {
         initMoveRange();
         initAttackRange();
+        makeHP();
         this.HitPoint = 1;
+        this.MaxHitPoint = 1;
         this.charaName = "Soldier";
+    }
+    private void makeHP()
+    {
+        for (i = 0; i < 3; i++)
+        {
+            if (i < HitPoint)
+            {
+                this.transform.GetChild(i).GetComponent<Image>().sprite = heart;
+            }DataBase.images[1]
+            else if (i < MaxHitPoint)
+            {
+                this.transform.GetChild(i).GetComponent<Image>().sprite = brokenheart;
+            }
+            else
+            {
+                this.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
     }
 
     private void initMoveRange()
