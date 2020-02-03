@@ -54,9 +54,9 @@ public class DataBase : MonoBehaviour
         stage.Add((2, 3, true, "Tank"));
         stage.Add((2, 4, true, "Soldier"));
 
-        stage.Add((6, 2, false, "Soldier"));
-        stage.Add((6, 3, false, "Tank"));
-        stage.Add((6, 4, false, "Soldier"));
+        stage.Add((4, 2, false, "Soldier"));
+        stage.Add((4, 3, false, "Tank"));
+        stage.Add((4, 4, false, "Soldier"));
         return stage;
     }
     public static (int, int) objSearch(GameObject obj)
