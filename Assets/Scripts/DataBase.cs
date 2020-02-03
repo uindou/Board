@@ -38,8 +38,9 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
-        stage.Add((4, 3, true, "Soldier"));
-        stage.Add((4, 4, true, "Soldier"));
+        stage.Add((1, 2, false, "Soldier"));
+        stage.Add((1, 3, false, "Soldier"));
+        stage.Add((1, 4, false, "Soldier"));
         return stage;
     }
     public static (int, int) objSearch(GameObject obj)
