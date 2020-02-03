@@ -8,35 +8,13 @@ public class gameManage : MonoBehaviour
 {
     [SerializeField]State state;
     public static situation receiveMode;
+    public static bool moveReset;
+
     public enum situation
     {
         select,
         move
     }
-    /*public static void requestEnqueue(GameObject obj)
-    {
-        Debug.Log("ゲームマネージャー起動");
-        switch (obj.GetComponent<interFace>().GetName())
-        {
-            case "Soldier":
-                Debug.Log("分岐");
-                List<(int, int)> area = obj.GetComponent<interFace>().Movable();
-                foreach ((int, int) T in area)
-                {
-                    Debug.Log("送信");
-                    var (i, j) = T;
-                    GameObject obj1 = GameObject.Find("Grid(" + i + "," + j + ")");
-                    Debug.Log("送信2");
-                    Debug.Log(i);
-                    Debug.Log(j);
-                    obj1.GetComponent<clickReceiver>().Flash();
-
-                }
-                break;
-            default:
-                break;
-        }
-    }*/
     public static void requestEnqueue(GameObject obj)
     {
         switch (receiveMode)
@@ -52,9 +30,16 @@ public class gameManage : MonoBehaviour
             case situation.move:
                 if(obj.GetComponent<interFace>() != null)
                 {
+                    int i3, j3;
+                    (i3, j3) = DataBase.selectMove;
+                    GameObject obj1 = DataBase.objs[i3, j3];
+                    FlashControl(obj1,false);
                     int s, t;
                     (s, t) = DataBase.objSearch(obj);
                     DataBase.SelectReset();
+                    DataBase.SelectRequest(s, t);
+                    moveReset = true;
+                    break;
                 }
                 else if (obj.GetComponent<clickReceiver>().IsMoveRange())
                 {
@@ -67,6 +52,23 @@ public class gameManage : MonoBehaviour
                 break;
 
 
+        }
+    }
+    public static void FlashControl(GameObject obj,bool isflash)
+    {
+        List<(int, int)> area = obj.GetComponent<interFace>().Movable();
+        foreach ((int, int) T in area)
+        {
+            var (i2, j2) = T;
+            GameObject obj1 = DataBase.objs[i2 - 1, j2 - 1];
+            if (isflash)
+            {
+                obj1.GetComponent<clickReceiver>().Flash();
+            }
+            else
+            {
+                obj1.GetComponent<clickReceiver>().StopFlash();
+            }
         }
     }
     private void Start()
@@ -102,20 +104,9 @@ public class Select : State
             int i, j;
             (i, j) = DataBase.selectMove;
             GameObject obj = DataBase.objs[i, j];
-            List<(int, int)> area = obj.GetComponent<interFace>().Movable();
-            foreach ((int, int) T in area)
-            {
-                var (i2, j2) = T;
-                Debug.Log(i2+","+j2);
-                GameObject obj1 = DataBase.objs[i2-1, j2-1];
-                obj1.GetComponent<clickReceiver>().Flash();
-            }
+            gameManage.FlashControl(obj, true);
             gameManage.receiveMode = situation.move;
             return new Move();
-        }
-        else if (true)
-        {
-            return this;
         }
         else
         {
@@ -135,19 +126,19 @@ public class Move:State{
             (i4, j4) = DataBase.move;
             GameObject obj = DataBase.objs[i4, j4];
             GameObject obj1 = DataBase.objs[i3, j3];
-            List<(int, int)> area = obj1.GetComponent<interFace>().Movable();
-            foreach ((int, int) T in area)
-            {
-                var (i2, j2) = T;
-                GameObject obj2 = DataBase.objs[i2 - 1, j2 - 1];
-                obj1.GetComponent<clickReceiver>().StopFlash();
-            }
+            gameManage.FlashControl(obj1, true);
             Vector3 c = obj.transform.position;
             obj.transform.position = obj1.transform.position;
             obj1.transform.position = c;
             return new Final();
+        }else if(gameManage.moveReset){
+            gameManage.moveReset = false;
+            return new Select();
         }
-        return this;
+        else
+        {
+            return this;
+        }
     }
 }
 public class Final : State
