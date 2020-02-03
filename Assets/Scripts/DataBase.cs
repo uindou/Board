@@ -11,6 +11,8 @@ public class DataBase : MonoBehaviour
     public static int horizontal=5;
     private static bool selectFlug;
     public static (int, int) selectMove;
+    private static bool moveFlug;
+    public static (int, int) move;
     private void Start()
     {
         selectFlug = false;
@@ -74,13 +76,29 @@ public class DataBase : MonoBehaviour
     {
         return selectFlug;
     }
-
+    public static void SelectReset()
+    {
+        selectFlug = false;
+    }
     public static void SelectRequest(int i,int j)
     {
         if (!selectFlug)
         {
             selectMove = (i, j);
             selectFlug = true;
+        }
+    }
+    public static bool Move()
+    {
+        return moveFlug;
+    }
+
+    public static void MoveRequest(int i, int j)
+    {
+        if (!moveFlug)
+        {
+            move = (i, j);
+            moveFlug = true;
         }
     }
 }

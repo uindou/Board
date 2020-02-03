@@ -50,26 +50,17 @@ public class gameManage : MonoBehaviour
                 }
                 break;
             case situation.move:
-                clickReceiver res = obj.GetComponent<clickReceiver>();
-                if (res.IsMoveRange())
+                if(obj.GetComponent<interFace>() != null)
                 {
-                    int i3, j3;
-                    (i3,j3)=DataBase.selectMove;
-                    GameObject obj1 = DataBase.objs[i3,j3];
-                    Debug.Log(obj1+","+obj);
-                    List<(int, int)> area = obj1.GetComponent<interFace>().Movable();
-                    foreach ((int, int) T in area)
-                    {
-                        var (i2, j2) = T;
-                        GameObject obj2 = DataBase.objs[i2 - 1, j2 - 1];
-                        obj1.GetComponent<clickReceiver>().StopFlash();
-                    }
-                    Vector3 c = obj.transform.position;
-                    obj.transform.position = obj1.transform.position;
-                    obj1.transform.position = c;
-                    Debug.Log("変更完了");
-
-
+                    int s, t;
+                    (s, t) = DataBase.objSearch(obj);
+                    DataBase.SelectReset();
+                }
+                else if (obj.GetComponent<clickReceiver>().IsMoveRange())
+                {
+                    int s, t;
+                    (s, t) = DataBase.objSearch(obj);
+                    DataBase.MoveRequest(s, t);
                 }
                 break;
             default:
@@ -108,7 +99,6 @@ public class Select : State
     {
         if (DataBase.Select())
         {
-            Debug.Log("select stateまで来た");
             int i, j;
             (i, j) = DataBase.selectMove;
             GameObject obj = DataBase.objs[i, j];
@@ -123,6 +113,10 @@ public class Select : State
             gameManage.receiveMode = situation.move;
             return new Move();
         }
+        else if (true)
+        {
+            return this;
+        }
         else
         {
             return this;
@@ -133,6 +127,26 @@ public class Select : State
 public class Move:State{
     public State Execute()
     {
+        if (DataBase.Move())
+        {
+            int i3, j3;
+            int i4, j4;
+            (i3, j3) = DataBase.selectMove;
+            (i4, j4) = DataBase.move;
+            GameObject obj = DataBase.objs[i4, j4];
+            GameObject obj1 = DataBase.objs[i3, j3];
+            List<(int, int)> area = obj1.GetComponent<interFace>().Movable();
+            foreach ((int, int) T in area)
+            {
+                var (i2, j2) = T;
+                GameObject obj2 = DataBase.objs[i2 - 1, j2 - 1];
+                obj1.GetComponent<clickReceiver>().StopFlash();
+            }
+            Vector3 c = obj.transform.position;
+            obj.transform.position = obj1.transform.position;
+            obj1.transform.position = c;
+            return new Final();
+        }
         return this;
     }
 }

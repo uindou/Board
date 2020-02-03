@@ -35,7 +35,6 @@ public class clickReceiver : MonoBehaviour
     {
         isFlash = true;
         moveTrigger = true;
-        Debug.Log("送信");
         startcolor = this.GetComponent<Image>().color;
         StartCoroutine("testtimer", 5);
     }
@@ -51,6 +50,5 @@ public class clickReceiver : MonoBehaviour
             this.GetComponent<Image>().color = new Color(amplitude, 170, amplitude);
         }
         this.GetComponent<Image>().color = startcolor;
-        Debug.Log("end");
     }
 }
