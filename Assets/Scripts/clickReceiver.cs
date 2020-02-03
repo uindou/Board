@@ -13,6 +13,7 @@ public class clickReceiver : MonoBehaviour
 
     private void Start()
     {
+        startcolor = this.GetComponent<Image>().color;
         moveTrigger = false;
     }
     public void OnClick()
@@ -28,14 +29,12 @@ public class clickReceiver : MonoBehaviour
 
     public void StopFlash()
     {
-        Debug.Log(this.gameObject +"終了");
         isFlash = false;
     }
    public void Flash()
     {
         isFlash = true;
         moveTrigger = true;
-        startcolor = this.GetComponent<Image>().color;
         StartCoroutine("testtimer", 5);
     }
     IEnumerator testtimer(int lefttime)
