@@ -126,7 +126,7 @@ public class Move:State{
             (i4, j4) = DataBase.move;
             GameObject obj = DataBase.objs[i4, j4];
             GameObject obj1 = DataBase.objs[i3, j3];
-            gameManage.FlashControl(obj1, true);
+            gameManage.FlashControl(obj1, false);
             Vector3 c = obj.transform.position;
             obj.transform.position = obj1.transform.position;
             obj1.transform.position = c;

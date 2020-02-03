@@ -76,11 +76,11 @@ public class DataBase : MonoBehaviour
     {
         return selectFlug;
     }
-    public static void SelectReset()
+    public static void SelectReset()//リクエスト
     {
         selectFlug = false;
     }
-    public static void SelectRequest(int i,int j)
+    public static void SelectRequest(int i,int j)//リクエストに対して、初めて置くときだけ許可
     {
         if (!selectFlug)
         {
