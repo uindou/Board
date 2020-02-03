@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static DataBase;
+using static gameManage;
 
 public class gameManage : MonoBehaviour
 {
     [SerializeField]State state;
-    static situation receiveMode;
-    private enum situation
+    public static situation receiveMode;
+    public enum situation
     {
         select,
         move
@@ -46,6 +47,29 @@ public class gameManage : MonoBehaviour
                     int s, t;
                     (s, t) = DataBase.objSearch(obj);
                     DataBase.SelectRequest(s, t);
+                }
+                break;
+            case situation.move:
+                clickReceiver res = obj.GetComponent<clickReceiver>();
+                if (res.IsMoveRange())
+                {
+                    int i3, j3;
+                    (i3,j3)=DataBase.selectMove;
+                    GameObject obj1 = DataBase.objs[i3,j3];
+                    Debug.Log(obj1+","+obj);
+                    List<(int, int)> area = obj1.GetComponent<interFace>().Movable();
+                    foreach ((int, int) T in area)
+                    {
+                        var (i2, j2) = T;
+                        GameObject obj2 = DataBase.objs[i2 - 1, j2 - 1];
+                        obj1.GetComponent<clickReceiver>().StopFlash();
+                    }
+                    Vector3 c = obj.transform.position;
+                    obj.transform.position = obj1.transform.position;
+                    obj1.transform.position = c;
+                    Debug.Log("変更完了");
+
+
                 }
                 break;
             default:
@@ -96,7 +120,8 @@ public class Select : State
                 GameObject obj1 = DataBase.objs[i2-1, j2-1];
                 obj1.GetComponent<clickReceiver>().Flash();
             }
-            return new Final();
+            gameManage.receiveMode = situation.move;
+            return new Move();
         }
         else
         {
@@ -105,6 +130,12 @@ public class Select : State
     }
 }
 
+public class Move:State{
+    public State Execute()
+    {
+        return this;
+    }
+}
 public class Final : State
 {
     public State Execute()
