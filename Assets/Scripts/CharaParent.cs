@@ -6,6 +6,7 @@ public class CharaParent : MonoBehaviour,interFace
 {
     protected string charaName;
     protected int HitPoint;
+    protected int MaxHitPoint;
     private int AttackPower;
     protected bool team;
     protected NowPoint now = new NowPoint();

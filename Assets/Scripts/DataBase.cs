@@ -26,6 +26,8 @@ public class DataBase : MonoBehaviour
     {
         images[0] = GameObject.Find("Soldier").GetComponent<SpriteRenderer>().sprite;
         images[1] = GameObject.Find("Tank").GetComponent<SpriteRenderer>().sprite;
+        images[2] = GameObject.Find("Heart").GetComponent<SpriteRenderer>().sprite;
+        images[3] = GameObject.Find("BrokenHeart").GetComponent<SpriteRenderer>().sprite;
     }
     public static Sprite image(int i)
     {
@@ -61,13 +63,14 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
-        stage.Add((2, 2, true, "Soldier"));
+        /*stage.Add((2, 2, true, "Soldier"));
         stage.Add((2, 3, true, "Tank"));
         stage.Add((2, 4, true, "Soldier"));
 
         stage.Add((4, 2, false, "Soldier"));
         stage.Add((4, 3, false, "Tank"));
-        stage.Add((4, 4, false, "Soldier"));
+        stage.Add((4, 4, false, "Soldier"));*/
+        stage.Add((1, 1, false, "Soldier"));
         return stage;
     }
     public static (int, int) objSearch(GameObject obj)

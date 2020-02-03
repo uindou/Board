@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Soldier : CharaParent
 {
-
-    private int i;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,24 +12,24 @@ public class Soldier : CharaParent
         initAttackRange();
         makeHP();
         this.HitPoint = 1;
-        this.MaxHitPoint = 1;
+        this.MaxHitPoint = this.HitPoint;
         this.charaName = "Soldier";
     }
     private void makeHP()
     {
-        for (i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (i < HitPoint)
             {
-                this.transform.GetChild(i).GetComponent<Image>().sprite = heart;
-            }DataBase.images[1]
+                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(2);
+            }
             else if (i < MaxHitPoint)
             {
-                this.transform.GetChild(i).GetComponent<Image>().sprite = brokenheart;
+                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(3);
             }
             else
             {
-                this.transform.GetChild(i).gameObject.SetActive(false);
+                this.transform.GetChild(1).transform.GetChild(i).gameObject.SetActive(false);
             }
         }
     }
