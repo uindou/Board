@@ -13,7 +13,8 @@ public class gameManage : MonoBehaviour
     public enum situation
     {
         select,
-        move
+        move,
+        attackselect
     }
     public static void requestEnqueue(GameObject obj)
     {
@@ -46,6 +47,12 @@ public class gameManage : MonoBehaviour
                     int s, t;
                     (s, t) = DataBase.objSearch(obj);
                     DataBase.MoveRequest(s, t);
+                }
+                break;
+            case situation.attackselect:
+                if (true)
+                {
+                    
                 }
                 break;
             default:
@@ -130,7 +137,7 @@ public class Move:State{
             Vector3 c = obj.transform.position;
             obj.transform.position = obj1.transform.position;
             obj1.transform.position = c;
-            return new Final();
+            return new AttackSelect();
         }else if(gameManage.moveReset){
             gameManage.moveReset = false;
             return new Select();
@@ -139,6 +146,13 @@ public class Move:State{
         {
             return this;
         }
+    }
+}
+public class AttackSelect : State
+{
+    public State Execute()
+    {
+        return this;
     }
 }
 public class Final : State
