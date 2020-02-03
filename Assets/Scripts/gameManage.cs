@@ -70,7 +70,7 @@ public class gameManage : MonoBehaviour
         foreach ((int, int) T in area)
         {
             var (i2, j2) = T;
-            GameObject obj1 = DataBase.objs[i2 - 1, j2 - 1];
+            GameObject obj1 = DataBase.objs[i2, j2];
             if (isflash)
             {
                 obj1.GetComponent<clickReceiver>().Flash();
@@ -87,7 +87,7 @@ public class gameManage : MonoBehaviour
         foreach ((int, int) T in area)
         {
             var (i2, j2) = T;
-            GameObject obj1 = DataBase.objs[i2-1, j2-1];
+            GameObject obj1 = DataBase.objs[i2, j2];
             if (obj1.GetComponent<interFace>() != null /*& obj1.GetComponent<interFace>().IsTeam() == false*/)
             {
                 if (isflash)

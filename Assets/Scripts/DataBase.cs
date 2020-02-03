@@ -77,7 +77,7 @@ public class DataBase : MonoBehaviour
         {
             for(int j = 0; j < horizontal; j++)
             {
-                objs[i,j] = GameObject.Find("Grid(" + (i+1) + "," + (j+1) + ")");
+                objs[i,j] = GameObject.Find("Grid(" + i + "," + j + ")");
                 if (objs[i, j] == null)
                 {
                     Debug.Log("init failed"+i+","+j);

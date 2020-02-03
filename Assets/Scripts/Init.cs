@@ -16,6 +16,8 @@ public class Init : MonoBehaviour
         {
             var (i, j,team, name) = T;
             int teamColor = team?1:0;
+            i -= 1;
+            j -= 1;
             DataBase.Set(i, j, teamColor);
 
             GameObject obj = GameObject.Find("Grid(" + i + "," + j+")");
