@@ -63,13 +63,8 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
-        /*stage.Add((2, 2, true, "Soldier"));
-        stage.Add((2, 3, true, "Tank"));
-        stage.Add((2, 4, true, "Soldier"));
-
-        stage.Add((4, 2, false, "Soldier"));
-        stage.Add((4, 3, false, "Tank"));
-        stage.Add((4, 4, false, "Soldier"));*/
+        stage.Add((1, 2, true, "Tank"));
+        stage.Add((1, 3, true, "Tank"));
         stage.Add((1, 1, false, "Soldier"));
         return stage;
     }
