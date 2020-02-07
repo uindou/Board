@@ -11,15 +11,14 @@ public class Soldier : CharaParent
     {
         initMoveRange();
         initAttackRange();
-        makeHP();
         this.HitPoint = 1;
         this.AttackPower = 3;
         this.MaxHitPoint = this.HitPoint;
         this.charaName = "Soldier";
+        makeHP();
     }
     private void makeHP()
     {
-        HitPoint = 1; //なぜか0になってるのでここでもう一回代入
         for (i = 0; i < 3; i++)
         {
             if (i < HitPoint)
