@@ -41,7 +41,6 @@ public class Init : MonoBehaviour
                     }
                     break;
                 default:
-                    obj.AddComponent<swap>();
                     break;
             }
         }

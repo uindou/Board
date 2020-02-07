@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static DataBase;
 
 public class CharaParent : MonoBehaviour,interFace
@@ -29,7 +30,12 @@ public class CharaParent : MonoBehaviour,interFace
     }
     public void Erase()
     {
-        Destroy(this.gameObject);
+        DataBase.Set(now.xAxis,now.yAxis,0);
+        if(team)this.gameObject.transform.Rotate(0, 0, 180f);
+        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.firstImage;
+        Destroy(this);
+
+        //Destroy(this.gameObject);
     }
     public void AddDamage(int damage)
     {

@@ -29,7 +29,6 @@ public class clickReceiver : MonoBehaviour
             if (DataBase.objSearch(this.gameObject) == T)
             {
                 return true;
-
             }
         }
         return false;

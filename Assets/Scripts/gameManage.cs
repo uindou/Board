@@ -215,6 +215,9 @@ public class Move:State{
             DataBase.objs[i3, j3] = obj;
             DataBase.objs[i4, j4] = obj1;
             obj1.GetComponent<interFace>().Move(i4,j4);
+            int teamNum = obj1.GetComponent<interFace>().IsTeam() ? 2 : 1;
+            DataBase.Set(i4, j4, teamNum);
+            DataBase.Set(i3, j3, 0);
 
             gameManage.receiveMode = gameManage.situation.attackselect;
             return new AttackSelect();
@@ -260,7 +263,7 @@ public class Attack : State
             GameObject obj = DataBase.objs[i4, j4];
             GameObject obj1 = DataBase.objs[i3, j3];
             gameManage.AttackFlash(obj1, false);
-            //obj.GetComponent<interFace>().AddDamage(obj1.GetComponent<interFace>().Power());
+            obj.GetComponent<interFace>().AddDamage(obj1.GetComponent<interFace>().Power());
 
             gameManage.receiveMode = gameManage.situation.free;
             return new Final();

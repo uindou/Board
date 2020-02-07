@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static gameManage;
 public class DataBase : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class DataBase : MonoBehaviour
     public static (int, int) attackSelect;
     public static bool attackFlug;
     public static (int, int) realAttack;
+    public static Sprite firstImage;
     public static situation receive;//他から変える
     public enum situation
     {
@@ -32,6 +34,7 @@ public class DataBase : MonoBehaviour
         objs = new GameObject[vertical, horizontal];
         objInit();
         ImageInit();
+        firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
     }
     public static void FlugInit()
     {
@@ -53,7 +56,7 @@ public class DataBase : MonoBehaviour
     }
     public static void Set(int x,int y,int mobColor)
     {
-        board[x, y] = mobColor;
+        board[x, y] = mobColor;//0→何もなし　1→相手？　2→自分？
     }
     public static bool CanSet(int x,int y)
     {
