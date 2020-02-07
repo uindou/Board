@@ -11,6 +11,7 @@ public class gameManage : MonoBehaviour
     public static bool moveReset;
     public static bool attackReset;
     public static bool turn;
+    public static bool skipFlug;
 
     public enum situation
     {
@@ -19,6 +20,10 @@ public class gameManage : MonoBehaviour
         attackselect,
         attack,
         free
+    }
+    public static void Skip()
+    {
+        skipFlug = true;
     }
     public static void requestEnqueue(GameObject obj)
     {
@@ -154,6 +159,7 @@ public class gameManage : MonoBehaviour
         state = new Start();
         receiveMode = situation.select;
         turn = false;
+        
     }
     private void Update()
     {
@@ -170,8 +176,11 @@ public class Start : State
 {
     public State Execute()
     {
+        gameManage.skipFlug = false;
         DataBase.FlugInit();
         gameManage.receiveMode = gameManage.situation.select;
+        DataBase.TurnChange();
+        DataBase.PhaseChange(true);
         return new Select();
     }
 }
@@ -180,7 +189,12 @@ public class Select : State
 {
     public State Execute()
     {
-        if (DataBase.selectFlug)
+        if (gameManage.skipFlug)
+        {
+            gameManage.skipFlug = false;
+            return new Move();
+        }
+        else if (DataBase.selectFlug)
         {
             int i, j;
             (i, j) = DataBase.selectMove;
@@ -220,6 +234,7 @@ public class Move:State{
             DataBase.Set(i3, j3, 0);
 
             gameManage.receiveMode = gameManage.situation.attackselect;
+            DataBase.PhaseChange(false);
             return new AttackSelect();
         }else if(gameManage.moveReset){
             gameManage.moveReset = false;
@@ -283,7 +298,22 @@ public class Final : State
 {
     public State Execute()
     {
-        gameManage.turn = !gameManage.turn;
-        return new Start();
+        if (DataBase.GameOver())
+        {
+            return new End();
+        }
+        else
+        {
+            gameManage.turn = !gameManage.turn;
+            return new Start();
+        }
+    }
+}
+public class End : State
+{
+    public State Execute()
+    {
+        //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
+        return this;
     }
 }

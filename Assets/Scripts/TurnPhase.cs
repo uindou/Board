@@ -7,27 +7,22 @@ public class TurnPhase : MonoBehaviour
 {
     public bool turn ;
     public bool phase;
-    
-    // Start is called before the first frame update
+    private Transform turnObj;
+    private Transform phaseObj;
+    public void turnUpdate(bool turn)
+    {
+        if(turn)turnObj.GetComponent<Text>().text = "ENEMY TURN";
+        else turnObj.GetComponent<Text>().text = "YOUR TURN";
+    }
+    public void PhaseUpdate(bool isMove)
+    {
+        if (isMove) phaseObj.GetComponent<Text>().text = "MOVE PHASE";
+        else phaseObj.GetComponent<Text>().text = "ATTACK PHASE";
+    }
     void Start()
     {
-        if (turn)
-        {
-            this.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "YOUR TURN";
-        }
-        else
-        {
-            this.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "ENEMY TURN";
-        }
-
-        if (phase)
-        {
-            this.gameObject.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = "MOVE PHASE";
-        }
-        else
-        {
-            this.gameObject.transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = "ATTACK PHASE";
-        }
+        turnObj = this.gameObject.transform.GetChild(0).transform.GetChild(0);
+        phaseObj = this.gameObject.transform.GetChild(1).transform.GetChild(0);
     }
 
     // Update is called once per frame

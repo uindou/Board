@@ -4502,8 +4502,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a010f34bbcbe434bb558d4e5f40ecad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turn: 0
-  phase: 0
+  turn: 1
+  phase: 1
 --- !u!1 &660821180
 GameObject:
   m_ObjectHideFlags: 0

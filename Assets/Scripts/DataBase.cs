@@ -8,6 +8,7 @@ public class DataBase : MonoBehaviour
     public static Sprite[] images = new Sprite[10];
     public static List<(int,int,bool,string)> stage;
     public static GameObject[,] objs;
+    [SerializeField] static GameObject turnPhase;
     private static int[,] board;
     public static int vertical=7;
     public static int horizontal=5;
@@ -28,8 +29,18 @@ public class DataBase : MonoBehaviour
         attackselect,
         attack
     }
+    public static void TurnChange()
+    {
+        turnPhase.GetComponent<TurnPhase>().turnUpdate(gameManage.turn);
+        Debug.Log("changed");
+    }
+    public static void PhaseChange(bool phase)
+    {
+        turnPhase.GetComponent<TurnPhase>().PhaseUpdate(phase);
+    }
     private void Start()
     {
+        turnPhase = GameObject.Find("TurnPhase");
         board = new int[vertical, horizontal];
         objs = new GameObject[vertical, horizontal];
         objInit();
@@ -68,6 +79,10 @@ public class DataBase : MonoBehaviour
         {
             return false;
         }
+    }
+    public static bool GameOver()
+    {
+        return false;
     }
     public static bool CanAttack(int x, int y,bool enemycolor)
     {
