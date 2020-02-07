@@ -10,11 +10,10 @@ public class Init : MonoBehaviour
     void Start()
     {
         List<(int, int,bool, string)> stage = DataBase.makeStage();
-        Debug.Log("init　起動成功");
         foreach((int, int,bool, string) T in stage)
         {
             var (i, j,team, name) = T;
-            int teamColor = team?1:0;
+            int teamColor = team?2:1;
             i -= 1;
             j -= 1;
             DataBase.Set(i, j, teamColor);

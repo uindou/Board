@@ -3,29 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static gameManage;
+using static DataBase;
 
 public class clickReceiver : MonoBehaviour
 {
     private float duration = 1.0f;
-    private static bool moveTrigger;
+    private List<(int, int)> select;
     private static bool isFlash;
     private static Color startcolor;
 
     private void Start()
     {
         startcolor = this.GetComponent<Image>().color;
-        moveTrigger = false;
+        select = new List<(int, int)>();
     }
     public void OnClick()
     {
-        Debug.Log("Clicked");
+        Debug.Log("Clicked",this);
         gameManage.requestEnqueue(this.gameObject);
     }
-
-    public bool IsMoveRange()
+    public bool IsRange()
     {
-        return moveTrigger;
+        foreach ((int, int)T in select)
+        {
+            if (DataBase.objSearch(this.gameObject) == T)
+            {
+                return true;
+
+            }
+        }
+        return false;
     }
+
 
     public void StopFlash()
     {
@@ -33,8 +42,9 @@ public class clickReceiver : MonoBehaviour
     }
    public void Flash()
     {
+        Debug.Log("change",this);
         isFlash = true;
-        moveTrigger = true;
+        select.Add(DataBase.objSearch(this.gameObject));
         StartCoroutine("testtimer", 5);
     }
     IEnumerator testtimer(int lefttime)
@@ -46,8 +56,9 @@ public class clickReceiver : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
             float phi = Time.time / duration * 2 * Mathf.PI;
             float amplitude = Mathf.Cos(phi) * 0.5F + 0.5F;
-            this.GetComponent<Image>().color = new Color(amplitude, 170, amplitude);
+            this.GetComponent<Image>().color = new Color(amplitude, 100, amplitude);
         }
         this.GetComponent<Image>().color = startcolor;
+        select.Remove(DataBase.objSearch(this.gameObject));
     }
 }

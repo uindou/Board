@@ -10,8 +10,9 @@ public class Soldier : CharaParent
     {
         initMoveRange();
         initAttackRange();
-        makeHP();
+        //makeHP();
         this.HitPoint = 1;
+        this.AttackPower = 3;
         this.MaxHitPoint = this.HitPoint;
         this.charaName = "Soldier";
     }

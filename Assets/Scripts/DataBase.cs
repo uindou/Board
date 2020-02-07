@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static gameManage;
 public class DataBase : MonoBehaviour
 {
     public static Sprite[] images = new Sprite[10];
@@ -10,17 +10,35 @@ public class DataBase : MonoBehaviour
     private static int[,] board;
     public static int vertical=7;
     public static int horizontal=5;
-    private static bool selectFlug;
+    public static bool selectFlug;
     public static (int, int) selectMove;
-    private static bool moveFlug;
-    public static (int, int) move;
+    public static bool moveFlug;
+    public static (int, int) realMove;
+    public static bool attackSelectFlug;
+    public static (int, int) attackSelect;
+    public static bool attackFlug;
+    public static (int, int) realAttack;
+    public static situation receive;//他から変える
+    public enum situation
+    {
+        select,
+        move,
+        attackselect,
+        attack
+    }
     private void Start()
     {
-        selectFlug = false;
         board = new int[vertical, horizontal];
         objs = new GameObject[vertical, horizontal];
         objInit();
         ImageInit();
+    }
+    public static void FlugInit()
+    {
+        selectFlug = false;
+        moveFlug = false;
+        attackSelectFlug = false;
+        attackFlug = false;
     }
     private void ImageInit()
     {
@@ -50,7 +68,7 @@ public class DataBase : MonoBehaviour
     }
     public static bool CanAttack(int x, int y,bool enemycolor)
     {
-        int mobcolor = enemycolor ? 1 : 0;
+        int mobcolor = enemycolor ? 2 : 1;
         if (x >= 0 & x < vertical & y >= 0 & y < horizontal)
         {
             return board[x, y] == mobcolor;
@@ -63,13 +81,13 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
-        /*stage.Add((2, 2, true, "Soldier"));
+        stage.Add((2, 2, true, "Soldier"));
         stage.Add((2, 3, true, "Tank"));
         stage.Add((2, 4, true, "Soldier"));
 
         stage.Add((4, 2, false, "Soldier"));
         stage.Add((4, 3, false, "Tank"));
-        stage.Add((4, 4, false, "Soldier"));*/
+        stage.Add((4, 4, false, "Soldier"));
         stage.Add((1, 1, false, "Soldier"));
         return stage;
     }
@@ -103,32 +121,72 @@ public class DataBase : MonoBehaviour
         }
         Debug.Log("Init succesed");
     }
-    public static bool Select()
+    public static void Reset(situation sit)
     {
-        return selectFlug;
+        bool flug = false;
+        (int, int) move = (0,0);
+        (flug, move) = RequestAdmin(flug, move, sit, false);
     }
-    public static void SelectReset()//リクエスト
+  
+    public static bool Question(situation sit)
     {
-        selectFlug = false;
+        bool flug = true;
+        (int, int) move = (0, 0);
+        (flug, move) = RequestAdmin(flug,move,sit,true);
+        return flug;
     }
-    public static void SelectRequest(int i,int j)//リクエストに対して、初めて置くときだけ許可
+    public static void Request(int i,int j,situation sit)
     {
-        if (!selectFlug)
+        bool flug = true;
+        (int, int) move = (0,0);
+
+        (flug,move)=RequestAdmin(flug,move,sit,true);
+        if (!flug)
         {
-            selectMove = (i, j);
-            selectFlug = true;
+            RequestAdmin(true,(i,j),sit,false);
         }
     }
-    public static bool Move()
+    
+    public static(bool,(int, int)) RequestAdmin(bool flug,(int,int) move,situation sit,bool isOutput)
+        //isOutputがtrue→その時のムーブとフラグを返す　false→フラグとムーブをセットする
     {
-        return moveFlug;
-    }
-    public static void MoveRequest(int i, int j)
-    {
-        if (!moveFlug)
+        receive = sit;
+        switch(receive)
         {
-            move = (i, j);
-            moveFlug = true;
+            case situation.select:
+                if(isOutput) return (selectFlug, selectMove);
+                else
+                {
+                    selectFlug = flug;
+                    selectMove = move;
+                    return (flug, move);
+                }
+            case situation.move:
+                if (isOutput) return (moveFlug, realMove);
+                else
+                {
+                    moveFlug = flug;
+                    realMove = move;
+                    return (flug, move);
+                }
+            case situation.attackselect:
+                if (isOutput) return (attackSelectFlug, attackSelect);
+                else
+                {
+                    attackSelectFlug = flug;
+                    attackSelect = move;
+                    return (flug, move);
+                }
+            case situation.attack:
+                if (isOutput) return (attackFlug, realAttack);
+                else
+                {
+                    attackFlug = flug;
+                    realAttack = move;
+                    return (flug, move);
+                }
+            default:
+                return (flug,move);
         }
     }
 }

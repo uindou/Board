@@ -6,9 +6,11 @@ public interface interFace /* CharaParentにかく関数は全部ここに書く
 {
     void Init(int x, int y,bool team);
     bool IsTeam();
+    void Move(int i,int j);
     void AddDamage(int damage);
     string GetName();
     void Erase();
+    int Power();
     List<(int, int)> Movable();
     List<(int, int)> Attackable();
 

@@ -7,7 +7,7 @@ public class CharaParent : MonoBehaviour,interFace
     protected string charaName;
     protected int HitPoint;
     protected int MaxHitPoint;
-    private int AttackPower;
+    protected int AttackPower;
     protected bool team;
     protected NowPoint now = new NowPoint();
     protected List<(int,int)> moveRange = new List<(int,int)>();
@@ -18,6 +18,15 @@ public class CharaParent : MonoBehaviour,interFace
         now.yAxis = y;
         this.team = team;
     }
+    public void Move(int i,int j)
+    {
+        now.xAxis = i;
+        now.yAxis = j;
+    }
+    public int Power()
+    {
+        return AttackPower;
+    }
     public void Erase()
     {
         Destroy(this.gameObject);
@@ -25,7 +34,7 @@ public class CharaParent : MonoBehaviour,interFace
     public void AddDamage(int damage)
     {
         HitPoint -= damage;
-        if (HitPoint < 0) Erase();
+        if (HitPoint <= 0) Erase();
     }
     public bool IsTeam()
     {
@@ -42,11 +51,20 @@ public class CharaParent : MonoBehaviour,interFace
         foreach((int,int) T in moveRange)
         {
             var (i, j) = T;
-            
+            if (gameManage.turn == false)
+            {
                 if (DataBase.CanSet(now.xAxis + i, now.yAxis + j))
                 {
                     res.Add((now.xAxis + i, now.yAxis + j));
                 }
+            }
+            else
+            {
+                if (DataBase.CanSet(now.xAxis - i, now.yAxis - j))
+                {
+                    res.Add((now.xAxis - i, now.yAxis - j));
+                }
+            }
             
         }
         return res;
@@ -57,9 +75,19 @@ public class CharaParent : MonoBehaviour,interFace
         foreach ((int, int) T in attackRange)
         {
             var (i, j) = T;
-            if (DataBase.CanAttack(now.xAxis+i, now.yAxis+j,false))
+            if (gameManage.turn == false)
             {
-                res.Add((now.xAxis + i, now.yAxis + j));
+                if (DataBase.CanAttack(now.xAxis + i, now.yAxis + j, !gameManage.turn))
+                {
+                    res.Add((now.xAxis + i, now.yAxis + j));
+                }
+            }
+            else
+            {
+                if (DataBase.CanAttack(now.xAxis - i, now.yAxis - j, !gameManage.turn))
+                {
+                    res.Add((now.xAxis - i, now.yAxis - j));
+                }
             }
         }
         return res;

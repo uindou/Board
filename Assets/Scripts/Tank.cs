@@ -10,7 +10,8 @@ public class Tank : CharaParent
     {
         initMoveRange();
         initAttackRange();
-        this.HitPoint = 3;
+        this.HitPoint = 2;
+        this.AttackPower = 2;
         this.charaName = "Tank";
     }
 
