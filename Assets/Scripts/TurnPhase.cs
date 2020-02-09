@@ -19,6 +19,12 @@ public class TurnPhase : MonoBehaviour
         if (isMove) phaseObj.GetComponent<Text>().text = "MOVE PHASE";
         else phaseObj.GetComponent<Text>().text = "ATTACK PHASE";
     }
+    public void GameEnd(bool turn)
+    {
+        turnObj.GetComponent<Text>().text = "GAME END";
+        if(turn) phaseObj.GetComponent<Text>().text = "YOU WIN";
+        else phaseObj.GetComponent<Text>().text = "YOU LOSE";
+    }
     void Start()
     {
         turnObj = this.gameObject.transform.GetChild(0).transform.GetChild(0);

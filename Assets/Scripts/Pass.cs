@@ -7,6 +7,7 @@ public class Pass : MonoBehaviour
 {
     public void OnClick()
     {
+        Debug.Log("passed");
         gameManage.Skip();
     }
     // Start is called before the first frame update

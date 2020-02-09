@@ -11,7 +11,8 @@ public class gameManage : MonoBehaviour
     public static bool moveReset;
     public static bool attackReset;
     public static bool turn;
-    public static bool skipFlug;
+    public static bool selectFlag;
+    public static bool attackFlag;
 
     public enum situation
     {
@@ -23,7 +24,33 @@ public class gameManage : MonoBehaviour
     }
     public static void Skip()
     {
-        skipFlug = true;
+        switch (receiveMode)
+        {
+            case situation.select:
+                selectFlag = true;
+                receiveMode = situation.attackselect;
+                break;
+            case situation.move:
+                selectFlag = true;
+                receiveMode = situation.attackselect;
+                var (i3, j3) = DataBase.selectMove;
+                GameObject obj1 = DataBase.objs[i3, j3];
+                gameManage.FlashControl(obj1, false);
+                break;
+            case situation.attackselect:
+                attackFlag = true;
+                receiveMode = situation.select;
+                break;
+            case situation.attack:
+                attackFlag = true;
+                receiveMode = situation.select;
+                var (i4, j4) = DataBase.attackSelect;
+                GameObject obj2 = DataBase.objs[i4, j4];
+                gameManage.AttackFlash(obj2, false);
+                break;
+            default:
+                break;
+        }
     }
     public static void requestEnqueue(GameObject obj)
     {
@@ -176,7 +203,8 @@ public class Start : State
 {
     public State Execute()
     {
-        gameManage.skipFlug = false;
+        gameManage.selectFlag = false;
+        gameManage.attackFlag = false;
         DataBase.FlugInit();
         gameManage.receiveMode = gameManage.situation.select;
         DataBase.TurnChange();
@@ -189,10 +217,10 @@ public class Select : State
 {
     public State Execute()
     {
-        if (gameManage.skipFlug)
+        if (selectFlag)
         {
-            gameManage.skipFlug = false;
-            return new Move();
+            DataBase.PhaseChange(false);
+            return new AttackSelect();
         }
         else if (DataBase.selectFlug)
         {
@@ -213,7 +241,12 @@ public class Select : State
 public class Move:State{
     public State Execute()
     {
-        if (DataBase.moveFlug)
+        if (gameManage.selectFlag)
+        {
+            DataBase.PhaseChange(false);
+            return new AttackSelect();
+        }
+        else if (DataBase.moveFlug)
         {
             int i3, j3;
             int i4, j4;
@@ -232,10 +265,16 @@ public class Move:State{
             int teamNum = obj1.GetComponent<interFace>().IsTeam() ? 2 : 1;
             DataBase.Set(i4, j4, teamNum);
             DataBase.Set(i3, j3, 0);
-
-            gameManage.receiveMode = gameManage.situation.attackselect;
-            DataBase.PhaseChange(false);
-            return new AttackSelect();
+            if (DataBase.GameOver(!gameManage.turn))
+            {
+                return new Final();
+            }
+            else
+            {
+                gameManage.receiveMode = gameManage.situation.attackselect;
+                DataBase.PhaseChange(false);
+                return new AttackSelect();
+            }
         }else if(gameManage.moveReset){
             gameManage.moveReset = false;
             return new Select();
@@ -250,7 +289,11 @@ public class AttackSelect : State
 {
     public State Execute()
     {
-        if (DataBase.attackSelectFlug)
+        if (attackFlag)
+        {
+            return new Final();
+        }
+        else if (DataBase.attackSelectFlug)
         {
             int i3, j3;
             (i3, j3) = DataBase.attackSelect;
@@ -269,7 +312,11 @@ public class Attack : State
 {
     public State Execute()
     {
-        if (DataBase.attackFlug)
+        if (attackFlag)
+        {
+            return new Final();
+        }
+        else if (DataBase.attackFlug)
         {
             int i3, j3;
             int i4, j4;
@@ -298,8 +345,10 @@ public class Final : State
 {
     public State Execute()
     {
-        if (DataBase.GameOver())
+        if (DataBase.GameOver(!gameManage.turn))
         {
+            gameManage.receiveMode = gameManage.situation.free;
+            DataBase.GameEnd(!gameManage.turn);
             return new End();
         }
         else

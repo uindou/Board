@@ -80,8 +80,32 @@ public class DataBase : MonoBehaviour
             return false;
         }
     }
-    public static bool GameOver()
+    public static void GameEnd(bool turn)
     {
+        turnPhase.GetComponent<TurnPhase>().GameEnd(turn);
+    }
+    public static bool GameOver(bool turn)
+    {
+        if (turn)
+        {
+            for(int i = 0; i< horizontal; i++)
+            {
+                if (board[0,i] == 1)
+                {
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            for(int i = 0; i < horizontal; i++)
+            {
+                if (board[vertical-1, i] == 2)
+                {
+                    return true;
+                }
+            }
+        }
         return false;
     }
     public static bool CanAttack(int x, int y,bool enemycolor)
@@ -106,6 +130,7 @@ public class DataBase : MonoBehaviour
         stage.Add((7, 2, false, "Soldier"));
         stage.Add((7, 3, false, "Tank"));
         stage.Add((7, 4, false, "Soldier"));
+        stage.Add((2, 4, false, "Soldier"));
         return stage;
     }
     public static (int, int) objSearch(GameObject obj)
