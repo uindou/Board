@@ -15,31 +15,7 @@ public class Tank : CharaParent
         this.AttackPower = 1;
         this.MaxHitPoint = HitPoint;
         this.charaName = "Tank";
-        makeHP();
-    }
-
-    private void makeHP()
-    {
-        
-        for (int i = 0; i < 3; i++)
-        {
-            if (i < HitPoint)
-            {
-                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(2);
-                Debug.Log("ハート");
-            }
-            else if (i < MaxHitPoint)
-            {
-                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(3);
-                Debug.Log("黒ハート");
-            }
-            else
-            {
-                this.transform.GetChild(1).transform.GetChild(i).gameObject.SetActive(false);
-                Debug.Log("ハートなし");
-            }
-            Debug.Log(HitPoint);
-        }
+        this.makeHP();
     }
 
     private void initMoveRange()

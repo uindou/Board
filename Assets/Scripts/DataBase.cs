@@ -130,8 +130,29 @@ public class DataBase : MonoBehaviour
         stage.Add((7, 2, false, "Soldier"));
         stage.Add((7, 3, false, "Tank"));
         stage.Add((7, 4, false, "Soldier"));
-        stage.Add((2, 4, false, "Soldier"));
         return stage;
+    }
+    public static bool CantAttack(bool turn)
+    {
+        int mobcolor = turn ? 2 : 1;
+        int enemycolor = turn ? 1 : 2;
+        for(int i = 0; i < vertical; i++)
+        {
+            for(int j = 0; j < horizontal; j++)
+            {
+                if (board[i, j] == mobcolor)
+                {
+                    GameObject obj = objs[i, j];
+                    List<(int, int)> res = obj.GetComponent<interFace>().Attackable();
+                    foreach((int,int) T in res)
+                    {
+                        var (k,l) = T;
+                        if (board[k, l] == enemycolor) return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
     public static (int, int) objSearch(GameObject obj)
     {

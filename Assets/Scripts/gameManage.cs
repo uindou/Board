@@ -268,6 +268,9 @@ public class Move:State{
             if (DataBase.GameOver(!gameManage.turn))
             {
                 return new Final();
+            }else if (DataBase.CantAttack(gameManage.turn))
+            {
+                return new Final();
             }
             else
             {
