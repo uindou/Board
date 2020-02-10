@@ -38,22 +38,32 @@ public class CharaParent : MonoBehaviour,interFace
 
     public void makeHP()
     {
-        for (int i = 0; i < 3; i++)
+        if (this.HitPoint <= 0)
         {
-            if (i < this.HitPoint)
+            for (int i = 0; i < 3; i++)
             {
-                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(2);
-                Debug.Log("ハート");
+                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(5);
             }
-            else if (i < this.MaxHitPoint)
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
             {
-                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(3);
-                Debug.Log("黒ハート");
-            }
-            else
-            {
-                this.transform.GetChild(1).transform.GetChild(i).gameObject.SetActive(false);
-                Debug.Log("ハートなし");
+                if (i < this.HitPoint)
+                {
+                    this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(2);
+                    Debug.Log("ハート");
+                }
+                else if (i < this.MaxHitPoint)
+                {
+                    this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(3);
+                    Debug.Log("黒ハート");
+                }
+                else
+                {
+                    this.transform.GetChild(1).transform.GetChild(i).gameObject.SetActive(false);
+                    Debug.Log("ハートなし");
+                }
             }
         }
     }

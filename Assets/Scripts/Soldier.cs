@@ -24,6 +24,13 @@ public class Soldier : CharaParent
         this.moveRange.Add((0, -1));
         this.moveRange.Add((0, 1));
         this.moveRange.Add((1, 0));
+        this.moveRange.Add((1, 1));
+        this.moveRange.Add((1, -1));
+        this.moveRange.Add((-1, 1));
+        this.moveRange.Add((-1, -1));
+        this.moveRange.Add((-2, 0));
+        this.moveRange.Add((0, 2));
+        this.moveRange.Add((0, -2));
 
     }
     private void initAttackRange()

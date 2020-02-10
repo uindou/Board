@@ -10,17 +10,22 @@ public class clickReceiver : MonoBehaviour
     //private float duration = 1.0f;
     private List<(int, int)> select;
     private static bool isFlash;
+    private static bool activate;
     //private static Color startcolor;
 
     private void Start()
     {
         //startcolor = this.GetComponent<Image>().color;
         select = new List<(int, int)>();
+        activate = true;
+    }
+    public void ChangeAct()
+    {
+        activate = !activate;
     }
     public void OnClick()
     {
-        Debug.Log("Clicked",this);
-        gameManage.requestEnqueue(this.gameObject);
+        if(activate)gameManage.requestEnqueue(this.gameObject);
     }
     public bool IsRange()
     {

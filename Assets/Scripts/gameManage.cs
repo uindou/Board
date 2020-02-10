@@ -347,9 +347,10 @@ public class Attack : State
 }
 public class Final : State
 {
+    public bool AImode=true;
     public State Execute()
     {
-        if (DataBase.GameOver(!gameManage.turn))
+        if (DataBase.GameOver(!gameManage.turn) || DataBase.NoKoma(gameManage.turn))
         {
             gameManage.receiveMode = gameManage.situation.free;
             DataBase.GameEnd(!gameManage.turn);
@@ -358,7 +359,13 @@ public class Final : State
         else
         {
             gameManage.turn = !gameManage.turn;
-            return new Start();
+            if (AImode & turn) return new AI();//2ターンに一度呼ばれる
+            else
+            {
+                GameObject obj = objs[0, 0];
+                obj.GetComponent<clickReceiver>().ChangeAct();
+                return new Start();
+            }
         }
     }
 }
@@ -374,6 +381,9 @@ public class AI : State
 {
     public State Execute()
     {
+        GameObject obj = objs[0, 0];
+        obj.GetComponent<clickReceiver>().ChangeAct();
+        myAI.StartAI(1);
         return new Start();
     }
 }

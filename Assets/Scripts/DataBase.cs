@@ -54,6 +54,23 @@ public class DataBase : MonoBehaviour
         attackSelectFlug = false;
         attackFlug = false;
     }
+    public static List<GameObject> MyKoma(bool turn)
+    {
+        List<GameObject> res = new List<GameObject>();
+        int mobcolor = turn ? 2 : 1;
+        for (int i = 0; i < vertical; i++)
+        {
+            for (int j = 0; j < horizontal; j++)
+            {
+                if (board[i, j] == mobcolor)
+                {
+                    GameObject obj = objs[i, j];
+                    res.Add(obj);
+                }
+            }
+        }
+        return res;
+    }
     private void ImageInit()
     {
         images[0] = GameObject.Find("Soldier").GetComponent<SpriteRenderer>().sprite;
@@ -86,6 +103,17 @@ public class DataBase : MonoBehaviour
     public static void GameEnd(bool turn)
     {
         turnPhase.GetComponent<TurnPhase>().GameEnd(turn);
+    }
+
+    public static bool NoKoma(bool turn)
+    {
+        int enemycolor = turn ? 1 : 2;
+        foreach(int b in board)
+        {
+            if (b == enemycolor) return false;
+        }
+        return true;
+
     }
     public static bool GameOver(bool turn)
     {
@@ -126,13 +154,20 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
-        stage.Add((1, 2, true, "Soldier"));
+        /*stage.Add((1, 1, true, "Soldier"));
+        stage.Add((1, 2, true, "Tank"));
         stage.Add((1, 3, true, "Tank"));
-        stage.Add((1, 4, true, "Soldier"));
+        stage.Add((1, 4, true, "Tank"));
+        stage.Add((1, 5, true, "Soldier"));
 
-        stage.Add((7, 2, false, "Soldier"));
+        stage.Add((7, 1, false, "Soldier"));
+        stage.Add((7, 2, false, "Tank"));
         stage.Add((7, 3, false, "Tank"));
-        stage.Add((7, 4, false, "Soldier"));
+        stage.Add((7, 4, false, "Tank"));
+        stage.Add((7, 4, false, "Tank"));
+        stage.Add((7, 5, false, "Soldier"));*/
+        stage.Add((7, 2, false, "Soldier"));
+        stage.Add((5, 2, true, "Soldier"));
         return stage;
     }
     public static bool CantAttack(bool turn)
