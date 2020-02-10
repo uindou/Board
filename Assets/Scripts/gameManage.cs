@@ -383,7 +383,7 @@ public class AI : State
     {
         GameObject obj = objs[0, 0];
         obj.GetComponent<clickReceiver>().ChangeAct();
-        myAI.StartAI(1);
+        myAI.StartAI(0);
         return new Start();
     }
 }

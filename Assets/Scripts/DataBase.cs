@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 using static gameManage;
 public class DataBase : MonoBehaviour
 {
@@ -54,7 +55,7 @@ public class DataBase : MonoBehaviour
         attackSelectFlug = false;
         attackFlug = false;
     }
-    public static List<GameObject> MyKoma(bool turn)
+    public static List<GameObject> MyKoma(bool turn,bool mode)
     {
         List<GameObject> res = new List<GameObject>();
         int mobcolor = turn ? 2 : 1;
@@ -65,7 +66,14 @@ public class DataBase : MonoBehaviour
                 if (board[i, j] == mobcolor)
                 {
                     GameObject obj = objs[i, j];
-                    res.Add(obj);
+                    if (mode)
+                    {
+                        if (obj.GetComponent<interFace>().Movable().Any()) res.Add(obj);
+                    }
+                    else
+                    {
+                        if (obj.GetComponent<interFace>().Attackable().Any()) res.Add(obj);
+                    }
                 }
             }
         }
@@ -154,7 +162,7 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
-        /*stage.Add((1, 1, true, "Soldier"));
+        stage.Add((1, 1, true, "Soldier"));
         stage.Add((1, 2, true, "Tank"));
         stage.Add((1, 3, true, "Tank"));
         stage.Add((1, 4, true, "Tank"));
@@ -164,10 +172,7 @@ public class DataBase : MonoBehaviour
         stage.Add((7, 2, false, "Tank"));
         stage.Add((7, 3, false, "Tank"));
         stage.Add((7, 4, false, "Tank"));
-        stage.Add((7, 4, false, "Tank"));
-        stage.Add((7, 5, false, "Soldier"));*/
-        stage.Add((7, 2, false, "Soldier"));
-        stage.Add((5, 2, true, "Soldier"));
+        stage.Add((7, 5, false, "Soldier"));
         return stage;
     }
     public static bool CantAttack(bool turn)
