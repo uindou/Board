@@ -8,7 +8,7 @@ using System.Linq;
 
 public class myAI : MonoBehaviour
 {
-    private enum komaNum
+    private enum KomaNum
     {
         empty,
         soldier,
@@ -30,6 +30,7 @@ public class myAI : MonoBehaviour
 
         await Task.Delay(1000);
         gameManage.requestEnqueue(obj);
+
         await Task.Delay(1000);
         gameManage.requestEnqueue(obj1);
         await Task.Delay(100);
