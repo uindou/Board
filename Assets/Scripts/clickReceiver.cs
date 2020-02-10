@@ -7,14 +7,14 @@ using static DataBase;
 
 public class clickReceiver : MonoBehaviour
 {
-    private float duration = 1.0f;
+    //private float duration = 1.0f;
     private List<(int, int)> select;
     private static bool isFlash;
-    private static Color startcolor;
+    //private static Color startcolor;
 
     private void Start()
     {
-        startcolor = this.GetComponent<Image>().color;
+        //startcolor = this.GetComponent<Image>().color;
         select = new List<(int, int)>();
     }
     public void OnClick()
@@ -53,11 +53,13 @@ public class clickReceiver : MonoBehaviour
             if (!isFlash) break;
             // 残り時間が0以上の場合はタイマーを更新　
             yield return new WaitForSeconds(0.01f);
-            float phi = Time.time / duration * 2 * Mathf.PI;
+            /*float phi = Time.time / duration * 2 * Mathf.PI;
             float amplitude = Mathf.Cos(phi) * 0.5F + 0.5F;
-            this.GetComponent<Image>().color = new Color(amplitude, 100, amplitude);
+            this.GetComponent<Image>().color = new Color(amplitude, 100, amplitude);*/
+            this.transform.GetChild(2).GetComponent<Image>().sprite = DataBase.image(4);
         }
-        this.GetComponent<Image>().color = startcolor;
+        //this.GetComponent<Image>().color = startcolor;
+        this.transform.GetChild(2).GetComponent<Image>().sprite = DataBase.image(5);
         select.Remove(DataBase.objSearch(this.gameObject));
     }
 }
