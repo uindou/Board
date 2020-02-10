@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static DataBase;
 using static gameManage;
+using static myAI;
 
 public class gameManage : MonoBehaviour
 {
@@ -367,5 +368,12 @@ public class End : State
     {
         //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
         return this;
+    }
+}
+public class AI : State
+{
+    public State Execute()
+    {
+        return new Start();
     }
 }

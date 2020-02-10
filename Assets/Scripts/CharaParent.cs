@@ -34,8 +34,6 @@ public class CharaParent : MonoBehaviour,interFace
         if(team)this.gameObject.transform.Rotate(0, 0, 180f);
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.firstImage;
         Destroy(this);
-
-        //Destroy(this.gameObject);
     }
 
     public void makeHP()
@@ -62,8 +60,9 @@ public class CharaParent : MonoBehaviour,interFace
     public void AddDamage(int damage)
     {
         HitPoint -= damage;
+        makeHP();
         if (HitPoint <= 0) Erase();
-        else makeHP();
+
     }
     public bool IsTeam()
     {

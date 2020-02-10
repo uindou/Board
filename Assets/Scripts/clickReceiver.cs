@@ -44,21 +44,23 @@ public class clickReceiver : MonoBehaviour
         Debug.Log("change",this);
         isFlash = true;
         select.Add(DataBase.objSearch(this.gameObject));
-        StartCoroutine("testtimer", 5);
+        StartCoroutine("testtimer");
     }
-    IEnumerator testtimer(int lefttime)
+    IEnumerator testtimer()
     {
-        while (lefttime >= 0)
+        if (gameManage.receiveMode == gameManage.situation.select || gameManage.receiveMode == gameManage.situation.move)
         {
-            if (!isFlash) break;
-            // 残り時間が0以上の場合はタイマーを更新　
-            yield return new WaitForSeconds(0.01f);
-            /*float phi = Time.time / duration * 2 * Mathf.PI;
-            float amplitude = Mathf.Cos(phi) * 0.5F + 0.5F;
-            this.GetComponent<Image>().color = new Color(amplitude, 100, amplitude);*/
             this.transform.GetChild(2).GetComponent<Image>().sprite = DataBase.image(4);
         }
-        //this.GetComponent<Image>().color = startcolor;
+        else
+        {
+            this.transform.GetChild(2).GetComponent<Image>().sprite = DataBase.image(6);
+        }
+        while (isFlash)
+        {
+            // 残り時間が0以上の場合はタイマーを更新　
+            yield return new WaitForSeconds(0.01f);
+        }
         this.transform.GetChild(2).GetComponent<Image>().sprite = DataBase.image(5);
         select.Remove(DataBase.objSearch(this.gameObject));
     }
