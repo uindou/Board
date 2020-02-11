@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class Tank : CharaParent
 {
@@ -17,7 +18,23 @@ public class Tank : CharaParent
         this.charaName = "Tank";
         this.makeHP();
     }
-
+    public async override void AttackImage()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(9);
+            await Task.Delay(200);
+            this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(10);
+            await Task.Delay(200);
+        }
+        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(1);
+    }
+    public async override void DamageImage()
+    {
+        this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.red;
+        await Task.Delay(200);
+        this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.white;
+    }
     private void initMoveRange()
     {
         this.moveRange.Add((-1, 0));

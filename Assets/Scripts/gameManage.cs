@@ -342,6 +342,7 @@ public class Attack : State
             GameObject obj = DataBase.objs[i4, j4];
             GameObject obj1 = DataBase.objs[i3, j3];
             gameManage.AttackFlash(obj1, false);
+            obj1.GetComponent<interFace>().AttackImage();
             obj.GetComponent<interFace>().AddDamage(obj1.GetComponent<interFace>().Power());
 
             gameManage.receiveMode = gameManage.situation.free;

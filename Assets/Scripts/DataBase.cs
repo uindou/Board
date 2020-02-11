@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 using static gameManage;
 public class DataBase : MonoBehaviour
 {
-    public static Sprite[] images = new Sprite[10];
+    public static Sprite[] images = new Sprite[15];
     public static List<(int,int,bool,string)> stage;
     public static GameObject[,] objs;
     [SerializeField] static GameObject turnPhase;
     private static int[,] board;
-    public static int vertical=7;
-    public static int horizontal=5;
+    public static int vertical;
+    public static int horizontal;
     public static bool selectFlug;
     public static (int, int) selectMove;
     public static bool moveFlug;
@@ -39,8 +40,23 @@ public class DataBase : MonoBehaviour
     {
         turnPhase.GetComponent<TurnPhase>().PhaseUpdate(phase);
     }
+    private static void LenSet()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Game":
+                vertical = 9;
+                horizontal = 7;
+                break;
+            default:
+                vertical = 7;
+                horizontal = 5;
+                break;
+        }
+    }
     private void Start()
     {
+        LenSet();
         turnPhase = GameObject.Find("TurnPhase");
         board = new int[vertical, horizontal];
         objs = new GameObject[vertical, horizontal];
@@ -81,6 +97,7 @@ public class DataBase : MonoBehaviour
     }
     private void ImageInit()
     {
+       
         images[0] = GameObject.Find("Soldier").GetComponent<SpriteRenderer>().sprite;
         images[1] = GameObject.Find("Tank").GetComponent<SpriteRenderer>().sprite;
         images[2] = GameObject.Find("Heart").GetComponent<SpriteRenderer>().sprite;
@@ -89,6 +106,13 @@ public class DataBase : MonoBehaviour
         images[5] = GameObject.Find("Transparent").GetComponent<SpriteRenderer>().sprite;
         images[6] = GameObject.Find("AttackSelection").GetComponent<SpriteRenderer>().sprite;
         images[7] = GameObject.Find("SimpleFrame").GetComponent<SpriteRenderer>().sprite;
+        images[8] = GameObject.Find("Soldier(Attacking1)").GetComponent<SpriteRenderer>().sprite;//兵士の攻撃画像1
+        images[9]=GameObject.Find("Tank(Attacking1)").GetComponent<SpriteRenderer>().sprite;//タンクの攻撃画像1
+        images[10] = GameObject.Find("PlainFighter(Attacking1)").GetComponent<SpriteRenderer>().sprite;//飛行機の攻撃画像1
+        images[11] = GameObject.Find("Soldier(Attacking2)").GetComponent<SpriteRenderer>().sprite;//兵士の攻撃画像2
+        images[12] = GameObject.Find("Tank(Attacking2)").GetComponent<SpriteRenderer>().sprite;//タンクの攻撃画像2
+        images[13] = GameObject.Find("PlainFighter(Attacking2)").GetComponent<SpriteRenderer>().sprite;//飛行機の攻撃画像2
+
     }
     public static Sprite image(int i)
     {
@@ -163,18 +187,24 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
-        stage.Add((1, 1, true, "Soldier"));
-        stage.Add((1, 2, true, "Tank"));
-        stage.Add((1, 3, true, "Tank"));
-        stage.Add((1, 4, true, "Tank"));
-        stage.Add((1, 5, true, "Soldier"));
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Game":
+                stage.Add((1, 1, true, "Soldier"));
+                stage.Add((1, 2, true, "Tank"));
+                stage.Add((1, 3, true, "Tank"));
+                stage.Add((1, 4, true, "Tank"));
+                stage.Add((1, 5, true, "Soldier"));
 
-        stage.Add((7, 1, false, "Soldier"));
-        stage.Add((7, 2, false, "Tank"));
-        stage.Add((7, 3, false, "Tank"));
-        stage.Add((7, 4, false, "Tank"));
-        stage.Add((7, 5, false, "Soldier"));
-        return stage;
+                stage.Add((7, 1, false, "Soldier"));
+                stage.Add((7, 2, false, "Tank"));
+                stage.Add((7, 3, false, "Tank"));
+                stage.Add((7, 4, false, "Tank"));
+                stage.Add((7, 5, false, "Soldier"));
+                return stage;
+            default:
+                return stage;
+    }
     }
     public static bool CantAttack(bool turn)
     {

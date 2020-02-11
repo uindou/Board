@@ -28,6 +28,14 @@ public class CharaParent : MonoBehaviour,interFace
     {
         return AttackPower;
     }
+    public async virtual void AttackImage()
+    {
+
+    }
+    public async virtual void DamageImage()
+    {
+
+    }
     public void Erase()
     {
         DataBase.Set(now.xAxis,now.yAxis,0);
@@ -69,6 +77,7 @@ public class CharaParent : MonoBehaviour,interFace
     }
     public void AddDamage(int damage)
     {
+        this.DamageImage();
         HitPoint -= damage;
         makeHP();
         if (HitPoint <= 0) Erase();

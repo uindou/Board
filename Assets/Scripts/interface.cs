@@ -11,6 +11,10 @@ public interface interFace /* CharaParentにかく関数は全部ここに書く
     string GetName();
     void Erase();
     int Power();
+
+    void AttackImage();
+
+    void DamageImage();
     List<(int, int)> Movable();
     List<(int, int)> Attackable();
 
