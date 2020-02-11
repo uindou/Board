@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using static gameManage;
 public class DataBase : MonoBehaviour
 {
+    public static string preStage="Title";
     public static Sprite[] images = new Sprite[15];
     public static List<(int,int,bool,string)> stage;
     public static GameObject[,] objs;

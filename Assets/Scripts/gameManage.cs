@@ -387,6 +387,8 @@ public class End : State
 {
     public State Execute()
     {
+        DataBase.preStage = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene("Win");
         //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
         return this;
     }
