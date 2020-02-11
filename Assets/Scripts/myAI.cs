@@ -18,6 +18,12 @@ public class myAI : MonoBehaviour
     {
         return (((0, 0), (0, 0)), ((0, 0), (0, 0)));
     }
+    private async static void FixedRandomAI()
+    {
+        List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
+        System.Random r1 = new System.Random();
+        GameObject obj = res[r1.Next(0, res.Count() - 1)];
+    }
     private async static void RandomAI()
     {
         List<GameObject> res = DataBase.MyKoma(gameManage.turn,true);
