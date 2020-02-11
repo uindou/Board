@@ -4,6 +4,7 @@ using UnityEngine;
 using static DataBase;
 using static gameManage;
 using static myAI;
+using UnityEngine.SceneManagement;
 
 public class gameManage : MonoBehaviour
 {
@@ -184,7 +185,7 @@ public class gameManage : MonoBehaviour
     }
     private void Start()
     {
-        state = new Start();
+        state = new Free();
         receiveMode = situation.select;
         turn = false;
         
@@ -361,7 +362,6 @@ public class Attack : State
 }
 public class Final : State
 {
-    public bool AImode=false;
     public State Execute()
     {
         if (DataBase.GameOver(!gameManage.turn) || DataBase.NoKoma(gameManage.turn))
@@ -373,11 +373,11 @@ public class Final : State
         else
         {
             gameManage.turn = !gameManage.turn;
-            if (AImode) return new AI();//2ターンに一度呼ばれる
+            if (DataBase.AImode && turn) return new AI();//2ターンに一度呼ばれる
             else
             {
                 GameObject obj = objs[0, 0];
-                //obj.GetComponent<clickReceiver>().ChangeAct();
+                if(DataBase.AImode)obj.GetComponent<clickReceiver>().ChangeAct();
                 return new Start();
             }
         }
@@ -399,5 +399,22 @@ public class AI : State
         obj.GetComponent<clickReceiver>().ChangeAct();
         myAI.StartAI(0);
         return new Start();
+    }
+}
+
+public class Free : State
+{
+    public State Execute()
+    {
+        switch(SceneManager.GetActiveScene().name)
+        {
+            case "Game":
+                return new Start();
+            case "AIStage1":
+                return new Start();
+            default:
+                return this;
+        }
+        
     }
 }
