@@ -361,7 +361,7 @@ public class Attack : State
 }
 public class Final : State
 {
-    public bool AImode=true;
+    public bool AImode=false;
     public State Execute()
     {
         if (DataBase.GameOver(!gameManage.turn) || DataBase.NoKoma(gameManage.turn))
@@ -377,7 +377,7 @@ public class Final : State
             else
             {
                 GameObject obj = objs[0, 0];
-                obj.GetComponent<clickReceiver>().ChangeAct();
+                //obj.GetComponent<clickReceiver>().ChangeAct();
                 return new Start();
             }
         }

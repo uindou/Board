@@ -114,6 +114,8 @@ public class DataBase : MonoBehaviour
         images[11] = GameObject.Find("Soldier(Attacking2)").GetComponent<SpriteRenderer>().sprite;//兵士の攻撃画像2
         images[12] = GameObject.Find("Tank(Attacking2)").GetComponent<SpriteRenderer>().sprite;//タンクの攻撃画像2
         images[13] = GameObject.Find("PlainFighter(Attacking2)").GetComponent<SpriteRenderer>().sprite;//飛行機の攻撃画像2
+        images[14] = GameObject.Find("PlainFighter").GetComponent<SpriteRenderer>().sprite;
+
 
     }
     public static Sprite image(int i)
@@ -192,17 +194,25 @@ public class DataBase : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "Game":
-                stage.Add((1, 1, true, "Soldier"));
-                stage.Add((1, 2, true, "Tank"));
+                stage.Add((1, 1, true, "PlainFighter"));
+                stage.Add((2, 1, true, "Soldier"));
+                stage.Add((1, 2, true, "Soldier"));
                 stage.Add((1, 3, true, "Tank"));
                 stage.Add((1, 4, true, "Tank"));
-                stage.Add((1, 5, true, "Soldier"));
+                stage.Add((1, 5, true, "Tank"));
+                stage.Add((1, 6, true, "Soldier"));
+                stage.Add((2, 7, true, "Soldier"));
+                stage.Add((1, 7, true, "PlainFighter"));
 
-                stage.Add((7, 1, false, "Soldier"));
-                stage.Add((7, 2, false, "Tank"));
-                stage.Add((7, 3, false, "Tank"));
-                stage.Add((7, 4, false, "Tank"));
-                stage.Add((7, 5, false, "Soldier"));
+                stage.Add((9, 1, false, "PlainFighter"));
+                stage.Add((8, 1, false, "Soldier"));
+                stage.Add((9, 2, false, "Soldier"));
+                stage.Add((9, 3, false, "Tank"));
+                stage.Add((9, 4, false, "Tank"));
+                stage.Add((9, 5, false, "Tank"));
+                stage.Add((9, 6, false, "Soldier"));
+                stage.Add((8, 7, false, "Soldier"));
+                stage.Add((9, 7, false, "PlainFighter"));
                 return stage;
             default:
                 return stage;
