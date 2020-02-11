@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds.Api;
- 
-public class GoogleAds : MonoBehaviour
+
+public class Admob : MonoBehaviour
 {
 
     // Use this for initialization
     void Start()
     {
         // アプリID、 これはテスト用
-        string appId = "ca-app-pub-3940256099942544~3347511713";
+        string appId = "ca-app-pub-8801150864537344~8686480864";
 
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(appId);
 
+        Debug.Log("Ad loaded");
         RequestBanner();
     }
     private void RequestBanner()
