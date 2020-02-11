@@ -80,6 +80,7 @@ public class DataBase : MonoBehaviour
         images[4] = GameObject.Find("MoveSelection").GetComponent<SpriteRenderer>().sprite;
         images[5] = GameObject.Find("Transparent").GetComponent<SpriteRenderer>().sprite;
         images[6] = GameObject.Find("AttackSelection").GetComponent<SpriteRenderer>().sprite;
+        images[7] = GameObject.Find("SimpleFrame").GetComponent<SpriteRenderer>().sprite;
     }
     public static Sprite image(int i)
     {

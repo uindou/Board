@@ -66,7 +66,7 @@ public class clickReceiver : MonoBehaviour
             // 残り時間が0以上の場合はタイマーを更新　
             yield return new WaitForSeconds(0.01f);
         }
-        this.transform.GetChild(2).GetComponent<Image>().sprite = DataBase.image(5);
+        this.transform.GetChild(2).GetComponent<Image>().sprite = DataBase.image(7);
         select.Remove(DataBase.objSearch(this.gameObject));
     }
 }
