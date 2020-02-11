@@ -17,7 +17,7 @@ public class Soldier : CharaParent
         this.MaxHitPoint = this.HitPoint;
         this.charaName = "Soldier";
         this.makeHP();
-        if (SceneManager.GetActiveScene().name == "AIStage1") initAIRange();
+        if (SceneManager.GetActiveScene().name == "AIStage1" || SceneManager.GetActiveScene().name == "AIStage2") initAIRange();
     }
     public async override void AttackImage()
     {
