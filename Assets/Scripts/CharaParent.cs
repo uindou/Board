@@ -11,6 +11,7 @@ public class CharaParent : MonoBehaviour,interFace
     protected int AttackPower;
     protected bool team;
     protected NowPoint now = new NowPoint();
+    protected List<(int, int)> AIRange = new List<(int, int)>();
     protected List<(int,int)> moveRange = new List<(int,int)>();
     protected List<(int,int)> attackRange = new List<(int, int)>();
     public void Init(int x, int y,bool team)
@@ -96,6 +97,30 @@ public class CharaParent : MonoBehaviour,interFace
     public string GetName()
     {
         return charaName;
+    }
+    public List<(int,int)> AIMovable()
+    {
+        List<(int, int)> res = new List<(int, int)>();
+        foreach ((int, int) T in AIRange)
+        {
+            var (i, j) = T;
+            if (gameManage.turn == false)
+            {
+                if (DataBase.CanSet(now.xAxis + i, now.yAxis + j))
+                {
+                    res.Add((now.xAxis + i, now.yAxis + j));
+                }
+            }
+            else
+            {
+                if (DataBase.CanSet(now.xAxis - i, now.yAxis - j))
+                {
+                    res.Add((now.xAxis - i, now.yAxis - j));
+                }
+            }
+
+        }
+        return res;
     }
     public List<(int,int)> Movable()
     {

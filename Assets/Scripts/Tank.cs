@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class Tank : CharaParent
 {
@@ -17,6 +18,7 @@ public class Tank : CharaParent
         this.MaxHitPoint = HitPoint;
         this.charaName = "Tank";
         this.makeHP();
+        if (SceneManager.GetActiveScene().name == "AIStage1") initAIRange();
     }
     public async override void AttackImage()
     {
@@ -41,7 +43,14 @@ public class Tank : CharaParent
         this.moveRange.Add((0, -1));
         this.moveRange.Add((0, 1));
         this.moveRange.Add((1, 0));
-
+    }
+    private void initAIRange()
+    {
+        this.AIRange.Add((-1, 0));
+        this.AIRange.Add((-1, 0));
+        this.AIRange.Add((-1, 0));
+        this.AIRange.Add((0, -1));
+        this.AIRange.Add((0, 1));
     }
     private void initAttackRange()
     {

@@ -82,6 +82,30 @@ public class DataBase : MonoBehaviour
         attackSelectFlug = false;
         attackFlug = false;
     }
+    public static List<GameObject> FixedMyKoma(bool turn, bool mode)
+    {
+        List<GameObject> res = new List<GameObject>();
+        int mobcolor = turn ? 2 : 1;
+        for (int i = 0; i < vertical; i++)
+        {
+            for (int j = 0; j < horizontal; j++)
+            {
+                if (board[i, j] == mobcolor)
+                {
+                    GameObject obj = objs[i, j];
+                    if (mode)
+                    {
+                        if (obj.GetComponent<interFace>().AIMovable().Any()) res.Add(obj);
+                    }
+                    else
+                    {
+                        if (obj.GetComponent<interFace>().Attackable().Any()) res.Add(obj);
+                    }
+                }
+            }
+        }
+        return res;
+    }
     public static List<GameObject> MyKoma(bool turn,bool mode)
     {
         List<GameObject> res = new List<GameObject>();

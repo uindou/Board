@@ -15,6 +15,7 @@ public interface interFace /* CharaParentにかく関数は全部ここに書く
     void AttackImage();
 
     void DamageImage();
+    List<(int, int)> AIMovable();
     List<(int, int)> Movable();
     List<(int, int)> Attackable();
 

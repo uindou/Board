@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class Soldier : CharaParent
 {
@@ -16,6 +17,7 @@ public class Soldier : CharaParent
         this.MaxHitPoint = this.HitPoint;
         this.charaName = "Soldier";
         this.makeHP();
+        if (SceneManager.GetActiveScene().name == "AIStage1") initAIRange();
     }
     public async override void AttackImage()
     {
@@ -50,6 +52,21 @@ public class Soldier : CharaParent
         this.moveRange.Add((0, -2));
         this.moveRange.Add((2, 0));
 
+    }
+    private void initAIRange()
+    {
+        this.AIRange.Add((-1, 0));
+        this.AIRange.Add((0, -1));
+        this.AIRange.Add((0, 1));
+        this.AIRange.Add((-1, 1));
+        this.AIRange.Add((-1, -1));
+        this.AIRange.Add((-2, 0));
+        this.AIRange.Add((-1, 1));
+        this.AIRange.Add((-1, -1));
+        this.AIRange.Add((-2, 0));
+        this.AIRange.Add((-2, 0));
+        this.AIRange.Add((0, 2));
+        this.AIRange.Add((0, -2));
     }
     private void initAttackRange()
     {
