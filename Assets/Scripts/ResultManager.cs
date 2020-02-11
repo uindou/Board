@@ -5,22 +5,22 @@ using UnityEngine.UI;
 
 public class ResultManager : MonoBehaviour
 {
-    public string winner;
     // Start is called before the first frame update
     void Start()
     {
 
-        if (winner == "Player1")
+        if (DataBase.preStage=="AIStage1")
         {
-            this.transform.GetChild(0).GetComponent<Text>().text = "Player1 Win!";
+            this.transform.GetChild(0).GetComponent<Text>().text = "You Win!";
+            
         }
-        else if(winner == "Player2")
+        else if(DataBase.preStage=="Game" & DataBase.winner)
         {
             this.transform.GetChild(0).GetComponent<Text>().text = "Player2 Win!";
         }
         else
         {
-            this.transform.GetChild(0).GetComponent<Text>().text = "You Win!";
+            this.transform.GetChild(0).GetComponent<Text>().text = "Player1 Win!";
         }
     }
 
