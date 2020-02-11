@@ -3,6 +3,7 @@ using System.Collections;
 using GoogleMobileAds.Api;
 public class Admob_inter : MonoBehaviour
 {
+    public string Android_Interstitial;
     private InterstitialAd _interstitial;
 
     // Use this for initialization

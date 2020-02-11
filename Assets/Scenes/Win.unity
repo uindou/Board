@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c2a6a12e059701469facaa37a7fa2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Android_Interstitial: 
 --- !u!4 &101832210
 Transform:
   m_ObjectHideFlags: 0
@@ -648,10 +649,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1440, y: 2560}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -947,6 +948,7 @@ GameObject:
   - component: {fileID: 1574770127}
   - component: {fileID: 1574770129}
   - component: {fileID: 1574770128}
+  - component: {fileID: 1574770130}
   m_Layer: 0
   m_Name: WinText
   m_TagString: Untagged
@@ -1010,6 +1012,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574770126}
   m_CullTransparentMesh: 0
+--- !u!114 &1574770130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574770126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942150a57b32003429b3920469957db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winner: Player1
 --- !u!1 &1584870578
 GameObject:
   m_ObjectHideFlags: 0
