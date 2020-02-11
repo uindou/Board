@@ -40,8 +40,8 @@ public class Fighter : CharaParent
         this.moveRange.Add((-2, 2));
         this.moveRange.Add((-2, -2));
         this.moveRange.Add((2, 0));
-        this.moveRange.Add((-1, 1));
-        this.moveRange.Add((-1, -1));
+        this.moveRange.Add((1, 1));
+        this.moveRange.Add((1, -1));
 
     }
     private void initAttackRange()
