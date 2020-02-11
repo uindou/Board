@@ -11,6 +11,7 @@ public class DataBase : MonoBehaviour
     public static List<(int,int,bool,string)> stage;
     public static GameObject[,] objs;
     [SerializeField] static GameObject turnPhase;
+    public static bool AImode;
     private static int[,] board;
     public static int vertical;
     public static int horizontal;
@@ -40,32 +41,40 @@ public class DataBase : MonoBehaviour
     {
         turnPhase.GetComponent<TurnPhase>().PhaseUpdate(phase);
     }
-    private static void LenSet()
+    private void Awake()
     {
         switch (SceneManager.GetActiveScene().name)
         {
             case "Game":
                 vertical = 9;
                 horizontal = 7;
-                Debug.Log("set1");
+                turnPhase = GameObject.Find("TurnPhase");
+                board = new int[vertical, horizontal];
+                objs = new GameObject[vertical, horizontal];
+                objInit();
+                ImageInit();
+                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
+                AImode = false;
+                break;
+            case "AIStage1":
+                vertical = 9;
+                horizontal = 7;
+                turnPhase = GameObject.Find("TurnPhase");
+                board = new int[vertical, horizontal];
+                objs = new GameObject[vertical, horizontal];
+                objInit();
+                ImageInit();
+                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
+                AImode = true;
                 break;
             default:
                 vertical = 7;
                 horizontal = 5;
                 break;
         }
+
     }
-    private void Start()
-    {
-        LenSet();
-        turnPhase = GameObject.Find("TurnPhase");
-        Debug.Log("set2");
-        board = new int[vertical, horizontal];
-        objs = new GameObject[vertical, horizontal];
-        objInit();
-        ImageInit();
-        firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
-    }
+    
     public static void FlugInit()
     {
         selectFlug = false;
@@ -194,6 +203,27 @@ public class DataBase : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "Game":
+                stage.Add((1, 1, true, "PlainFighter"));
+                stage.Add((2, 1, true, "Soldier"));
+                stage.Add((1, 2, true, "Soldier"));
+                stage.Add((1, 3, true, "Tank"));
+                stage.Add((1, 4, true, "Tank"));
+                stage.Add((1, 5, true, "Tank"));
+                stage.Add((1, 6, true, "Soldier"));
+                stage.Add((2, 7, true, "Soldier"));
+                stage.Add((1, 7, true, "PlainFighter"));
+
+                stage.Add((9, 1, false, "PlainFighter"));
+                stage.Add((8, 1, false, "Soldier"));
+                stage.Add((9, 2, false, "Soldier"));
+                stage.Add((9, 3, false, "Tank"));
+                stage.Add((9, 4, false, "Tank"));
+                stage.Add((9, 5, false, "Tank"));
+                stage.Add((9, 6, false, "Soldier"));
+                stage.Add((8, 7, false, "Soldier"));
+                stage.Add((9, 7, false, "PlainFighter"));
+                return stage;
+            case "AIStage1":
                 stage.Add((1, 1, true, "PlainFighter"));
                 stage.Add((2, 1, true, "Soldier"));
                 stage.Add((1, 2, true, "Soldier"));
