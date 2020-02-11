@@ -220,8 +220,15 @@ public class Select : State
     {
         if (selectFlag)
         {
-            DataBase.PhaseChange(false);
-            return new AttackSelect();
+            if (DataBase.CantAttack(gameManage.turn))
+            {
+                return new Final();
+            }
+            else
+            {
+                DataBase.PhaseChange(false);
+                return new AttackSelect();
+            }
         }
         else if (DataBase.selectFlug)
         {
@@ -244,8 +251,14 @@ public class Move:State{
     {
         if (gameManage.selectFlag)
         {
-            DataBase.PhaseChange(false);
-            return new AttackSelect();
+            if (DataBase.CantAttack(gameManage.turn)) {
+                return new Final();
+            }
+            else
+            {
+                DataBase.PhaseChange(false);
+                return new AttackSelect();
+            }
         }
         else if (DataBase.moveFlug)
         {
@@ -383,7 +396,7 @@ public class AI : State
     {
         GameObject obj = objs[0, 0];
         obj.GetComponent<clickReceiver>().ChangeAct();
-        myAI.StartAI(1);
+        myAI.StartAI(0);
         return new Start();
     }
 }
