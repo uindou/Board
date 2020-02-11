@@ -18,7 +18,7 @@ public class Tank : CharaParent
         this.MaxHitPoint = HitPoint;
         this.charaName = "Tank";
         this.makeHP();
-        if (SceneManager.GetActiveScene().name == "AIStage1") initAIRange();
+        if (SceneManager.GetActiveScene().name == "AIStage1" || SceneManager.GetActiveScene().name == "AIStage2") initAIRange();
     }
     public async override void AttackImage()
     {

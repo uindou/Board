@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using static gameManage;
 public class DataBase : MonoBehaviour
 {
+    public static bool winner = true;
     public static string preStage="Title";
     public static Sprite[] images = new Sprite[15];
     public static List<(int,int,bool,string)> stage;
@@ -58,6 +59,17 @@ public class DataBase : MonoBehaviour
                 AImode = false;
                 break;
             case "AIStage1":
+                vertical = 9;
+                horizontal = 7;
+                turnPhase = GameObject.Find("TurnPhase");
+                board = new int[vertical, horizontal];
+                objs = new GameObject[vertical, horizontal];
+                objInit();
+                ImageInit();
+                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
+                AImode = true;
+                break;
+            case "AIStage2":
                 vertical = 9;
                 horizontal = 7;
                 turnPhase = GameObject.Find("TurnPhase");
@@ -143,7 +155,7 @@ public class DataBase : MonoBehaviour
         images[6] = GameObject.Find("AttackSelection").GetComponent<SpriteRenderer>().sprite;
         images[7] = GameObject.Find("SimpleFrame").GetComponent<SpriteRenderer>().sprite;
         images[8] = GameObject.Find("Soldier(Attacking1)").GetComponent<SpriteRenderer>().sprite;//兵士の攻撃画像1
-        images[9]=GameObject.Find("Tank(Attacking1)").GetComponent<SpriteRenderer>().sprite;//タンクの攻撃画像1
+        images[9] = GameObject.Find("Tank(Attacking1)").GetComponent<SpriteRenderer>().sprite;//タンクの攻撃画像1
         images[10] = GameObject.Find("PlainFighter(Attacking1)").GetComponent<SpriteRenderer>().sprite;//飛行機の攻撃画像1
         images[11] = GameObject.Find("Soldier(Attacking2)").GetComponent<SpriteRenderer>().sprite;//兵士の攻撃画像2
         images[12] = GameObject.Find("Tank(Attacking2)").GetComponent<SpriteRenderer>().sprite;//タンクの攻撃画像2
@@ -268,6 +280,25 @@ public class DataBase : MonoBehaviour
                 stage.Add((9, 6, false, "Soldier"));
                 stage.Add((8, 7, false, "Soldier"));
                 stage.Add((9, 7, false, "PlainFighter"));
+                return stage;
+            case "AIStage2":
+                stage.Add((1, 2, true, "Soldier"));
+                stage.Add((2, 3, true, "Tank"));
+                stage.Add((1, 3, true, "PlainFighter"));
+                stage.Add((1, 4, true, "PlainFighter"));
+                stage.Add((2, 4, true, "PlainFighter"));
+                stage.Add((1, 5, true, "PlainFighter"));
+                stage.Add((2, 5, true, "Tank"));
+                stage.Add((1, 6, true, "Soldier"));
+
+                stage.Add((9, 2, false, "Soldier"));
+                stage.Add((8, 3, false, "Tank"));
+                stage.Add((9, 3, false, "PlainFighter"));
+                stage.Add((9, 4, false, "PlainFighter"));
+                stage.Add((8, 4, false, "PlainFighter"));
+                stage.Add((9, 5, false, "PlainFighter"));
+                stage.Add((8, 5, false, "Tank"));
+                stage.Add((9, 6, false, "Soldier"));
                 return stage;
             default:
                 return stage;

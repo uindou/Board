@@ -387,6 +387,7 @@ public class End : State
 {
     public State Execute()
     {
+        DataBase.winner = !gameManage.turn;
         DataBase.preStage = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene("Win");
         //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
@@ -413,6 +414,8 @@ public class Free : State
             case "Game":
                 return new Start();
             case "AIStage1":
+                return new Start();
+            case "AIStart2":
                 return new Start();
             default:
                 return this;
