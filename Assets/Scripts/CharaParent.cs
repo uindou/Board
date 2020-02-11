@@ -77,11 +77,16 @@ public class CharaParent : MonoBehaviour,interFace
     }
     public void AddDamage(int damage)
     {
-        this.DamageImage();
         HitPoint -= damage;
         makeHP();
-        if (HitPoint <= 0) Erase();
-
+        if (HitPoint <= 0)
+        {
+            Erase();
+        }
+        else
+        {
+            this.DamageImage();
+        }
     }
     public bool IsTeam()
     {

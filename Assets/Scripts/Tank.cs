@@ -24,7 +24,7 @@ public class Tank : CharaParent
         {
             this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(9);
             await Task.Delay(200);
-            this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(10);
+            this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(12);
             await Task.Delay(200);
         }
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(1);

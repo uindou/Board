@@ -47,6 +47,7 @@ public class DataBase : MonoBehaviour
             case "Game":
                 vertical = 9;
                 horizontal = 7;
+                Debug.Log("set1");
                 break;
             default:
                 vertical = 7;
@@ -58,6 +59,7 @@ public class DataBase : MonoBehaviour
     {
         LenSet();
         turnPhase = GameObject.Find("TurnPhase");
+        Debug.Log("set2");
         board = new int[vertical, horizontal];
         objs = new GameObject[vertical, horizontal];
         objInit();

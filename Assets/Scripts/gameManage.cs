@@ -373,7 +373,7 @@ public class Final : State
         else
         {
             gameManage.turn = !gameManage.turn;
-            if (AImode & turn) return new AI();//2ターンに一度呼ばれる
+            if (AImode) return new AI();//2ターンに一度呼ばれる
             else
             {
                 GameObject obj = objs[0, 0];
