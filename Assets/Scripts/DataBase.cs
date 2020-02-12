@@ -45,12 +45,12 @@ public class DataBase : MonoBehaviour
     }
     private void Awake()
     {
+        turnPhase = GameObject.Find("TurnPhase");
         switch (SceneManager.GetActiveScene().name)
         {
             case "Game":
                 vertical = 9;
                 horizontal = 7;
-                turnPhase = GameObject.Find("TurnPhase");
                 board = new int[vertical, horizontal];
                 objs = new GameObject[vertical, horizontal];
                 objInit();
@@ -61,7 +61,6 @@ public class DataBase : MonoBehaviour
             case "AIStage1":
                 vertical = 9;
                 horizontal = 7;
-                turnPhase = GameObject.Find("TurnPhase");
                 board = new int[vertical, horizontal];
                 objs = new GameObject[vertical, horizontal];
                 objInit();
@@ -72,7 +71,6 @@ public class DataBase : MonoBehaviour
             case "AIStage2":
                 vertical = 9;
                 horizontal = 7;
-                turnPhase = GameObject.Find("TurnPhase");
                 board = new int[vertical, horizontal];
                 objs = new GameObject[vertical, horizontal];
                 objInit();
@@ -145,7 +143,7 @@ public class DataBase : MonoBehaviour
     }
     private void ImageInit()
     {
-       
+        GameObject imageParent = GameObject.Find("ImageDataBase");
         images[0] = GameObject.Find("Soldier").GetComponent<SpriteRenderer>().sprite;
         images[1] = GameObject.Find("Tank").GetComponent<SpriteRenderer>().sprite;
         images[2] = GameObject.Find("Heart").GetComponent<SpriteRenderer>().sprite;
@@ -234,72 +232,87 @@ public class DataBase : MonoBehaviour
             return false;
         }
     }
+    public static List<(int, int, bool, string)> GameMakeStage()
+    {
+        stage = new List<(int, int, bool, string)>();
+        stage.Add((1, 1, true, "PlainFighter"));
+        stage.Add((2, 1, true, "Soldier"));
+        stage.Add((1, 2, true, "Soldier"));
+        stage.Add((1, 3, true, "Tank"));
+        stage.Add((1, 4, true, "Tank"));
+        stage.Add((1, 5, true, "Tank"));
+        stage.Add((1, 6, true, "Soldier"));
+        stage.Add((2, 7, true, "Soldier"));
+        stage.Add((1, 7, true, "PlainFighter"));
+
+        stage.Add((9, 1, false, "PlainFighter"));
+        stage.Add((8, 1, false, "Soldier"));
+        stage.Add((9, 2, false, "Soldier"));
+        stage.Add((9, 3, false, "Tank"));
+        stage.Add((9, 4, false, "Tank"));
+        stage.Add((9, 5, false, "Tank"));
+        stage.Add((9, 6, false, "Soldier"));
+        stage.Add((8, 7, false, "Soldier"));
+        stage.Add((9, 7, false, "PlainFighter"));
+        return stage;
+    }
+    public static List<(int, int, bool, string)> AI1MakeStage()
+    {
+        stage = new List<(int, int, bool, string)>();
+        stage.Add((1, 1, true, "PlainFighter"));
+        stage.Add((2, 1, true, "Soldier"));
+        stage.Add((1, 2, true, "Soldier"));
+        stage.Add((1, 3, true, "Tank"));
+        stage.Add((1, 4, true, "Tank"));
+        stage.Add((1, 5, true, "Tank"));
+        stage.Add((1, 6, true, "Soldier"));
+        stage.Add((2, 7, true, "Soldier"));
+        stage.Add((1, 7, true, "PlainFighter"));
+
+        stage.Add((9, 1, false, "PlainFighter"));
+        stage.Add((8, 1, false, "Soldier"));
+        stage.Add((9, 2, false, "Soldier"));
+        stage.Add((9, 3, false, "Tank"));
+        stage.Add((9, 4, false, "Tank"));
+        stage.Add((9, 5, false, "Tank"));
+        stage.Add((9, 6, false, "Soldier"));
+        stage.Add((8, 7, false, "Soldier"));
+        stage.Add((9, 7, false, "PlainFighter"));
+        return stage;
+    }
+    public static List<(int, int, bool, string)> AI2MakeStage()
+    {
+        stage = new List<(int, int, bool, string)>();
+        stage.Add((1, 2, true, "Soldier"));
+        stage.Add((2, 3, true, "Tank"));
+        stage.Add((1, 3, true, "PlainFighter"));
+        stage.Add((1, 4, true, "PlainFighter"));
+        stage.Add((2, 4, true, "PlainFighter"));
+        stage.Add((1, 5, true, "PlainFighter"));
+        stage.Add((2, 5, true, "Tank"));
+        stage.Add((1, 6, true, "Soldier"));
+
+        stage.Add((9, 2, false, "Soldier"));
+        stage.Add((8, 3, false, "Tank"));
+        stage.Add((9, 3, false, "PlainFighter"));
+        stage.Add((9, 4, false, "PlainFighter"));
+        stage.Add((8, 4, false, "PlainFighter"));
+        stage.Add((9, 5, false, "PlainFighter"));
+        stage.Add((8, 5, false, "Tank"));
+        stage.Add((9, 6, false, "Soldier"));
+        return stage;
+    }
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
         switch (SceneManager.GetActiveScene().name)
         {
             case "Game":
-                stage.Add((1, 1, true, "PlainFighter"));
-                stage.Add((2, 1, true, "Soldier"));
-                stage.Add((1, 2, true, "Soldier"));
-                stage.Add((1, 3, true, "Tank"));
-                stage.Add((1, 4, true, "Tank"));
-                stage.Add((1, 5, true, "Tank"));
-                stage.Add((1, 6, true, "Soldier"));
-                stage.Add((2, 7, true, "Soldier"));
-                stage.Add((1, 7, true, "PlainFighter"));
-
-                stage.Add((9, 1, false, "PlainFighter"));
-                stage.Add((8, 1, false, "Soldier"));
-                stage.Add((9, 2, false, "Soldier"));
-                stage.Add((9, 3, false, "Tank"));
-                stage.Add((9, 4, false, "Tank"));
-                stage.Add((9, 5, false, "Tank"));
-                stage.Add((9, 6, false, "Soldier"));
-                stage.Add((8, 7, false, "Soldier"));
-                stage.Add((9, 7, false, "PlainFighter"));
-                return stage;
+                return GameMakeStage();
             case "AIStage1":
-                stage.Add((1, 1, true, "PlainFighter"));
-                stage.Add((2, 1, true, "Soldier"));
-                stage.Add((1, 2, true, "Soldier"));
-                stage.Add((1, 3, true, "Tank"));
-                stage.Add((1, 4, true, "Tank"));
-                stage.Add((1, 5, true, "Tank"));
-                stage.Add((1, 6, true, "Soldier"));
-                stage.Add((2, 7, true, "Soldier"));
-                stage.Add((1, 7, true, "PlainFighter"));
-
-                stage.Add((9, 1, false, "PlainFighter"));
-                stage.Add((8, 1, false, "Soldier"));
-                stage.Add((9, 2, false, "Soldier"));
-                stage.Add((9, 3, false, "Tank"));
-                stage.Add((9, 4, false, "Tank"));
-                stage.Add((9, 5, false, "Tank"));
-                stage.Add((9, 6, false, "Soldier"));
-                stage.Add((8, 7, false, "Soldier"));
-                stage.Add((9, 7, false, "PlainFighter"));
-                return stage;
+                return AI1MakeStage();
             case "AIStage2":
-                stage.Add((1, 2, true, "Soldier"));
-                stage.Add((2, 3, true, "Tank"));
-                stage.Add((1, 3, true, "PlainFighter"));
-                stage.Add((1, 4, true, "PlainFighter"));
-                stage.Add((2, 4, true, "PlainFighter"));
-                stage.Add((1, 5, true, "PlainFighter"));
-                stage.Add((2, 5, true, "Tank"));
-                stage.Add((1, 6, true, "Soldier"));
-
-                stage.Add((9, 2, false, "Soldier"));
-                stage.Add((8, 3, false, "Tank"));
-                stage.Add((9, 3, false, "PlainFighter"));
-                stage.Add((9, 4, false, "PlainFighter"));
-                stage.Add((8, 4, false, "PlainFighter"));
-                stage.Add((9, 5, false, "PlainFighter"));
-                stage.Add((8, 5, false, "Tank"));
-                stage.Add((9, 6, false, "Soldier"));
-                return stage;
+                return AI2MakeStage();
             default:
                 return stage;
     }
@@ -343,11 +356,12 @@ public class DataBase : MonoBehaviour
             
     void objInit()
     {
-        for(int i = 0; i < vertical; i++)
+        GameObject board = GameObject.Find("Board");
+        for (int i = 0; i < vertical; i++)
         {
             for(int j = 0; j < horizontal; j++)
             {
-                objs[i,j] = GameObject.Find("Grid(" + i + "," + j + ")");
+                objs[i, j] = board.transform.GetChild(i).GetChild(j).gameObject;
                 if (objs[i, j] == null)
                 {
                     Debug.Log("init failed"+i+","+j);

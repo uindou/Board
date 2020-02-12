@@ -5,6 +5,7 @@ using static DataBase;
 using static gameManage;
 using static myAI;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class gameManage : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class gameManage : MonoBehaviour
     public static bool turn;
     public static bool selectFlag;
     public static bool attackFlag;
+    public static bool endWaiting;
 
     public enum situation
     {
@@ -53,6 +55,11 @@ public class gameManage : MonoBehaviour
             default:
                 break;
         }
+    }
+    public static async void WaitTime()
+    {
+        await Task.Delay(2000);
+        endWaiting = true;
     }
     public static void requestEnqueue(GameObject obj)
     {
@@ -183,6 +190,7 @@ public class gameManage : MonoBehaviour
             }
         }
     }
+    
     private void Start()
     {
         state = new Free();
@@ -360,7 +368,7 @@ public class Attack : State
         }
     }
 }
-public class Final : State
+public class Final :State
 {
     public State Execute()
     {
@@ -368,7 +376,9 @@ public class Final : State
         {
             gameManage.receiveMode = gameManage.situation.free;
             DataBase.GameEnd(!gameManage.turn);
-            return new End();
+            endWaiting = false;
+            gameManage.WaitTime();
+            return new PreEnd();
         }
         else
         {
@@ -381,6 +391,16 @@ public class Final : State
                 return new Start();
             }
         }
+    }
+    
+}
+public class PreEnd : State
+{
+    public State Execute()
+    {
+
+        if (!endWaiting) return this;
+        else return new End();
     }
 }
 public class End : State
@@ -415,7 +435,7 @@ public class Free : State
                 return new Start();
             case "AIStage1":
                 return new Start();
-            case "AIStart2":
+            case "AIStage2":
                 return new Start();
             default:
                 return this;
