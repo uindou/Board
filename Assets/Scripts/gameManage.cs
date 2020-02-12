@@ -4,6 +4,7 @@ using UnityEngine;
 using static DataBase;
 using static gameManage;
 using static myAI;
+//using static Admob_inter;
 using UnityEngine.SceneManagement;
 
 public class gameManage : MonoBehaviour

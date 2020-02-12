@@ -63,9 +63,7 @@ public class Fighter : CharaParent
     private void initAttackRange()
     {
         this.attackRange.Add((-1, 0));
-        this.attackRange.Add((0, -1));
-        this.attackRange.Add((0, 1));
-        this.attackRange.Add((1, 0));
+        this.attackRange.Add((-2, 0));
     }
     // Update is called once per frame
     void Update()

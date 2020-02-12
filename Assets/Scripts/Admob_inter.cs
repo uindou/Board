@@ -1,44 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GoogleMobileAds;
 using GoogleMobileAds.Api;
 
 public class Admob_inter : MonoBehaviour
 {
-    private InterstitialAd interStitialView;
-    // Use this for initialization
-    void Start()
+    private InterstitialAd interstitial;
+
+    private void Start()
     {
-        // アプリID、 これはテスト用
-        string appId = "ca-app-pub-8801150864537344~8686480864";
-
-        // Initialize the Google Mobile Ads SDK.
-        MobileAds.Initialize(appId);
-
-        Debug.Log("Ad loaded");
         RequestInterstitial();
     }
     private void RequestInterstitial()
     {
-
-        // 広告ユニットID これはテスト用
+#if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+#elif UNITY_IPHONE
+        string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+#else
+        string adUnitId = "unexpected_platform";
+#endif
 
-        // Create an interstitial at the top of the screen.
-        interStitialView = new InterstitialAd(adUnitId);
-
+        // Initialize an InterstitialAd.
+        this.interstitial = new InterstitialAd(adUnitId);
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
-
-        // Load the banner with the request.
-        interStitialView.LoadAd(request);
-
+        // Load the interstitial with the request.
+        this.interstitial.LoadAd(request);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    private void GameOver()
     {
-
+        if (this.interstitial.IsLoaded())
+        {
+            this.interstitial.Show();
+        }
     }
 }
