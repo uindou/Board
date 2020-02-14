@@ -235,6 +235,7 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> GameMakeStage()
     {
         stage = new List<(int, int, bool, string)>();
+        
         stage.Add((1, 1, true, "PlainFighter"));
         stage.Add((2, 1, true, "Soldier"));
         stage.Add((1, 2, true, "Soldier"));
@@ -254,6 +255,15 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 6, false, "Soldier"));
         stage.Add((8, 7, false, "Soldier"));
         stage.Add((9, 7, false, "PlainFighter"));
+        
+        /*
+        for (int i=1; i<10; i++)
+        {
+            for (int j = 1; j < 8; j++)
+            {
+                stage.Add((i, j, false, "Tank"));
+            }
+        }*/
         return stage;
     }
     public static List<(int, int, bool, string)> AI1MakeStage()

@@ -4,7 +4,7 @@ using UnityEngine;
 using static DataBase;
 using static gameManage;
 using static myAI;
-//using static Admob_inter;
+using static Admob;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
@@ -410,8 +410,10 @@ public class End : State
     {
         DataBase.winner = gameManage.turn;
         DataBase.preStage = SceneManager.GetActiveScene().name;
+
         SceneManager.LoadScene("Win");
         //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
+        Admob.GameOver();
         return this;
     }
 }
