@@ -59,7 +59,7 @@ public class gameManage : MonoBehaviour
     }
     public static async void WaitTime()
     {
-        await Task.Delay(2000);
+        await Task.Delay(500);
         endWaiting = true;
     }
     public static void requestEnqueue(GameObject obj)
@@ -401,19 +401,22 @@ public class PreEnd : State
     {
 
         if (!endWaiting) return this;
-        else return new End();
+        else
+        {
+            DataBase.winner = gameManage.turn;
+            DataBase.preStage = SceneManager.GetActiveScene().name;
+
+            SceneManager.LoadScene("Win");
+            //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
+            Admob.GameOver();
+            return new End();
+        }
     }
 }
 public class End : State
 {
     public State Execute()
     {
-        DataBase.winner = gameManage.turn;
-        DataBase.preStage = SceneManager.GetActiveScene().name;
-
-        SceneManager.LoadScene("Win");
-        //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
-        Admob.GameOver();
         return this;
     }
 }
