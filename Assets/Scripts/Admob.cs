@@ -79,6 +79,7 @@ public class Admob: MonoBehaviour
 
     }
 
+    //ゲーム終了時にインタースティシャル広告を起動
     public static void GameOver()
     {
         if (interstitial.IsLoaded())
@@ -86,5 +87,13 @@ public class Admob: MonoBehaviour
             Debug.Log("Ad: Interstitial loaded");
             interstitial.Show();
         }
+    }
+
+    //インタースティシャル広告が削除されたら次をロードする
+    void OnAdClosed(object sender, System.EventArgs e)
+    {
+        interstitial.Destroy();
+        Debug.Log("Ad: Interstitial destroyed");
+        RequestInterstitial();
     }
 }
