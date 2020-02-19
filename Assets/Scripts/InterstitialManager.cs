@@ -4,11 +4,11 @@ using UnityEngine;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
 
-public class Admob: MonoBehaviour
+public class InterstitialManager: MonoBehaviour
 {
     private float timeOut = 30.0f;
     private float timeElapsed;
-    private BannerView bannerView;
+    //private BannerView bannerView;
     private static InterstitialAd interstitial;
 
     private void Start()
@@ -21,12 +21,11 @@ public class Admob: MonoBehaviour
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(appId);
 
-        Debug.Log("何度も呼ばれる？");
-
-        RequestBanner();
+        //RequestBanner();
         RequestInterstitial();
     }
 
+    /*
     //バナー広告のリクエスト
     private void RequestBanner()
     {
@@ -43,7 +42,7 @@ public class Admob: MonoBehaviour
         // Load the banner with the request.
         bannerView.LoadAd(request);
 
-    }
+    }*/
 
     //インタースティシャル広告のリクエスト
     private void RequestInterstitial()
@@ -61,6 +60,7 @@ public class Admob: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //30秒に1回バナー広告を更新
         timeElapsed += Time.deltaTime;
 
@@ -76,7 +76,7 @@ public class Admob: MonoBehaviour
             RequestBanner();
             Debug.Log("Ad: Banner loaded");
             timeElapsed = 0.0f;
-        }
+        }*/
 
     }
 
