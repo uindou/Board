@@ -11,8 +11,7 @@ public class Admob: MonoBehaviour
     private BannerView bannerView;
     private static InterstitialAd interstitial;
 
-    // Use this for initialization
-    void Start()
+    private void Start()
     {
         DontDestroyOnLoad(this);
 
@@ -21,6 +20,8 @@ public class Admob: MonoBehaviour
 
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(appId);
+
+        Debug.Log("何度も呼ばれる？");
 
         RequestBanner();
         RequestInterstitial();

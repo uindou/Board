@@ -61,17 +61,14 @@ public class CharaParent : MonoBehaviour,interFace
                 if (i < this.HitPoint)
                 {
                     this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(2);
-                    Debug.Log("ハート");
                 }
                 else if (i < this.MaxHitPoint)
                 {
                     this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = DataBase.image(3);
-                    Debug.Log("黒ハート");
                 }
                 else
                 {
                     this.transform.GetChild(1).transform.GetChild(i).gameObject.SetActive(false);
-                    Debug.Log("ハートなし");
                 }
             }
         }
