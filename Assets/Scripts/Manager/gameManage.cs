@@ -4,7 +4,7 @@ using UnityEngine;
 using static DataBase;
 using static gameManage;
 using static myAI;
-using static InterstitialManager;
+using static AdMobManager;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
@@ -430,7 +430,7 @@ public class PreEnd : State
             }
             SceneManager.LoadScene("Win");
             //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
-            InterstitialManager.GameOver();
+            AdMobManager.GameOver();
             return new End();
         }
     }
