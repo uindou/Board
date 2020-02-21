@@ -119,7 +119,7 @@ public class CharaParent : MonoBehaviour,interFace
         }
         return res;
     }
-    public List<(int,int)> Movable()
+    public virtual List<(int,int)> Movable()
     {
         List<(int,int)> res = new List<(int,int)>();
         foreach((int,int) T in moveRange)
@@ -139,11 +139,10 @@ public class CharaParent : MonoBehaviour,interFace
                     res.Add((now.xAxis - i, now.yAxis - j));
                 }
             }
-            
         }
         return res;
     }
-    public List<(int, int)> Attackable()
+    public virtual List<(int, int)> Attackable()
     {
         List<(int, int)> res = new List<(int, int)>();
         foreach ((int, int) T in attackRange)

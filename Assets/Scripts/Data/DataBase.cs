@@ -27,6 +27,7 @@ public class DataBase : MonoBehaviour
     public static (int, int) realAttack;
     public static Sprite firstImage;
     public static situation receive;//他から変える
+    
     public enum situation
     {
         select,
@@ -34,6 +35,8 @@ public class DataBase : MonoBehaviour
         attackselect,
         attack
     }
+
+   
     public static void TurnChange()
     {
         turnPhase.GetComponent<TurnPhase>().turnUpdate(gameManage.turn);

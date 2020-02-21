@@ -18,6 +18,7 @@ public class gameManage : MonoBehaviour
     public static bool selectFlag;
     public static bool attackFlag;
     public static bool endWaiting;
+    public static bool aiPlaying;
 
     public enum situation
     {
@@ -197,6 +198,7 @@ public class gameManage : MonoBehaviour
         state = new Free();
         receiveMode = situation.select;
         turn = false;
+        aiPlaying = false;
         
     }
     private void Update()
@@ -217,8 +219,8 @@ public class Start : State
         gameManage.selectFlag = false;
         gameManage.attackFlag = false;
         DataBase.FlugInit();
-        gameManage.receiveMode = gameManage.situation.select;
         DataBase.TurnChange();
+        receiveMode = gameManage.situation.select;
         DataBase.PhaseChange(true);
         return new Select();
     }
@@ -384,11 +386,17 @@ public class Final :State
         else
         {
             gameManage.turn = !gameManage.turn;
-            if (DataBase.AImode && turn) return new AI();//2ターンに一度呼ばれる
+            if (DataBase.AImode && turn)
+            {
+                aiPlaying = true;
+                return new AI();//2ターンに一度呼ばれる
+            }
             else
             {
+                aiPlaying = false;
                 GameObject obj = objs[0, 0];
-                if(DataBase.AImode)obj.GetComponent<clickReceiver>().ChangeAct();
+                if (DataBase.AImode) obj.GetComponent<clickReceiver>().ChangeAct();
+                gameManage.receiveMode = gameManage.situation.select;
                 return new Start();
             }
         }
@@ -406,6 +414,20 @@ public class PreEnd : State
             DataBase.winner = gameManage.turn;
             DataBase.preStage = SceneManager.GetActiveScene().name;
 
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "Game":
+                    CoinManager.SetBonus(1);
+                    break;
+                case "AIStage1":
+                    CoinManager.SetBonus(10);
+                    break;
+                case "AIStage2":
+                    CoinManager.SetBonus(20);
+                    break;
+                default:
+                    break;
+            }
             SceneManager.LoadScene("Win");
             //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
             InterstitialManager.GameOver();
@@ -425,7 +447,7 @@ public class AI : State
     public State Execute()
     {
         GameObject obj = objs[0, 0];
-        obj.GetComponent<clickReceiver>().ChangeAct();
+        obj.GetComponent<clickReceiver>().ChangeAct();//クリックレシーバーのモードを変えるための処理
         myAI.StartAI(2);
         return new Start();
     }

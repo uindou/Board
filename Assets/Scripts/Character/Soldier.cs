@@ -36,7 +36,7 @@ public class Soldier : CharaParent
         await Task.Delay(200);
         this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.white;
     }
-
+    
     private void initMoveRange()
     {
         this.moveRange.Add((-1, 0));

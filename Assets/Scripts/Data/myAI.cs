@@ -21,25 +21,36 @@ public class myAI : MonoBehaviour
     private async static void FixedRandomAI()
     {
         List<GameObject> res = DataBase.FixedMyKoma(gameManage.turn, true);
-        System.Random r1 = new System.Random();
-        GameObject obj = res[r1.Next(0, res.Count() - 1)];
+        if (res == null)
+        {
+            aiPlaying = false;
+            gameManage.Skip();
+            aiPlaying = true;
+            await Task.Delay(100);
+        }
+        else
+        {
+            System.Random r1 = new System.Random();
+            GameObject obj = res[r1.Next(0, res.Count() - 1)];
+            List<(int, int)> AIRange = obj.GetComponent<interFace>().AIMovable();
+            var (i, j) = AIRange[r1.Next(0, AIRange.Count() - 1)];
+            GameObject obj1 = DataBase.objs[i, j];
 
-        List<(int, int)> AIRange = obj.GetComponent<interFace>().AIMovable();
-        var (i, j) = AIRange[r1.Next(0, AIRange.Count() - 1)];
-        GameObject obj1 = DataBase.objs[i, j];
+            await Task.Delay(1000);
+            gameManage.requestEnqueue(obj);
 
-        await Task.Delay(1000);
-        gameManage.requestEnqueue(obj);
-
-        await Task.Delay(1000);
-        gameManage.requestEnqueue(obj1);
-        await Task.Delay(100);
+            await Task.Delay(1000);
+            gameManage.requestEnqueue(obj1);
+            await Task.Delay(100);
+        }
         if (gameManage.receiveMode != gameManage.situation.attackselect)
         {
             return;
         }
         else
         {
+            Debug.Log(3);
+            System.Random r1 = new System.Random();
             List<GameObject> res1 = DataBase.MyKoma(gameManage.turn, false);
             GameObject obj2 = res1[r1.Next(0, res1.Count() - 1)];
             List<(int, int)> attackRange = obj2.GetComponent<interFace>().Attackable();
