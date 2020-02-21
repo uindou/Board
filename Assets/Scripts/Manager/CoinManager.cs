@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class CoinManager : MonoBehaviour
 {
+    
     public static int coin;
     public static int bonus;
     public static int GetCoin()
@@ -18,6 +19,7 @@ public class CoinManager : MonoBehaviour
         PlayerPrefs.SetInt("coin", 0);
         coin = 0;
     }
+    
     public static void SetCoin(int bonus)
     {
         coin += bonus;
@@ -45,5 +47,18 @@ public class CoinManager : MonoBehaviour
 
         }
         
+    }
+    private void Update()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "MainMenu":
+                GetCoin();
+                this.GetComponent<Text>().text = coin.ToString();
+                break;
+            default:
+                break;
+        }
+
     }
 }
