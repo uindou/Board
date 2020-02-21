@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public GameObject obj;
     public AudioSource audioSource;
     // Start is called before the first frame update
     void Play()
     {
         if (DataBase.bgmflug)
         {
-            audioSource.Play();
+            obj.SetActive(true);
         }
         else
         {
-            audioSource.Stop();
+            obj.SetActive(false);
         }
     }
     void Start()
