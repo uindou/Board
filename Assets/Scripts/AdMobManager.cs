@@ -82,6 +82,7 @@ public class AdMobManager: MonoBehaviour
     //ゲーム終了時にインタースティシャル広告を起動
     public static void GameOver()
     {
+        Debug.Log(1);
         if (interstitial.IsLoaded())
         {
             Debug.Log("Ad: Interstitial loaded");
