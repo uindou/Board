@@ -27,6 +27,7 @@ public class DataBase : MonoBehaviour
     public static (int, int) realAttack;
     public static Sprite firstImage;
     public static situation receive;//他から変える
+    public static bool bgmflug;
     
     public enum situation
     {
