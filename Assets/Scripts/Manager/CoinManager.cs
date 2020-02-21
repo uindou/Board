@@ -13,6 +13,11 @@ public class CoinManager : MonoBehaviour
         coin = PlayerPrefs.GetInt("coin", 0);
         return coin;
     }
+    public static void Reset()
+    {
+        PlayerPrefs.SetInt("coin", 0);
+        coin = 0;
+    }
     public static void SetCoin(int bonus)
     {
         coin += bonus;

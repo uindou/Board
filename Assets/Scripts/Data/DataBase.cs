@@ -46,6 +46,43 @@ public class DataBase : MonoBehaviour
     {
         turnPhase.GetComponent<TurnPhase>().PhaseUpdate(phase);
     }
+
+    public static bool Jump(int x1,int y1,int x2,int y2)
+    {
+        int startx, starty, lastx, lasty;
+        if (x1 < x2)
+        {
+            startx = x1;
+            lastx = x2;
+        }
+        else
+        {
+            startx = x2;
+            lastx = x1;
+        }
+        if (y1 < y2)
+        {
+            starty = y1;
+            lasty = y2;
+        }
+        else
+        {
+            starty = y2;
+            lasty = y1;
+        }
+        for(int x = startx+1; x < lastx; x++)
+        {
+            for(int y = starty + 1; y < lasty; y++)
+            {
+                Debug.Log((x, y));
+                if (!CanSet(x, y))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     private void Awake()
     {
         turnPhase = GameObject.Find("TurnPhase");

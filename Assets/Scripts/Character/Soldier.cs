@@ -36,7 +36,30 @@ public class Soldier : CharaParent
         await Task.Delay(200);
         this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.white;
     }
-    
+
+    /*public override List<(int, int)> Movable()
+    {
+        List<(int, int)> res = new List<(int, int)>();
+        foreach ((int, int) T in moveRange)
+        {
+            var (i, j) = T;
+            if (gameManage.turn == false)
+            {
+                if (DataBase.CanSet(now.xAxis + i, now.yAxis + j) && DataBase.Jump(now.xAxis,now.yAxis,now.xAxis + i, now.yAxis + j))
+                {
+                    res.Add((now.xAxis + i, now.yAxis + j));
+                }
+            }
+            else
+            {
+                if (DataBase.CanSet(now.xAxis - i, now.yAxis - j))
+                {
+                    res.Add((now.xAxis - i, now.yAxis - j));
+                }
+            }
+        }
+        return res;
+    }*/
     private void initMoveRange()
     {
         this.moveRange.Add((-1, 0));
