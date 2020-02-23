@@ -25,11 +25,11 @@ public class StageSelectManager : MonoBehaviour
     }
 
     private static void Draw()
-    {/*
+    {
         parent.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[9].ToString();
         parent.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
         parent.transform.GetChild(2).transform.GetChild(0).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[1].ToString();
-    */}
+    }
 
     public static void StageRotate(bool vector)
     {
