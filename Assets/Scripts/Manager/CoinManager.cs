@@ -20,7 +20,7 @@ public class CoinManager : MonoBehaviour
         coin = 0;
     }
     
-    public static void SetCoin(int bonus)
+    public static void SetCoin()
     {
         coin += bonus;
         PlayerPrefs.SetInt("coin", coin);
@@ -36,7 +36,7 @@ public class CoinManager : MonoBehaviour
         {
             case "Win":
                 this.GetComponent<Text>().text = "+" + bonus.ToString();
-                SetCoin(bonus);
+                SetCoin();
                 break;
             case "MainMenu":
                 GetCoin();
