@@ -36,7 +36,18 @@ public class Soldier : CharaParent
         await Task.Delay(200);
         this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.white;
     }
+    public override int Evaluation(int x,int y)
+    {
+        if (DataBase.danger)
+        {
 
+
+        }
+        else
+        {
+            return -1;
+        }
+    }
     /*public override List<(int, int)> Movable()
     {
         List<(int, int)> res = new List<(int, int)>();

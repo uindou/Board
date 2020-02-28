@@ -108,6 +108,7 @@ public class DataBase : MonoBehaviour
                 ImageInit();
                 firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
                 AImode = true;
+                danger = false;
                 break;
             case "AIStage2":
                 vertical = 9;

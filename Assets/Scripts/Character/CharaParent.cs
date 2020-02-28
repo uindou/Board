@@ -166,6 +166,11 @@ public class CharaParent : MonoBehaviour,interFace
         return res;
     }
 
+    public virtual int Evaluation(int x,int y)
+    {
+        return 0;
+    }
+
     private void Start()
     {
 
