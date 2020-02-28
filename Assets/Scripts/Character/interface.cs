@@ -11,9 +11,9 @@ public interface interFace /* CharaParentにかく関数は全部ここに書く
     string GetName();
     void Erase();
     int Power();
-
+    int Evaluation(int x, int y);
     void AttackImage();
-
+    int AtcEvaluation();
     void DamageImage();
     List<(int, int)> AIMovable();
     List<(int, int)> Movable();

@@ -37,53 +37,6 @@ public class DataBase : MonoBehaviour
         attack
     }
 
-   
-    public static void TurnChange()
-    {
-        turnPhase.GetComponent<TurnPhase>().turnUpdate(gameManage.turn);
-        Debug.Log("changed");
-    }
-    public static void PhaseChange(bool phase)
-    {
-        turnPhase.GetComponent<TurnPhase>().PhaseUpdate(phase);
-    }
-
-    public static bool Jump(int x1,int y1,int x2,int y2)
-    {
-        int startx, starty, lastx, lasty;
-        if (x1 < x2)
-        {
-            startx = x1;
-            lastx = x2;
-        }
-        else
-        {
-            startx = x2;
-            lastx = x1;
-        }
-        if (y1 < y2)
-        {
-            starty = y1;
-            lasty = y2;
-        }
-        else
-        {
-            starty = y2;
-            lasty = y1;
-        }
-        for(int x = startx+1; x < lastx; x++)
-        {
-            for(int y = starty + 1; y < lasty; y++)
-            {
-                Debug.Log((x, y));
-                if (!CanSet(x, y))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
     private void Awake()
     {
         turnPhase = GameObject.Find("TurnPhase");
@@ -126,6 +79,52 @@ public class DataBase : MonoBehaviour
         }
 
     }
+    public static void TurnChange()
+    {
+        turnPhase.GetComponent<TurnPhase>().turnUpdate(gameManage.turn);
+    }
+    public static void PhaseChange(bool phase)
+    {
+        turnPhase.GetComponent<TurnPhase>().PhaseUpdate(phase);
+    }
+
+    /*public static bool Jump(int x1,int y1,int x2,int y2)
+    {
+        int startx, starty, lastx, lasty;
+        if (x1 < x2)
+        {
+            startx = x1;
+            lastx = x2;
+        }
+        else
+        {
+            startx = x2;
+            lastx = x1;
+        }
+        if (y1 < y2)
+        {
+            starty = y1;
+            lasty = y2;
+        }
+        else
+        {
+            starty = y2;
+            lasty = y1;
+        }
+        for(int x = startx+1; x < lastx; x++)
+        {
+            for(int y = starty + 1; y < lasty; y++)
+            {
+                Debug.Log((x, y));
+                if (!CanSet(x, y))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }*/
+    
     
     public static void FlugInit()
     {
@@ -273,6 +272,22 @@ public class DataBase : MonoBehaviour
             return false;
         }
     }
+    /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/
+    public static List<(int, int, bool, string)> makeStage()
+    {
+        stage = new List<(int, int, bool, string)>();
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Game":
+                return GameMakeStage();
+            case "AIStage1":
+                return AI1MakeStage();
+            case "AIStage2":
+                return AI2MakeStage();
+            default:
+                return stage;
+        }
+    }
     public static List<(int, int, bool, string)> GameMakeStage()
     {
         stage = new List<(int, int, bool, string)>();
@@ -295,17 +310,6 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 6, false, "Soldier"));
         stage.Add((8, 7, false, "Soldier"));
         stage.Add((9, 7, false, "PlainFighter"));
-        return stage;
-
-
-        /*
-        for (int i=1; i<10; i++)
-        {
-            for (int j = 1; j < 8; j++)
-            {
-                stage.Add((i, j, false, "Tank"));
-            }
-        }*/
         return stage;
     }
     public static List<(int, int, bool, string)> AI1MakeStage()
@@ -354,21 +358,7 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 6, false, "Soldier"));
         return stage;
     }
-    public static List<(int, int, bool, string)> makeStage()
-    {
-        stage = new List<(int, int, bool, string)>();
-        switch (SceneManager.GetActiveScene().name)
-        {
-            case "Game":
-                return GameMakeStage();
-            case "AIStage1":
-                return AI1MakeStage();
-            case "AIStage2":
-                return AI2MakeStage();
-            default:
-                return stage;
-    }
-    }
+    /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/
     public static bool CantAttack(bool turn)
     {
         int mobcolor = turn ? 2 : 1;

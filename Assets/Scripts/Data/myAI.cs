@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using System.Threading.Tasks;
 using static gameManage;
 using System.Linq;
@@ -17,6 +16,73 @@ public class myAI : MonoBehaviour
     private (((int,int),(int,int)), ((int, int), (int, int))) MiniMaxMain(int readTurn,int[,] board)
     {
         return (((0, 0), (0, 0)), ((0, 0), (0, 0)));
+    }
+    private async static void PowerfulRandomAI()
+    {
+        int power1 = 200;
+        int power2 = 20;
+        List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);//自分の駒のリスト
+        if (res == null)
+        {
+            aiPlaying = false;
+            gameManage.Skip();
+            aiPlaying = true;
+            await Task.Delay(100);
+        }
+        else
+        {
+            (GameObject,GameObject) RandomMax = (null,null);
+            int MaxEva = -1000;
+            for(int t = 0; t < power1; t++)
+            {
+                GameObject myobj = res[Random.Range(0, res.Count() - 1)];
+                List<(int, int)> moveRange = myobj.GetComponent<interFace>().Movable();
+                var (i0, j0) = DataBase.objSearch(myobj);
+                var (i, j) = moveRange[Random.Range(0, moveRange.Count() - 1)];
+                GameObject myobj1 = DataBase.objs[i, j];
+                int eva0 = myobj.GetComponent<interFace>().Evaluation(i0, j0);
+                int eva1 = myobj.GetComponent<interFace>().Evaluation(i, j);
+                if (MaxEva < eva1-eva0)
+                {
+                    RandomMax = ( myobj,myobj1);
+                    MaxEva = eva1-eva0;
+                }
+            }
+            var (obj,obj1) = RandomMax;
+            Debug.Log("評価値は"+MaxEva.ToString());
+
+
+            await Task.Delay(1000);
+            gameManage.requestEnqueue(obj);
+
+            await Task.Delay(1000);
+            gameManage.requestEnqueue(obj1);
+            await Task.Delay(100);
+        }
+        /*------------------------------------------MOVE PHASE------------------------------------------------------*/
+        if (gameManage.receiveMode != gameManage.situation.attackselect)
+        {
+            return;
+        }
+        else
+        {
+            (GameObject, GameObject) RandomMax = (null, null);
+            int MaxEva = -1000;
+            for (int t = 0; t < power2; t++)
+            {
+                List<GameObject> res1 = DataBase.MyKoma(gameManage.turn, false);
+                GameObject myobj2 = res1[Random.Range(0, res1.Count() - 1)];
+                List<(int, int)> attackRange = myobj2.GetComponent<interFace>().Attackable();
+                var (k, l) = attackRange[Random.Range(0, attackRange.Count() - 1)];
+                GameObject myobj3 = DataBase.objs[k, l];
+                RandomMax = (myobj2, myobj3);
+            }
+            var(obj2, obj3) = RandomMax;
+            gameManage.requestEnqueue(obj2);
+            await Task.Delay(1000);
+            gameManage.requestEnqueue(obj3);
+
+        }
     }
     private async static void FixedRandomAI()
     {
@@ -115,6 +181,9 @@ public class myAI : MonoBehaviour
                 break;
             case 2:
                 FixedRandomAI();
+                break;
+            case 3:
+                PowerfulRandomAI();
                 break;
             default:
                 break;

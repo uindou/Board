@@ -46,7 +46,6 @@ public class clickReceiver : MonoBehaviour
     }
    public void Flash()
     {
-        Debug.Log("change",this);
         isFlash = true;
         select.Add(DataBase.objSearch(this.gameObject));
         StartCoroutine("testtimer");

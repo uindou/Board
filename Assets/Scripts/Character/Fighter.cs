@@ -7,8 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class Fighter : CharaParent
 {
+    private int inf = 10^5;
+    private int[,] eva;
     void Start()
     {
+        eva = new int[9, 7] { {1,1,1,1,1,1,1 },{ 3,3,3,3,3,3,3},{5,5,5,5,5,5,5 },{10,10,10,10,10,10,10 },{25,25,25,25,25,25,25 },
+            {50,50,50,50,50,50,50 },{50,50,100,100,100,50,50 },{ 1, 1, 1, 1, 1, 1, 1 },{ inf, inf, inf, inf, inf, inf, inf }};
         initMoveRange();
         initAttackRange();
         this.HitPoint = 2;
@@ -18,6 +22,7 @@ public class Fighter : CharaParent
         this.makeHP();
         if (SceneManager.GetActiveScene().name == "AIStage1" || SceneManager.GetActiveScene().name == "AIStage2") initAIRange();
     }
+    /*--------------------------------------------------OVERRIDE ZONE-----------------------------------------------------*/
     public async override void AttackImage()
     {
         for (int i = 0; i < 2; i++)
@@ -36,6 +41,16 @@ public class Fighter : CharaParent
         this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.white;
     }
 
+    public override int Evaluation(int x, int y)
+    {
+        return eva[y, x];
+    }
+    public override int AtcEvaluation()
+    {
+        int rev = this.HitPoint == 2 ? 2 : 1;
+        return 3 * Evaluation(now.xAxis, now.yAxis) * rev;
+    }
+    /*--------------------------------------------OVERRIDE END----------------------------------------------------*/
     private void initMoveRange()
     {
         this.moveRange.Add((-3, 0));
@@ -65,9 +80,6 @@ public class Fighter : CharaParent
         this.attackRange.Add((-1, 0));
         this.attackRange.Add((-2, 0));
     }
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
+
 }
