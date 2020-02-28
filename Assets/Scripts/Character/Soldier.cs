@@ -40,7 +40,7 @@ public class Soldier : CharaParent
     }
     public override int AtcEvaluation()
     {
-        return 10* Evaluation(now.xAxis, now.yAxis);
+        return 10* Evaluation(DataBase.vertical - now.xAxis, now.yAxis);
     }
     /*public override int Evaluation(int x,int y)
     {

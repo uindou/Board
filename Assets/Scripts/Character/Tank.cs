@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Tank : CharaParent
 {
-    private int inf = 10 ^ 5;
+    private int inf = 10 ^ 10;
     private int[,] eva;
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,7 @@ public class Tank : CharaParent
     public override int AtcEvaluation()
     {
         int rev = this.HitPoint == 3 ? 1 : (this.HitPoint ==2? 2:10);
-        return 2 * Evaluation(now.xAxis, now.yAxis) * rev;
+        return 2 * Evaluation(DataBase.vertical-now.xAxis, now.yAxis) * rev;
     }
     /*--------------------------------------------------OVERRIDE END--------------------------------------------------*/
     /*--------------------------------------------------INIT ZONE-----------------------------------------------------*/

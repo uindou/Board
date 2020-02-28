@@ -447,7 +447,7 @@ public class AI : State
     {
         GameObject obj = objs[0, 0];
         obj.GetComponent<clickReceiver>().ChangeAct();//クリックレシーバーのモードを変えるための処理
-        myAI.StartAI(3);//AIのモードをセット
+        myAI.StartAI(4);//AIのモードをセット
         return new Start();
     }
 }

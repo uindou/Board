@@ -17,6 +17,147 @@ public class myAI : MonoBehaviour
     {
         return (((0, 0), (0, 0)), ((0, 0), (0, 0)));
     }
+
+    private async static void ReadAI()
+    {
+        List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
+        if (!res.Any())
+        {
+            aiPlaying = false;
+            gameManage.Skip();
+            aiPlaying = true;
+            await Task.Delay(100);
+
+            if (gameManage.receiveMode != gameManage.situation.attackselect)
+            {
+                return;
+            }
+            else
+            {
+                (GameObject, GameObject) Act = (null, null);
+                int ActionPoint = -1000;
+                List<GameObject> res1 = DataBase.MyKoma(gameManage.turn, false);
+                for (int k = 0; k < res1.Count(); k++)
+                {
+
+                    GameObject obj2 = res1[k];
+                    List<(int, int)> attackRange = obj2.GetComponent<interFace>().Attackable();
+                    for (int l = 0; l < attackRange.Count(); l++)
+                    {
+                        var (x3, y3) = attackRange[l];
+                        GameObject obj3 = DataBase.objs[k, l];
+                        int evaAtc = obj3.GetComponent<interFace>().AtcEvaluation();
+                        int actPt = evaAtc;
+                        if (actPt > ActionPoint)
+                        {
+                            ActionPoint = actPt;
+                            Act = (obj2, obj3);
+                        }
+                    }
+                }
+                var (Robj, Robj1) = Act;
+                Debug.Log("評価値は" + ActionPoint.ToString());
+                gameManage.requestEnqueue(Robj);
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj1);
+                await Task.Delay(100);
+            }
+        }
+        else
+        {
+            (GameObject, GameObject, GameObject, GameObject) Act = (null, null, null, null);
+            int ActionPoint = -1000;
+            bool afterSkip = false;
+            for (int i = 0; i < res.Count(); i++)
+            {
+                GameObject obj = res[i];
+                var (x0, y0) = DataBase.objSearch(obj);
+                List<(int, int)> moveRange = obj.GetComponent<interFace>().Movable();
+                for (int j = 0; j < moveRange.Count(); j++)
+                {
+                    var (x1, y1) = moveRange[j];
+                    GameObject obj1 = DataBase.objs[x1, y1];
+                    obj.GetComponent<interFace>().Move(x1, y1);
+                    DataBase.Set(x0, y0, 0);
+                    DataBase.Set(x1, y1, 2);
+                    DataBase.objs[x0, y0] = obj1;
+                    DataBase.objs[x1, y1] = obj;
+                    List<GameObject> res1 = DataBase.MyKoma(gameManage.turn, false);
+                    int eva0 = obj.GetComponent<interFace>().Evaluation(x0, y0);
+                    int eva1 = obj.GetComponent<interFace>().Evaluation(x1, y1);
+                    int movePt = eva1 - eva0;
+                    if (!res1.Any())
+                    {
+                        
+                        if (movePt > ActionPoint)
+                        {
+                            ActionPoint = movePt;
+                            Act = (obj, obj1, null, null);
+                            afterSkip = true;
+                        }
+                    }
+                    else
+                    {
+                        for (int k = 0; k < res1.Count(); k++)
+                        {
+                            GameObject obj2 = res1[k];
+                            List<(int, int)> attackRange = obj2.GetComponent<interFace>().Attackable();
+                            for (int l = 0; l < attackRange.Count(); l++)
+                            {
+                                var (x3, y3) = attackRange[l];
+                                GameObject obj3 = DataBase.objs[x3, y3];
+                                int evaAtc = obj3.GetComponent<interFace>().AtcEvaluation();
+                                int actPt = movePt * 10 + evaAtc;
+                                if (actPt > ActionPoint)
+                                {
+                                    ActionPoint = actPt;
+                                    Act = (obj, obj1, obj2, obj3);
+                                    afterSkip = false;
+                                }
+                            }
+                        }
+
+                    }
+                    DataBase.Set(x0, y0, 2);
+                    DataBase.Set(x1, y1, 0);
+                    obj.GetComponent<interFace>().Move(x0, y0);
+                    DataBase.objs[x0, y0] = obj;
+                    DataBase.objs[x1, y1] = obj1;
+                }
+            }
+            var (Robj1, Robj2, Robj3, Robj4) = Act;
+            if (afterSkip)
+            {
+                Debug.Log("評価値は" + ActionPoint.ToString());
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj1);
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj2);
+                await Task.Delay(100);
+                if (gameManage.receiveMode != gameManage.situation.attackselect)
+                {
+                    return;
+                }
+                else
+                {
+                    gameManage.Skip();//何か問題が生じた時に止まらないための処置.正しく動けばこれは起きない
+                }
+            }
+            else
+            {
+                Debug.Log("評価値は"+ActionPoint.ToString());
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj1);
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj2);
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj3);
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj4);
+                await Task.Delay(100);
+            }
+        }
+    }
     private async static void PowerfulRandomAI()
     {
         int power1 = 200;
@@ -75,7 +216,12 @@ public class myAI : MonoBehaviour
                 List<(int, int)> attackRange = myobj2.GetComponent<interFace>().Attackable();
                 var (k, l) = attackRange[Random.Range(0, attackRange.Count() - 1)];
                 GameObject myobj3 = DataBase.objs[k, l];
-                RandomMax = (myobj2, myobj3);
+                int eva0 = myobj3.GetComponent<interFace>().AtcEvaluation();
+                if (MaxEva < eva0)
+                {
+                    RandomMax = (myobj2, myobj3);
+                    MaxEva = eva0;
+                }
             }
             var(obj2, obj3) = RandomMax;
             gameManage.requestEnqueue(obj2);
@@ -184,6 +330,9 @@ public class myAI : MonoBehaviour
                 break;
             case 3:
                 PowerfulRandomAI();
+                break;
+            case 4:
+                ReadAI();
                 break;
             default:
                 break;
