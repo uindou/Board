@@ -7,23 +7,27 @@ using UnityEngine.UI;
 public class CreditManager : MonoBehaviour
 {
     public GameObject targetText;
+    private Vector3 startVector;
     //　テキストのスクロールスピード
-    private float textScrollSpeed = 60;
+    private float textScrollSpeed = 1000;
     //　テキストの制限位置
     private float limitPosition = 3451f;
     //　エンドロールが終了したかどうか
     private bool isStopEndRoll;
     bool firstFlag;
+    
 
     void Start()
     {
         firstFlag = PlayerPrefs.GetInt("endFirst",0)==0;
+        //targetText.transform.position;
+       
     }
 
     private void OnEnable()
     {
         isStopEndRoll = false;
-        targetText.transform.position = new Vector3(751.9f, 677.5f, 0.0f);
+        targetText.transform.position = new Vector3(751.9f, 746.4f, 0.0f); ;
     }
     // Update is called once per frame
 
