@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class Fighter : CharaParent
 {
-    private int inf = 10^5;
+    private int inf = 10^10;
     private int[,] eva;
     void Start()
     {
         eva = new int[9, 7] { {1,1,1,1,1,1,1 },{ 3,3,3,3,3,3,3},{5,5,5,5,5,5,5 },{10,10,10,10,10,10,10 },{25,25,25,25,25,25,25 },
-            {50,50,50,50,50,50,50 },{50,50,100,100,100,50,50 },{ 1, 1, 1, 1, 1, 1, 1 },{ inf, inf, inf, inf, inf, inf, inf }};
+            {50,50,50,50,50,50,50 },{50,50,100,100,100,50,50 },{ 1, 1, 1, 1, 1, 1, 1 },{ 10000, 10000, 10000, 10000, 10000, 10000, 10000 }};
         initMoveRange();
         initAttackRange();
         this.HitPoint = 2;
@@ -43,12 +43,12 @@ public class Fighter : CharaParent
 
     public override int Evaluation(int x, int y)
     {
-        return eva[y, x];
+        return eva[x,y];
     }
     public override int AtcEvaluation()
     {
         int rev = this.HitPoint == 2 ? 2 : 1;
-        return 3 * Evaluation(now.xAxis, now.yAxis) * rev;
+        return 3 * Evaluation(DataBase.vertical - now.xAxis, now.yAxis) * rev;
     }
     /*--------------------------------------------OVERRIDE END----------------------------------------------------*/
     private void initMoveRange()
