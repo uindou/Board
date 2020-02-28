@@ -26091,7 +26091,7 @@ GameObject:
   - component: {fileID: 1435425290}
   - component: {fileID: 1435425289}
   - component: {fileID: 1435425288}
-  - component: {fileID: 1435425292}
+  - component: {fileID: 1435425293}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -26149,7 +26149,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1435425292
+--- !u!114 &1435425293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -26158,7 +26158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1435425287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be99272f322858b49a80a13c0dcdbc31, type: 3}
+  m_Script: {fileID: 11500000, guid: d00756c8710d31349a9e6f67101e2278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1436607446

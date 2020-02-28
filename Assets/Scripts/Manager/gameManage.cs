@@ -385,14 +385,15 @@ public class Final :State
         }
         else
         {
-            gameManage.turn = !gameManage.turn;
-            if (DataBase.AImode && turn)
+            
+            if (DataBase.AImode && !turn)
             {
                 aiPlaying = true;
                 return new AI();//2ターンに一度呼ばれる
             }
             else
             {
+                gameManage.turn = !gameManage.turn;
                 aiPlaying = false;
                 GameObject obj = objs[0, 0];
                 if (DataBase.AImode) obj.GetComponent<clickReceiver>().ChangeAct();
@@ -448,7 +449,18 @@ public class AI : State
     {
         GameObject obj = objs[0, 0];
         obj.GetComponent<clickReceiver>().ChangeAct();//クリックレシーバーのモードを変えるための処理
-        myAI.StartAI(2);
+        Debug.Log(1);
+        if (DataBase.EndWarn())
+        {
+            gameManage.turn = !gameManage.turn;
+            myAI.StartAI(5);//割り込み
+        }
+        else
+        {
+            gameManage.turn = !gameManage.turn;
+            myAI.StartAI(4);
+        }
+        
         return new Start();
     }
 }
