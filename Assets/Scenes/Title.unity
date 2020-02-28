@@ -529,7 +529,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Dot Battle
+  m_Text: game title
 --- !u!222 &1804242697
 CanvasRenderer:
   m_ObjectHideFlags: 0

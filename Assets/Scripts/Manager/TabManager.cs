@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TabManager : MonoBehaviour
 {
     public GameObject targetTab;
+    public int tabNum;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class TabManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (targetTab.transform.GetSiblingIndex() != 2)
+        if (targetTab.transform.GetSiblingIndex() != tabNum-1)
         {
             this.GetComponent<Image>().color = Color.gray;
         }

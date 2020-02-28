@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class WindowCloser : MonoBehaviour
 {
     public GameObject closeWindow;
+    public GameObject closeWindow2;
+    public GameObject targetWindow;
+    public GameObject targetTab;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +21,19 @@ public class WindowCloser : MonoBehaviour
     {
         
     }
-    public void OnClick()
+    public void Close1()
     {
         closeWindow.SetActive(false);
+    }
+
+    public void Close2()
+    {
+        closeWindow2.SetActive(false);
+    }
+
+    public void TabInit()
+    {
+        targetWindow.transform.SetAsLastSibling();
+        targetTab.GetComponent<Image>().color = Color.white;
     }
 }
