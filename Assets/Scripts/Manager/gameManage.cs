@@ -4,7 +4,7 @@ using UnityEngine;
 using static DataBase;
 using static gameManage;
 using static myAI;
-using static AdMobManager;
+using static InterstitialManager;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
@@ -429,7 +429,8 @@ public class PreEnd : State
                     break;
             }
             SceneManager.LoadScene("Win");
-            AdMobManager.GameOver();
+            //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
+            InterstitialManager.GameOver();
             return new End();
         }
     }
@@ -447,7 +448,7 @@ public class AI : State
     {
         GameObject obj = objs[0, 0];
         obj.GetComponent<clickReceiver>().ChangeAct();//クリックレシーバーのモードを変えるための処理
-        myAI.StartAI(4);//AIのモードをセット
+        myAI.StartAI(2);
         return new Start();
     }
 }

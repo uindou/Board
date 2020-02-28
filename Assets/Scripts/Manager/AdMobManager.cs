@@ -9,7 +9,7 @@ public class AdMobManager: MonoBehaviour
     private float timeOut = 30.0f;
     private float timeElapsed;
     private BannerView bannerView;
-    private static InterstitialAd interstitial;
+    //private static InterstitialAd interstitial;
 
     private void Start()
     {
@@ -21,7 +21,7 @@ public class AdMobManager: MonoBehaviour
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(appId);
 
-        RequestInterstitial();
+        //RequestInterstitial();
     }
 
     
@@ -43,6 +43,7 @@ public class AdMobManager: MonoBehaviour
 
     }
 
+    /*
     //インタースティシャル広告のリクエスト
     private void RequestInterstitial()
     {
@@ -55,6 +56,7 @@ public class AdMobManager: MonoBehaviour
         // Load the interstitial with the request.
         interstitial.LoadAd(request);
     }
+    */
 
     // Update is called once per frame
     void Update()
@@ -79,6 +81,7 @@ public class AdMobManager: MonoBehaviour
 
     }
 
+    /*
     //ゲーム終了時にインタースティシャル広告を起動
     public static void GameOver()
     {
@@ -96,4 +99,5 @@ public class AdMobManager: MonoBehaviour
         Debug.Log("Ad: Interstitial destroyed");
         RequestInterstitial();
     }
+    */
 }

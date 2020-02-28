@@ -10,6 +10,7 @@ public class Reset : MonoBehaviour
     {
         Debug.Log(1);
         PlayerPrefs.SetInt("coin", 0);
+        PlayerPrefs.SetInt("endFirst", 0);
         CoinManager.GetCoin();
         closeWindow.SetActive(false);
     }
