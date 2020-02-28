@@ -8,6 +8,7 @@ public class WindowCloser : MonoBehaviour
 {
     public GameObject closeWindow;
     public GameObject closeWindow2;
+    public GameObject closeWindow3;
     public GameObject targetWindow;
     public GameObject targetTab;
     // Start is called before the first frame update
@@ -29,6 +30,11 @@ public class WindowCloser : MonoBehaviour
     public void Close2()
     {
         closeWindow2.SetActive(false);
+    }
+
+    public void Close3()
+    {
+        closeWindow3.SetActive(false);
     }
 
     public void TabInit()

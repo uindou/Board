@@ -5318,7 +5318,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 100539841}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 100539843}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &100539841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11007,7 +11018,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.4905396, y: -2.8632812}
+  m_AnchoredPosition: {x: 3.4904785, y: -2.8632812}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &201615047
@@ -12745,6 +12756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeWindow: {fileID: 1619496709}
   closeWindow2: {fileID: 0}
+  closeWindow3: {fileID: 0}
   targetWindow: {fileID: 1891693712}
   targetTab: {fileID: 166524350}
 --- !u!114 &234733600
@@ -16642,6 +16654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeWindow: {fileID: 2045619858}
   closeWindow2: {fileID: 412558326}
+  closeWindow3: {fileID: 405461780}
   targetWindow: {fileID: 0}
   targetTab: {fileID: 0}
 --- !u!114 &301491366
@@ -16700,6 +16713,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 301491365}
         m_MethodName: Close2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 301491365}
+        m_MethodName: Close3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19764,6 +19788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeWindow: {fileID: 525372534}
   closeWindow2: {fileID: 0}
+  closeWindow3: {fileID: 0}
   targetWindow: {fileID: 0}
   targetTab: {fileID: 0}
 --- !u!114 &346889660
@@ -22887,9 +22912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a16677c7fe0be4ba575e0bac316320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startVector: {x: 0, y: 0, z: 0}
-  endVector: {x: 0, y: 0, z: 0}
-  scrollSpeed: 0.1
+  targetText: {fileID: 1095020410}
 --- !u!1 &406107094
 GameObject:
   m_ObjectHideFlags: 0
@@ -24134,8 +24157,9 @@ GameObject:
   - component: {fileID: 425612943}
   - component: {fileID: 425612942}
   - component: {fileID: 425612941}
+  - component: {fileID: 425612944}
   m_Layer: 5
-  m_Name: Report
+  m_Name: Feedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24203,7 +24227,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 425612942}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 425612944}
+        m_MethodName: OnClick_ErrorReport
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &425612942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24240,6 +24275,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425612939}
   m_CullTransparentMesh: 0
+--- !u!114 &425612944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425612939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83f67b3f9a9a104394726564c568515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &428339449
 GameObject:
   m_ObjectHideFlags: 0
@@ -34689,6 +34736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeWindow: {fileID: 1445039985}
   closeWindow2: {fileID: 0}
+  closeWindow3: {fileID: 0}
   targetWindow: {fileID: 0}
   targetTab: {fileID: 0}
 --- !u!114 &643209204
@@ -39945,6 +39993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeWindow: {fileID: 412558326}
   closeWindow2: {fileID: 0}
+  closeWindow3: {fileID: 0}
   targetWindow: {fileID: 0}
   targetTab: {fileID: 0}
 --- !u!114 &751754978
@@ -47252,6 +47301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeWindow: {fileID: 1859385814}
   closeWindow2: {fileID: 0}
+  closeWindow3: {fileID: 0}
   targetWindow: {fileID: 0}
   targetTab: {fileID: 0}
 --- !u!114 &888409402
@@ -56860,7 +56910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2, y: -11.700195}
+  m_AnchoredPosition: {x: 2, y: -15.099976}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1095020412
@@ -56931,6 +56981,9 @@ MonoBehaviour:
     you for playing!
 
     here is a gift coin + 500
+
+    (First time only)
+
 
 '
 --- !u!222 &1095020413
@@ -60236,7 +60289,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: report
+  m_Text: feedback
 --- !u!222 &1163957053
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -73103,7 +73156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -36.200012, y: 7.0859375}
+  m_AnchoredPosition: {x: -36.19995, y: 7.0859375}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1433867827
@@ -82556,7 +82609,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.4905396, y: -2.8632812}
+  m_AnchoredPosition: {x: 3.4904785, y: -2.8632812}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1614654897
@@ -95787,7 +95840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1859385815
 RectTransform:
   m_ObjectHideFlags: 0
@@ -105311,7 +105364,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 22, y: -6.8199463}
+  m_AnchoredPosition: {x: 22, y: -6.819824}
   m_SizeDelta: {x: 1280, y: 2530}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2044818216
@@ -105367,7 +105420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2045619859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -107809,7 +107862,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.09954834, y: 7.831543}
+  m_AnchoredPosition: {x: 0.099609375, y: 7.831543}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2079856720
@@ -110336,7 +110389,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -58.07257, y: 7.0859375}
+  m_AnchoredPosition: {x: -58.07251, y: 7.0859375}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2147054028
