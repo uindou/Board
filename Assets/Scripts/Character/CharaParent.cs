@@ -29,14 +29,7 @@ public class CharaParent : MonoBehaviour,interFace
     {
         return AttackPower;
     }
-    public async virtual void AttackImage()
-    {
-
-    }
-    public async virtual void DamageImage()
-    {
-
-    }
+    
     public void Erase()
     {
         DataBase.Set(now.xAxis,now.yAxis,0);
@@ -119,6 +112,15 @@ public class CharaParent : MonoBehaviour,interFace
         }
         return res;
     }
+    /*------------------------------------------------OVERRIDE----------------------------------------------------------------*/
+    public async virtual void AttackImage()
+    {
+
+    }
+    public async virtual void DamageImage()
+    {
+
+    }
     public virtual List<(int,int)> Movable()
     {
         List<(int,int)> res = new List<(int,int)>();
@@ -170,11 +172,11 @@ public class CharaParent : MonoBehaviour,interFace
     {
         return 0;
     }
-
-    private void Start()
+    public virtual int AtcEvaluation()
     {
-
+        return 0;
     }
+/*------------------------------------------------OVERRIDE----------------------------------------------------------------*/
 }
 public class NowPoint
 {

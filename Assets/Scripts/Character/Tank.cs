@@ -7,10 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class Tank : CharaParent
 {
-
+    private int inf = 10 ^ 5;
+    private int[,] eva;
     // Start is called before the first frame update
     void Start()
     {
+        eva = new int[9, 7] { {1,1,1,1,1,1,1 },{10,30,20,30,20,30,10},{10,31,21,31,21,31,10},{10,32,22,32,22,32,10},
+            {10,33,23,33,23,33,10},{10,34,24,34,24,34,10},{10,35,25,35,25,35,10},{10,36,26,36,26,36,10},{ inf, inf, inf, inf, inf, inf, inf }};
         initMoveRange();
         initAttackRange();
         this.HitPoint = 3;
@@ -20,6 +23,7 @@ public class Tank : CharaParent
         this.makeHP();
         if (SceneManager.GetActiveScene().name == "AIStage1" || SceneManager.GetActiveScene().name == "AIStage2") initAIRange();
     }
+    /*--------------------------------------------------OVERRIDE ZONE-----------------------------------------------------*/
     public async override void AttackImage()
     {
         for (int i = 0; i < 2; i++)
@@ -37,6 +41,17 @@ public class Tank : CharaParent
         await Task.Delay(200);
         this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.white;
     }
+    public override int Evaluation(int x, int y)
+    {
+        return eva[x, y];
+    }
+    public override int AtcEvaluation()
+    {
+        int rev = this.HitPoint == 3 ? 1 : (this.HitPoint ==2? 2:10);
+        return 2 * Evaluation(now.xAxis, now.yAxis) * rev;
+    }
+    /*--------------------------------------------------OVERRIDE END--------------------------------------------------*/
+    /*--------------------------------------------------INIT ZONE-----------------------------------------------------*/
     private void initMoveRange()
     {
         this.moveRange.Add((-1, 0));
@@ -59,9 +74,6 @@ public class Tank : CharaParent
         this.attackRange.Add((-2, -1));
         this.attackRange.Add((-2, 1));
     }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    /*--------------------------------------------------INIT END-----------------------------------------------------*/
+    
 }

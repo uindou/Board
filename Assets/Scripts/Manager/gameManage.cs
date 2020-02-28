@@ -429,7 +429,6 @@ public class PreEnd : State
                     break;
             }
             SceneManager.LoadScene("Win");
-            //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
             AdMobManager.GameOver();
             return new End();
         }
@@ -448,7 +447,7 @@ public class AI : State
     {
         GameObject obj = objs[0, 0];
         obj.GetComponent<clickReceiver>().ChangeAct();//クリックレシーバーのモードを変えるための処理
-        myAI.StartAI(2);
+        myAI.StartAI(3);//AIのモードをセット
         return new Start();
     }
 }

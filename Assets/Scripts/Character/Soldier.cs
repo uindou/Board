@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using System.Linq;
 using UnityEngine.SceneManagement;
 
 public class Soldier : CharaParent
 {
+    private List<(int, int)> MArange;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,18 +38,33 @@ public class Soldier : CharaParent
         await Task.Delay(200);
         this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.white;
     }
-    public override int Evaluation(int x,int y)
+    public override int AtcEvaluation()
     {
-        if (DataBase.danger)
+        return 10* Evaluation(now.xAxis, now.yAxis);
+    }
+    /*public override int Evaluation(int x,int y)
+    {
+        if (DangerForAI.danger)
         {
-
+            if (DangerForAI.overDanger)
+            {
+                foreach((int,int) T in MArange)
+                {
+                    if(T == )
+                }
+            }
 
         }
         else
         {
             return -1;
         }
+    }*/
+    public override int Evaluation(int x, int y)
+    {
+        return -1;
     }
+
     /*public override List<(int, int)> Movable()
     {
         List<(int, int)> res = new List<(int, int)>();
@@ -108,6 +125,20 @@ public class Soldier : CharaParent
         this.attackRange.Add((0, -1));
         this.attackRange.Add((0, 1));
         this.attackRange.Add((1, 0));
+    }
+    private void initMArange()
+    {
+        foreach((int,int) T in moveRange)
+        {
+            var (x1, y1) = T;
+            foreach ((int,int) S in attackRange)
+            {
+
+                var (x2, y2) = S;
+                MArange.Add((x1 + x2, y1 + y2));
+            }
+        }
+        MArange = MArange.Distinct().ToList();
     }
     // Update is called once per frame
     void Update()

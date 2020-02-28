@@ -37,18 +37,58 @@ public class DataBase : MonoBehaviour
         attack
     }
 
-   
+    private void Awake()
+    {
+        turnPhase = GameObject.Find("TurnPhase");
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Game":
+                vertical = 9;
+                horizontal = 7;
+                board = new int[vertical, horizontal];
+                objs = new GameObject[vertical, horizontal];
+                objInit();
+                ImageInit();
+                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
+                AImode = false;
+                break;
+            case "AIStage1":
+                vertical = 9;
+                horizontal = 7;
+                board = new int[vertical, horizontal];
+                objs = new GameObject[vertical, horizontal];
+                objInit();
+                ImageInit();
+                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
+                AImode = true;
+                break;
+            case "AIStage2":
+                vertical = 9;
+                horizontal = 7;
+                board = new int[vertical, horizontal];
+                objs = new GameObject[vertical, horizontal];
+                objInit();
+                ImageInit();
+                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
+                AImode = true;
+                break;
+            default:
+                vertical = 7;
+                horizontal = 5;
+                break;
+        }
+
+    }
     public static void TurnChange()
     {
         turnPhase.GetComponent<TurnPhase>().turnUpdate(gameManage.turn);
-        Debug.Log("changed");
     }
     public static void PhaseChange(bool phase)
     {
         turnPhase.GetComponent<TurnPhase>().PhaseUpdate(phase);
     }
 
-    public static bool Jump(int x1,int y1,int x2,int y2)
+    /*public static bool Jump(int x1,int y1,int x2,int y2)
     {
         int startx, starty, lastx, lasty;
         if (x1 < x2)
@@ -83,50 +123,8 @@ public class DataBase : MonoBehaviour
             }
         }
         return true;
-    }
-    private void Awake()
-    {
-        turnPhase = GameObject.Find("TurnPhase");
-        switch (SceneManager.GetActiveScene().name)
-        {
-            case "Game":
-                vertical = 9;
-                horizontal = 7;
-                board = new int[vertical, horizontal];
-                objs = new GameObject[vertical, horizontal];
-                objInit();
-                ImageInit();
-                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
-                AImode = false;
-                break;
-            case "AIStage1":
-                vertical = 9;
-                horizontal = 7;
-                board = new int[vertical, horizontal];
-                objs = new GameObject[vertical, horizontal];
-                objInit();
-                ImageInit();
-                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
-                AImode = true;
-                danger = false;
-                break;
-            case "AIStage2":
-                vertical = 9;
-                horizontal = 7;
-                board = new int[vertical, horizontal];
-                objs = new GameObject[vertical, horizontal];
-                objInit();
-                ImageInit();
-                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
-                AImode = true;
-                break;
-            default:
-                vertical = 7;
-                horizontal = 5;
-                break;
-        }
-
-    }
+    }*/
+    
     
     public static void FlugInit()
     {
@@ -274,6 +272,22 @@ public class DataBase : MonoBehaviour
             return false;
         }
     }
+    /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/
+    public static List<(int, int, bool, string)> makeStage()
+    {
+        stage = new List<(int, int, bool, string)>();
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Game":
+                return GameMakeStage();
+            case "AIStage1":
+                return AI1MakeStage();
+            case "AIStage2":
+                return AI2MakeStage();
+            default:
+                return stage;
+        }
+    }
     public static List<(int, int, bool, string)> GameMakeStage()
     {
         stage = new List<(int, int, bool, string)>();
@@ -296,17 +310,6 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 6, false, "Soldier"));
         stage.Add((8, 7, false, "Soldier"));
         stage.Add((9, 7, false, "PlainFighter"));
-        return stage;
-
-
-        /*
-        for (int i=1; i<10; i++)
-        {
-            for (int j = 1; j < 8; j++)
-            {
-                stage.Add((i, j, false, "Tank"));
-            }
-        }*/
         return stage;
     }
     public static List<(int, int, bool, string)> AI1MakeStage()
@@ -355,21 +358,7 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 6, false, "Soldier"));
         return stage;
     }
-    public static List<(int, int, bool, string)> makeStage()
-    {
-        stage = new List<(int, int, bool, string)>();
-        switch (SceneManager.GetActiveScene().name)
-        {
-            case "Game":
-                return GameMakeStage();
-            case "AIStage1":
-                return AI1MakeStage();
-            case "AIStage2":
-                return AI2MakeStage();
-            default:
-                return stage;
-    }
-    }
+    /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/
     public static bool CantAttack(bool turn)
     {
         int mobcolor = turn ? 2 : 1;
