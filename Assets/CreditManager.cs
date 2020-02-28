@@ -8,7 +8,7 @@ public class CreditManager : MonoBehaviour
 {
     public GameObject targetText;
     //　テキストのスクロールスピード
-    private float textScrollSpeed = 1000;
+    private float textScrollSpeed = 60;
     //　テキストの制限位置
     private float limitPosition = 3451f;
     //　エンドロールが終了したかどうか
