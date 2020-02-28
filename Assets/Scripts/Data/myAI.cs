@@ -13,12 +13,46 @@ public class myAI : MonoBehaviour
         soldier,
         tank
     }
-    private (((int,int),(int,int)), ((int, int), (int, int))) MiniMaxMain(int readTurn,int[,] board)
-    {
-        return (((0, 0), (0, 0)), ((0, 0), (0, 0)));
-    }
 
-    private async static void ReadAI()
+    private async static void WarikomiAI()
+    {
+        if (DangerForAI.overDanger)
+        {
+            ReadAI(true);
+            return;
+        }
+        else if (DangerForAI.danger)
+        {
+            List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
+            foreach(GameObject obj in res)
+            {
+                foreach((int,int) T in obj.GetComponent<interFace>().Movable())
+                {
+                    if (T == DangerForAI.dangerList[0])
+                    {
+                        var (x, y) = T;
+                        GameObject obj1 = DataBase.objs[x, y];
+                        await Task.Delay(1000);
+                        gameManage.requestEnqueue(obj);
+                        await Task.Delay(1000);
+                        gameManage.requestEnqueue(obj1);
+                        await Task.Delay(100);
+                        DangerForAI.DangerReset();
+                        return;
+                    }
+                }
+            }
+            ReadAI(true);
+            return;
+        }
+        else
+        {
+            ReadAI(false);
+            DangerForAI.DangerReset();
+            return;
+        }
+    }
+    private async static void ReadAI(bool mode)
     {
         List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
         if (!res.Any())
@@ -106,7 +140,15 @@ public class myAI : MonoBehaviour
                             {
                                 var (x3, y3) = attackRange[l];
                                 GameObject obj3 = DataBase.objs[x3, y3];
-                                int evaAtc = obj3.GetComponent<interFace>().AtcEvaluation();
+                                int evaAtc;
+                                if (mode)
+                                {
+                                    evaAtc = obj3 == DangerForAI.dangerEnemyG ? 10000000 : obj3.GetComponent<interFace>().AtcEvaluation();
+                                }
+                                else
+                                {
+                                    evaAtc = obj3.GetComponent<interFace>().AtcEvaluation();
+                                }
                                 int actPt = movePt * 10 + evaAtc;
                                 if (actPt > ActionPoint)
                                 {
@@ -155,8 +197,10 @@ public class myAI : MonoBehaviour
                 await Task.Delay(1000);
                 gameManage.requestEnqueue(Robj4);
                 await Task.Delay(100);
+                DangerForAI.DangerReset();
             }
         }
+        
     }
     private async static void PowerfulRandomAI()
     {
@@ -332,7 +376,10 @@ public class myAI : MonoBehaviour
                 PowerfulRandomAI();
                 break;
             case 4:
-                ReadAI();
+                ReadAI(false);
+                break;
+            case 5:
+                WarikomiAI();
                 break;
             default:
                 break;

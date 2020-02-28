@@ -126,13 +126,7 @@ public class DataBase : MonoBehaviour
     }*/
     
     
-    public static void FlugInit()
-    {
-        selectFlug = false;
-        moveFlug = false;
-        attackSelectFlug = false;
-        attackFlug = false;
-    }
+    
     public static List<GameObject> FixedMyKoma(bool turn, bool mode)
     {
         List<GameObject> res = new List<GameObject>();
@@ -181,6 +175,30 @@ public class DataBase : MonoBehaviour
         }
         return res;
     }
+    /*---------------------------------------------INIT---------------------------------------------------------*/
+    public static void FlugInit()
+    {
+        selectFlug = false;
+        moveFlug = false;
+        attackSelectFlug = false;
+        attackFlug = false;
+    }
+    void objInit()
+    {
+        GameObject board = GameObject.Find("Board");
+        for (int i = 0; i < vertical; i++)
+        {
+            for (int j = 0; j < horizontal; j++)
+            {
+                objs[i, j] = board.transform.GetChild(i).GetChild(j).gameObject;
+                if (objs[i, j] == null)
+                {
+                    Debug.Log("init failed" + i + "," + j);
+                }
+            }
+        }
+        Debug.Log("Init succesed");
+    }
     private void ImageInit()
     {
         GameObject imageParent = GameObject.Find("ImageDataBase");
@@ -199,9 +217,8 @@ public class DataBase : MonoBehaviour
         images[12] = GameObject.Find("Tank(Attacking2)").GetComponent<SpriteRenderer>().sprite;//タンクの攻撃画像2
         images[13] = GameObject.Find("PlainFighter(Attacking2)").GetComponent<SpriteRenderer>().sprite;//飛行機の攻撃画像2
         images[14] = GameObject.Find("PlainFighter").GetComponent<SpriteRenderer>().sprite;
-
-
     }
+    /*---------------------------------------------INIT---------------------------------------------------------*/
     public static Sprite image(int i)
     {
         return images[i];
@@ -271,6 +288,33 @@ public class DataBase : MonoBehaviour
         {
             return false;
         }
+    }
+    public static bool EndWarn()
+    {
+        bool ret = false;
+        List< (GameObject, (int, int) )> res = new List<(GameObject,(int,int))>();
+        int mobcolor = turn ? 2 : 1;
+        for (int i = 0; i < vertical; i++)
+        {
+            for (int j = 0; j < horizontal; j++)
+            {
+                if (board[i, j] == mobcolor)
+                {
+                    GameObject obj = objs[i, j];
+                    foreach((int,int) T in obj.GetComponent<interFace>().Movable())
+                    {
+                        var (x, y) = T;
+                        if (x == 0)
+                        {
+                            Debug.Log("Danger!!");
+                            ret = true;
+                            DangerForAI.AddDanger(T, (i,j), obj);
+                        }
+                    }
+                }
+            }
+        }
+        return ret;
     }
     /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/
     public static List<(int, int, bool, string)> makeStage()
@@ -396,22 +440,8 @@ public class DataBase : MonoBehaviour
         return (1,1);
     }
             
-    void objInit()
-    {
-        GameObject board = GameObject.Find("Board");
-        for (int i = 0; i < vertical; i++)
-        {
-            for(int j = 0; j < horizontal; j++)
-            {
-                objs[i, j] = board.transform.GetChild(i).GetChild(j).gameObject;
-                if (objs[i, j] == null)
-                {
-                    Debug.Log("init failed"+i+","+j);
-                }
-            }
-        }
-        Debug.Log("Init succesed");
-    }
+    
+    /*--------------------------------------------Request---------------------------------------------------------*/
     public static void Reset(situation sit)
     {
         bool flug = false;
@@ -480,4 +510,5 @@ public class DataBase : MonoBehaviour
                 return (flug,move);
         }
     }
+    /*--------------------------------------------Request---------------------------------------------------------*/
 }
