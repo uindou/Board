@@ -413,29 +413,30 @@ public class PreEnd : State
         else
         {
             DataBase.winner = gameManage.turn;
-            DataBase.preStage = SceneManager.GetActiveScene().name;
+            DataBase.preStage = AImode ? "AIStage" : "Game";
 
             switch (DataBase.SceneName)
             {
                 case "Stage1":
-                    CoinManager.SetBonus(1);
+                    DataBase.bonusCoin=1;
                     break;
                 case "Stage2":
-                    CoinManager.SetBonus(2);
+                    DataBase.bonusCoin=2;
                     break;
                 case "Stage3":
-                    CoinManager.SetBonus(3);
+                    DataBase.bonusCoin = 3;
                     break;
                 case "AIStage1":
-                    CoinManager.SetBonus(10);
+                    DataBase.bonusCoin = 10;
                     break;
                 case "AIStage2":
-                    CoinManager.SetBonus(20);
+                    DataBase.bonusCoin = 20;
                     break;
                 default:
-                    CoinManager.SetBonus(0);
+                    DataBase.bonusCoin = 0;
                     break;
             }
+            DataBase.SceneName = "";
             SceneManager.LoadScene("Win");
             //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
             InterstitialManager.GameOver();

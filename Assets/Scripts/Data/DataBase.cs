@@ -8,7 +8,9 @@ using static gameManage;
 public class DataBase : MonoBehaviour
 {
     public static string SceneName;
+    public static bool isOnline;
     public static bool winner = true;
+    public static int bonusCoin;
     public static string preStage="Title";
     public static Sprite[] images;
     public static List<(int,int,bool,string)> stage;

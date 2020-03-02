@@ -45,8 +45,13 @@ public class InterstitialManager: MonoBehaviour
     {
         if (interstitial.IsLoaded())
         {
+            DataBase.isOnline = true;
             Debug.Log("Ad: Interstitial loaded");
             interstitial.Show();
+        }
+        else
+        {
+            DataBase.isOnline = false;
         }
     }
 
