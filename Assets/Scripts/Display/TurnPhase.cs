@@ -67,6 +67,10 @@ public class TurnPhase : MonoBehaviour
         attackphase = this.gameObject.transform.GetChild(1).transform.GetChild(1).transform.GetChild(1);
         yourturn = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(1);
         enemyturn = this.gameObject.transform.GetChild(0).transform.GetChild(1).transform.GetChild(1);
+        if (DataBase.AImode)
+        {
+            this.gameObject.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = "AI";
+        }
     }
 
     // Update is called once per frame

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using static gameManage;
 public class DataBase : MonoBehaviour
 {
-    public static string SceneName="Stage1";
+    public static string SceneName;
     public static bool winner = true;
     public static string preStage="Title";
     public static Sprite[] images;
