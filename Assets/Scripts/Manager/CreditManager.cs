@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class CreditManager : MonoBehaviour
 {
     public GameObject targetText;
     private Vector3 startVector;
     //　テキストのスクロールスピード
-    private float textScrollSpeed = 1000;
+    private float textScrollSpeed = 100;
     //　テキストの制限位置
-    private float limitPosition = 3451f;
+    private float limitPosition = 3460f;
     //　エンドロールが終了したかどうか
     private bool isStopEndRoll;
     bool firstFlag;
@@ -20,14 +21,20 @@ public class CreditManager : MonoBehaviour
     void Start()
     {
         firstFlag = PlayerPrefs.GetInt("endFirst",0)==0;
-        //targetText.transform.position;
        
     }
 
     private void OnEnable()
     {
         isStopEndRoll = false;
-        targetText.transform.position = new Vector3(751.9f, 746.4f, 0.0f); ;
+        //targetText.transform.position = new Vector3(751.9f, 746.4f, 0.0f);
+        startVector = targetText.transform.position;
+    }
+
+    private void OnDisable()
+    {
+        targetText.transform.position = startVector;
+
     }
     // Update is called once per frame
 
@@ -35,32 +42,30 @@ public class CreditManager : MonoBehaviour
     void Update()
     {
         Debug.Log(targetText.transform.position);
-        //　エンドロールが終了した時
-        if (isStopEndRoll)
+   
+     //　エンドロール用テキストがリミットを越えるまで動かす
+    if (targetText.transform.position.y <= limitPosition)
         {
-            
-            firstFlag = PlayerPrefs.GetInt("endFirst", 0) == 0;
-            PlayerPrefs.SetInt("endFirst", 1);
-            if (firstFlag)
-            {
-                CoinManager.SetBonus(500);
-                CoinManager.SetCoin();
-                firstFlag = false;
-            }
+         targetText.transform.position += new Vector3(0, textScrollSpeed * Time.deltaTime,0);
+        }
+    else
+        {
+            IsStopEndroll();
+        }
+    }
 
-            this.gameObject.SetActive(false);
-        }
-        else
+    private async void IsStopEndroll()
+    {
+        firstFlag = PlayerPrefs.GetInt("endFirst", 0) == 0;
+        PlayerPrefs.SetInt("endFirst", 1);
+        if (firstFlag)
         {
-            //　エンドロール用テキストがリミットを越えるまで動かす
-            if (targetText.transform.position.y <= limitPosition)
-            {
-                targetText.transform.position += new Vector3(0, textScrollSpeed * Time.deltaTime,0);
-            }
-            else
-            {
-                isStopEndRoll = true;
-            }
+            CoinManager.SetBonus(500);
+            CoinManager.SetCoin();
+            firstFlag = false;
         }
+
+        await Task.Delay(1000);
+        this.gameObject.SetActive(false);
     }
 }
