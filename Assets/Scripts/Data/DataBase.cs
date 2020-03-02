@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 using static gameManage;
 public class DataBase : MonoBehaviour
 {
+    public static string SceneName;
     public static bool winner = true;
     public static string preStage="Title";
-    public static Sprite[] images = new Sprite[15];
+    public static Sprite[] images;
     public static List<(int,int,bool,string)> stage;
     public static GameObject[,] objs;
     [SerializeField] static GameObject turnPhase;
@@ -37,12 +38,42 @@ public class DataBase : MonoBehaviour
         attack
     }
 
+    public enum im
+    {
+        soldier = 0,
+        soldierA1 = 8,
+        soldierA2 = 11,
+        tank = 1,
+        tankA1 = 9,
+        tankA2 = 12,
+        plain = 14,
+        plainA1 = 10,
+        plainA2 = 13,
+        heart = 2,
+        brokenheart = 3,
+        moveSelection = 4,
+        attackSelection = 6,
+        transParent = 5,
+        simpleFrame = 7
+
+    }
+
     private void Awake()
     {
         turnPhase = GameObject.Find("TurnPhase");
-        switch (SceneManager.GetActiveScene().name)
+        switch (SceneName)
         {
-            case "Game":
+            case "Stage1":
+                vertical = 9;
+                horizontal = 7;
+                board = new int[vertical, horizontal];
+                objs = new GameObject[vertical, horizontal];
+                objInit();
+                ImageInit();
+                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
+                AImode = false;
+                break;
+            case "Stage2":
                 vertical = 9;
                 horizontal = 7;
                 board = new int[vertical, horizontal];
@@ -73,8 +104,14 @@ public class DataBase : MonoBehaviour
                 AImode = true;
                 break;
             default:
-                vertical = 7;
-                horizontal = 5;
+                vertical = 9;
+                horizontal = 7;
+                board = new int[vertical, horizontal];
+                objs = new GameObject[vertical, horizontal];
+                objInit();
+                ImageInit();
+                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
+                AImode = false;
                 break;
         }
 
@@ -124,8 +161,6 @@ public class DataBase : MonoBehaviour
         }
         return true;
     }*/
-    
-    
     
     public static List<GameObject> FixedMyKoma(bool turn, bool mode)
     {
@@ -201,23 +236,32 @@ public class DataBase : MonoBehaviour
     }
     private void ImageInit()
     {
-        GameObject imageParent = GameObject.Find("ImageDataBase");
-        images[0] = GameObject.Find("Soldier").GetComponent<SpriteRenderer>().sprite;
-        images[1] = GameObject.Find("Tank").GetComponent<SpriteRenderer>().sprite;
-        images[2] = GameObject.Find("Heart").GetComponent<SpriteRenderer>().sprite;
-        images[3] = GameObject.Find("BrokenHeart").GetComponent<SpriteRenderer>().sprite;
-        images[4] = GameObject.Find("MoveSelection").GetComponent<SpriteRenderer>().sprite;
-        images[5] = GameObject.Find("Transparent").GetComponent<SpriteRenderer>().sprite;
-        images[6] = GameObject.Find("AttackSelection").GetComponent<SpriteRenderer>().sprite;
-        images[7] = GameObject.Find("SimpleFrame").GetComponent<SpriteRenderer>().sprite;
-        images[8] = GameObject.Find("Soldier(Attacking1)").GetComponent<SpriteRenderer>().sprite;//兵士の攻撃画像1
-        images[9] = GameObject.Find("Tank(Attacking1)").GetComponent<SpriteRenderer>().sprite;//タンクの攻撃画像1
-        images[10] = GameObject.Find("PlainFighter(Attacking1)").GetComponent<SpriteRenderer>().sprite;//飛行機の攻撃画像1
-        images[11] = GameObject.Find("Soldier(Attacking2)").GetComponent<SpriteRenderer>().sprite;//兵士の攻撃画像2
-        images[12] = GameObject.Find("Tank(Attacking2)").GetComponent<SpriteRenderer>().sprite;//タンクの攻撃画像2
-        images[13] = GameObject.Find("PlainFighter(Attacking2)").GetComponent<SpriteRenderer>().sprite;//飛行機の攻撃画像2
-        images[14] = GameObject.Find("PlainFighter").GetComponent<SpriteRenderer>().sprite;
+        images = new Sprite[System.Enum.GetNames(typeof(im)).Length];
+        Transform imageParent = GameObject.Find("ImageDataBase").transform;
+        Transform SoldierParent = imageParent.GetChild(0);
+        Transform TankParent = imageParent.GetChild(1);
+        Transform FighterParent = imageParent.GetChild(2);
+        Transform Effects = imageParent.GetChild(3);
+        Transform Others = imageParent.GetChild(4);
+        images[(int)im.soldier] = SoldierParent.GetChild(PlayerPrefs.GetInt("soldierSkin",0)).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.tank] = TankParent.GetChild(PlayerPrefs.GetInt("tankSkin", 0)).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.plain] = FighterParent.GetChild(PlayerPrefs.GetInt("plainSkin", 0)).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.soldierA1] = Effects.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.soldierA2] = Effects.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.tankA1] = Effects.GetChild(2).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.tankA2] = Effects.GetChild(3).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.plainA1] = Effects.GetChild(4).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.plainA2] = Effects.GetChild(5).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.heart] = Others.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.brokenheart] = Others.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.moveSelection] = Others.GetChild(2).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.attackSelection] = Others.GetChild(3).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.transParent] = Others.GetChild(4).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.simpleFrame] = Others.GetChild(5).GetComponent<SpriteRenderer>().sprite;
     }
+
+    
+   
     /*---------------------------------------------INIT---------------------------------------------------------*/
     public static Sprite image(int i)
     {
@@ -225,7 +269,7 @@ public class DataBase : MonoBehaviour
     }
     public static void Set(int x,int y,int mobColor)
     {
-        board[x, y] = mobColor;//0→何もなし　1→相手？　2→自分？
+        board[x, y] = mobColor;//0→何もなし　1→相手　2→自分
     }
     public static bool CanSet(int x,int y)
     {
@@ -320,19 +364,21 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> makeStage()
     {
         stage = new List<(int, int, bool, string)>();
-        switch (SceneManager.GetActiveScene().name)
+        switch (SceneName)
         {
-            case "Game":
-                return GameMakeStage();
+            case "Stage1":
+                return Stage1MakeStage();
+            case "Stage2":
+                return Stage2MakeStage();
             case "AIStage1":
                 return AI1MakeStage();
             case "AIStage2":
                 return AI2MakeStage();
             default:
-                return stage;
+                return Stage1MakeStage();
         }
     }
-    public static List<(int, int, bool, string)> GameMakeStage()
+    public static List<(int, int, bool, string)> Stage1MakeStage()
     {
         stage = new List<(int, int, bool, string)>();
         stage.Add((1, 1, true, "PlainFighter"));
@@ -343,6 +389,23 @@ public class DataBase : MonoBehaviour
         stage.Add((1, 5, true, "Tank"));
         stage.Add((1, 6, true, "Soldier"));
         stage.Add((2, 7, true, "Soldier"));
+        stage.Add((1, 7, true, "PlainFighter"));
+
+        stage.Add((9, 1, false, "PlainFighter"));
+        stage.Add((8, 1, false, "Soldier"));
+        stage.Add((9, 2, false, "Soldier"));
+        stage.Add((9, 3, false, "Tank"));
+        stage.Add((9, 4, false, "Tank"));
+        stage.Add((9, 5, false, "Tank"));
+        stage.Add((9, 6, false, "Soldier"));
+        stage.Add((8, 7, false, "Soldier"));
+        stage.Add((9, 7, false, "PlainFighter"));
+        return stage;
+    }
+    public static List<(int, int, bool, string)> Stage2MakeStage()
+    {
+        stage = new List<(int, int, bool, string)>();
+
         stage.Add((1, 7, true, "PlainFighter"));
 
         stage.Add((9, 1, false, "PlainFighter"));

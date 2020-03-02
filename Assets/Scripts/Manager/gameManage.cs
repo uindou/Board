@@ -415,10 +415,13 @@ public class PreEnd : State
             DataBase.winner = gameManage.turn;
             DataBase.preStage = SceneManager.GetActiveScene().name;
 
-            switch (SceneManager.GetActiveScene().name)
+            switch (DataBase.SceneName)
             {
-                case "Game":
+                case "Stage1":
                     CoinManager.SetBonus(1);
+                    break;
+                case "Stage2":
+                    CoinManager.SetBonus(2);
                     break;
                 case "AIStage1":
                     CoinManager.SetBonus(10);
@@ -427,6 +430,7 @@ public class PreEnd : State
                     CoinManager.SetBonus(20);
                     break;
                 default:
+                    CoinManager.SetBonus(0);
                     break;
             }
             SceneManager.LoadScene("Win");
@@ -469,9 +473,11 @@ public class Free : State
 {
     public State Execute()
     {
-        switch(SceneManager.GetActiveScene().name)
+        switch(DataBase.SceneName)
         {
-            case "Game":
+            case "Stage1":
+                return new Start();
+            case "Stage2":
                 return new Start();
             case "AIStage1":
                 return new Start();
@@ -480,6 +486,5 @@ public class Free : State
             default:
                 return this;
         }
-        
     }
 }

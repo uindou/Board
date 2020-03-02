@@ -37,6 +37,7 @@ public class myAI : MonoBehaviour
                         await Task.Delay(1000);
                         gameManage.requestEnqueue(obj1);
                         await Task.Delay(100);
+
                         DangerForAI.DangerReset();
                         return;
                     }
