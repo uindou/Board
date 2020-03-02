@@ -20,7 +20,6 @@ public class SmokeCoatingManager : MonoBehaviour
     void Update()
     {
         trigger = targetWindow0.activeSelf || targetWindow1.activeSelf || targetWindow2.activeSelf || targetWindow3.activeSelf;
-        Debug.Log(trigger);
         smokeLayer.gameObject.SetActive(trigger);
     }
 }

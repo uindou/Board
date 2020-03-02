@@ -10,7 +10,10 @@ public class TabManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (targetTab.transform.GetSiblingIndex() != tabNum - 1)
+        {
+            this.GetComponent<Image>().color = Color.gray;
+        }
     }
 
     // Update is called once per frame

@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 public class CreditManager : MonoBehaviour
 {
     public GameObject targetText;
+    public GameObject ghostText;
     private Vector3 startVector;
     //　テキストのスクロールスピード
-    private float textScrollSpeed = 100;
+    public float textScrollSpeed = 100;
     //　テキストの制限位置
-    private float limitPosition = 3460f;
+    private float limitPosition;
     //　エンドロールが終了したかどうか
     private bool isStopEndRoll;
     bool firstFlag;
@@ -21,7 +22,7 @@ public class CreditManager : MonoBehaviour
     void Start()
     {
         firstFlag = PlayerPrefs.GetInt("endFirst",0)==0;
-       
+        limitPosition = ghostText.transform.position.y;
     }
 
     private void OnEnable()
