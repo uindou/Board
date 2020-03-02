@@ -423,6 +423,9 @@ public class PreEnd : State
                 case "Stage2":
                     CoinManager.SetBonus(2);
                     break;
+                case "Stage3":
+                    CoinManager.SetBonus(3);
+                    break;
                 case "AIStage1":
                     CoinManager.SetBonus(10);
                     break;
@@ -478,6 +481,8 @@ public class Free : State
             case "Stage1":
                 return new Start();
             case "Stage2":
+                return new Start();
+            case "Stage3":
                 return new Start();
             case "AIStage1":
                 return new Start();

@@ -18,7 +18,7 @@ public class Init : MonoBehaviour
             j -= 1;
             DataBase.Set(i, j, teamColor);
 
-            GameObject obj = GameObject.Find("Grid(" + i + "," + j+")");
+            GameObject obj = objs[i, j];
             switch(name)
             {
                 case "Soldier":

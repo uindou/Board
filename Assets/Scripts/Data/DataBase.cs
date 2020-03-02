@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using static gameManage;
 public class DataBase : MonoBehaviour
 {
-    public static string SceneName;
+    public static string SceneName="Stage1";
     public static bool winner = true;
     public static string preStage="Title";
     public static Sprite[] images;
@@ -61,46 +61,28 @@ public class DataBase : MonoBehaviour
     private void Awake()
     {
         turnPhase = GameObject.Find("TurnPhase");
+        vertical = 9;
+        horizontal = 7;
+        board = new int[vertical, horizontal];
+        objs = new GameObject[vertical, horizontal];
+        objInit();
+        ImageInit();
+        firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
         switch (SceneName)
         {
             case "Stage1":
-                vertical = 9;
-                horizontal = 7;
-                board = new int[vertical, horizontal];
-                objs = new GameObject[vertical, horizontal];
-                objInit();
-                ImageInit();
-                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
                 AImode = false;
                 break;
             case "Stage2":
-                vertical = 9;
-                horizontal = 7;
-                board = new int[vertical, horizontal];
-                objs = new GameObject[vertical, horizontal];
-                objInit();
-                ImageInit();
-                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
+                AImode = false;
+                break;
+            case "Stage3":
                 AImode = false;
                 break;
             case "AIStage1":
-                vertical = 9;
-                horizontal = 7;
-                board = new int[vertical, horizontal];
-                objs = new GameObject[vertical, horizontal];
-                objInit();
-                ImageInit();
-                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
                 AImode = true;
                 break;
             case "AIStage2":
-                vertical = 9;
-                horizontal = 7;
-                board = new int[vertical, horizontal];
-                objs = new GameObject[vertical, horizontal];
-                objInit();
-                ImageInit();
-                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
                 AImode = true;
                 break;
             default:
@@ -370,6 +352,8 @@ public class DataBase : MonoBehaviour
                 return Stage1MakeStage();
             case "Stage2":
                 return Stage2MakeStage();
+            case "Stage3":
+                return Stage3MakeStage();
             case "AIStage1":
                 return AI1MakeStage();
             case "AIStage2":
@@ -402,6 +386,7 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 7, false, "PlainFighter"));
         return stage;
     }
+
     public static List<(int, int, bool, string)> Stage2MakeStage()
     {
         stage = new List<(int, int, bool, string)>();
@@ -416,6 +401,30 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 5, false, "Tank"));
         stage.Add((9, 6, false, "Soldier"));
         stage.Add((8, 7, false, "Soldier"));
+        stage.Add((9, 7, false, "PlainFighter"));
+        return stage;
+    }
+    public static List<(int, int, bool, string)> Stage3MakeStage()
+    {
+        stage = new List<(int, int, bool, string)>();
+        stage.Add((1, 1, true, "PlainFighter"));
+        stage.Add((2, 1, true, "PlainFighter"));
+        stage.Add((1, 2, true, "PlainFighter"));
+        stage.Add((1, 3, true, "PlainFighter"));
+        stage.Add((1, 4, true, "PlainFighter"));
+        stage.Add((1, 5, true, "PlainFighter"));
+        stage.Add((1, 6, true, "PlainFighter"));
+        stage.Add((2, 7, true, "PlainFighter"));
+        stage.Add((1, 7, true, "PlainFighter"));
+
+        stage.Add((9, 1, false, "PlainFighter"));
+        stage.Add((8, 1, false, "PlainFighter"));
+        stage.Add((9, 2, false, "PlainFighter"));
+        stage.Add((9, 3, false, "PlainFighter"));
+        stage.Add((9, 4, false, "PlainFighter"));
+        stage.Add((9, 5, false, "PlainFighter"));
+        stage.Add((9, 6, false, "PlainFighter"));
+        stage.Add((8, 7, false, "PlainFighter"));
         stage.Add((9, 7, false, "PlainFighter"));
         return stage;
     }

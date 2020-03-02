@@ -25,12 +25,12 @@ public class Soldier : CharaParent
     {
         for(int i = 0; i < 2; i++)
         {
-            this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(8);
+            this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image(8);
             await Task.Delay(200);
-            this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(11);
+            this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image(11);
             await Task.Delay(200);
         }
-        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(0);
+        this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image((int)DataBase.im.transParent);
     }
     public async override void DamageImage()
     {

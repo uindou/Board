@@ -28,12 +28,12 @@ public class Tank : CharaParent
     {
         for (int i = 0; i < 2; i++)
         {
-            this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(9);
+            this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image(9);
             await Task.Delay(200);
-            this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(12);
+            this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image(12);
             await Task.Delay(200);
         }
-        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(1);
+        this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image((int)DataBase.im.transParent);
     }
     public async override void DamageImage()
     {

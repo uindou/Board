@@ -10,7 +10,8 @@ public class ModeSceneMove : MonoBehaviour
     
     public void OnClick()
     {
-        DataBase.SceneName = nameObject.GetComponent<Text>().text;
+        string isAI = this.name == "AIButton" ? "AI" : "";
+        DataBase.SceneName = isAI+nameObject.GetComponent<Text>().text;
         SceneManager.LoadScene("Game");
     }
 }
