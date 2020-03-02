@@ -37,6 +37,33 @@ public class myAI : MonoBehaviour
                         await Task.Delay(1000);
                         gameManage.requestEnqueue(obj1);
                         await Task.Delay(100);
+                        List<GameObject> res1 = DataBase.MyKoma(gameManage.turn, false);
+                        (GameObject, GameObject) Act = (null, null);
+                        int ActionPoint = -1000;
+                        for (int k = 0; k < res1.Count(); k++)
+                        {
+                            GameObject obj2 = res1[k];
+                            List<(int, int)> attackRange = obj2.GetComponent<interFace>().Attackable();
+                            for (int l = 0; l < attackRange.Count(); l++)
+                            {
+                                var (x3, y3) = attackRange[l];
+                                GameObject obj3 = DataBase.objs[x3, y3];
+                                int evaAtc;
+                                evaAtc = obj3 == DangerForAI.dangerEnemyG ? 10000000 : obj3.GetComponent<interFace>().AtcEvaluation();
+                                if (evaAtc > ActionPoint)
+                                {
+                                    ActionPoint = evaAtc;
+                                    Act = (obj2, obj3);
+                                }
+                            }
+                        }
+                        Debug.Log("評価値は" + ActionPoint.ToString());
+                        var (Robj, Robj1) = Act;
+                        await Task.Delay(900);
+                        gameManage.requestEnqueue(Robj);
+                        await Task.Delay(1000);
+                        gameManage.requestEnqueue(Robj1);
+                        await Task.Delay(100);
                         DangerForAI.DangerReset();
                         return;
                     }
