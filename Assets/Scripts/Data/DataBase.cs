@@ -357,9 +357,11 @@ public class DataBase : MonoBehaviour
             case "Stage3":
                 return Stage3MakeStage();
             case "AIStage1":
-                return AI1MakeStage();
+                return Stage1MakeStage();
             case "AIStage2":
-                return AI2MakeStage();
+                return Stage2MakeStage();
+            case "AIStage3":
+                return Stage3MakeStage();
             default:
                 return Stage1MakeStage();
         }
@@ -388,22 +390,26 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 7, false, "PlainFighter"));
         return stage;
     }
-
     public static List<(int, int, bool, string)> Stage2MakeStage()
     {
         stage = new List<(int, int, bool, string)>();
+        stage.Add((1, 2, true, "Soldier"));
+        stage.Add((2, 3, true, "Tank"));
+        stage.Add((1, 3, true, "PlainFighter"));
+        stage.Add((1, 4, true, "PlainFighter"));
+        stage.Add((2, 4, true, "PlainFighter"));
+        stage.Add((1, 5, true, "PlainFighter"));
+        stage.Add((2, 5, true, "Tank"));
+        stage.Add((1, 6, true, "Soldier"));
 
-        stage.Add((1, 7, true, "PlainFighter"));
-
-        stage.Add((9, 1, false, "PlainFighter"));
-        stage.Add((8, 1, false, "Soldier"));
         stage.Add((9, 2, false, "Soldier"));
-        stage.Add((9, 3, false, "Tank"));
-        stage.Add((9, 4, false, "Tank"));
-        stage.Add((9, 5, false, "Tank"));
+        stage.Add((8, 3, false, "Tank"));
+        stage.Add((9, 3, false, "PlainFighter"));
+        stage.Add((9, 4, false, "PlainFighter"));
+        stage.Add((8, 4, false, "PlainFighter"));
+        stage.Add((9, 5, false, "PlainFighter"));
+        stage.Add((8, 5, false, "Tank"));
         stage.Add((9, 6, false, "Soldier"));
-        stage.Add((8, 7, false, "Soldier"));
-        stage.Add((9, 7, false, "PlainFighter"));
         return stage;
     }
     public static List<(int, int, bool, string)> Stage3MakeStage()
@@ -430,52 +436,7 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 7, false, "PlainFighter"));
         return stage;
     }
-    public static List<(int, int, bool, string)> AI1MakeStage()
-    {
-        stage = new List<(int, int, bool, string)>();
-        stage.Add((1, 1, true, "PlainFighter"));
-        stage.Add((2, 1, true, "Soldier"));
-        stage.Add((1, 2, true, "Soldier"));
-        stage.Add((1, 3, true, "Tank"));
-        stage.Add((1, 4, true, "Tank"));
-        stage.Add((1, 5, true, "Tank"));
-        stage.Add((1, 6, true, "Soldier"));
-        stage.Add((2, 7, true, "Soldier"));
-        stage.Add((1, 7, true, "PlainFighter"));
-
-        stage.Add((9, 1, false, "PlainFighter"));
-        stage.Add((8, 1, false, "Soldier"));
-        stage.Add((9, 2, false, "Soldier"));
-        stage.Add((9, 3, false, "Tank"));
-        stage.Add((9, 4, false, "Tank"));
-        stage.Add((9, 5, false, "Tank"));
-        stage.Add((9, 6, false, "Soldier"));
-        stage.Add((8, 7, false, "Soldier"));
-        stage.Add((9, 7, false, "PlainFighter"));
-        return stage;
-    }
-    public static List<(int, int, bool, string)> AI2MakeStage()
-    {
-        stage = new List<(int, int, bool, string)>();
-        stage.Add((1, 2, true, "Soldier"));
-        stage.Add((2, 3, true, "Tank"));
-        stage.Add((1, 3, true, "PlainFighter"));
-        stage.Add((1, 4, true, "PlainFighter"));
-        stage.Add((2, 4, true, "PlainFighter"));
-        stage.Add((1, 5, true, "PlainFighter"));
-        stage.Add((2, 5, true, "Tank"));
-        stage.Add((1, 6, true, "Soldier"));
-
-        stage.Add((9, 2, false, "Soldier"));
-        stage.Add((8, 3, false, "Tank"));
-        stage.Add((9, 3, false, "PlainFighter"));
-        stage.Add((9, 4, false, "PlainFighter"));
-        stage.Add((8, 4, false, "PlainFighter"));
-        stage.Add((9, 5, false, "PlainFighter"));
-        stage.Add((8, 5, false, "Tank"));
-        stage.Add((9, 6, false, "Soldier"));
-        return stage;
-    }
+    
     /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/
     public static bool CantAttack(bool turn)
     {

@@ -69,6 +69,65 @@ public class SkinManager : MonoBehaviour
                 PlayerPrefs.GetInt("PlainSkin" + i.ToString(), 0) == 1));
         }
     }
-    
+    public static bool Available(string type,int index)
+    {
+        int coin = PlayerPrefs.GetInt("coin", 0);
+        int price;
+        if (type == "soldier")
+        {
+            var (a, b, p, c) = SoldierSkin[index];
+            price = p;
+        }else if(type == "tank")
+        {
+            var (a, b, p, c) = TankSkin[index];
+            price = p;
+        }
+        else
+        {
+            var (a, b, p, c) = PlainSkin[index];
+            price = p;
+        }
+        return coin >= price;
+    }
+    public static void Purchase(string type, int index)
+    {
+        int price;
+        if (type == "soldier")
+        {
+            var (a, b, p, c) = SoldierSkin[index];
+            price = p;
+        }
+        else if (type == "tank")
+        {
+            var (a, b, p, c) = TankSkin[index];
+            price = p;
+        }
+        else
+        {
+            var (a, b, p, c) = PlainSkin[index];
+            price = p;
+        }
+        int coin = PlayerPrefs.GetInt("coin", 0);
+        PlayerPrefs.SetInt("coin", coin - price);
+    }
+
+    public static bool BuyFlag(string type,int index)
+    {
+        if (type == "soldier")
+        {
+            var (a, b, c, flag) = SoldierSkin[index];
+            return flag;
+        }
+        else if (type == "tank")
+        {
+            var (a, b, c, flag) = TankSkin[index];
+            return flag;
+        }
+        else
+        {
+            var (a, b, c, flag) = PlainSkin[index];
+            return flag;
+        }
+    }
 
 }
