@@ -14,7 +14,7 @@ public class WindowCloser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("押された");
     }
 
     // Update is called once per frame
@@ -24,21 +24,25 @@ public class WindowCloser : MonoBehaviour
     }
     public void Close1()
     {
+        Debug.Log("押された");
         closeWindow.SetActive(false);
     }
 
     public void Close2()
     {
+        Debug.Log("押された");
         closeWindow2.SetActive(false);
     }
 
     public void Close3()
     {
+        Debug.Log("押された");
         closeWindow3.SetActive(false);
     }
 
     public void TabInit()
     {
+        Debug.Log("押された");
         targetWindow.transform.SetAsLastSibling();
         targetTab.GetComponent<Image>().color = Color.white;
     }

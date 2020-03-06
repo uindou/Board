@@ -13,5 +13,11 @@ public class Reset : MonoBehaviour
         PlayerPrefs.SetInt("endFirst", 0);
         CoinManager.GetCoin();
         closeWindow.SetActive(false);
+        PlayerPrefs.SetInt("SoldierSkin1", 0);
+        PlayerPrefs.SetInt("SoldierSkin2", 0);
+        PlayerPrefs.SetInt("SoldierSkin3", 0);
+        PlayerPrefs.SetInt("SoldierSkin4", 0);
+        PlayerPrefs.SetInt("SoldierSkin5", 0);
+        SkinManager.Init();
     }
 }

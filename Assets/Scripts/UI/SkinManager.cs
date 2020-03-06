@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SkinManager : MonoBehaviour
 {
-    Transform SkinData;
+    public static Transform SkinData;
     public static List<(string, Sprite, int, bool)> SoldierSkin;
     public static List<(string, Sprite, int, bool)> TankSkin;
     public static List<(string, Sprite, int, bool)> PlainSkin;
@@ -13,6 +13,12 @@ public class SkinManager : MonoBehaviour
     {
         SkinData = this.gameObject.transform;
         SetInit();
+        Init();
+        
+    }
+    public static void Init()
+    {
+        Debug.Log("load init");
         SoldierInit();
         TankInit();
         PlainInit();
@@ -23,7 +29,7 @@ public class SkinManager : MonoBehaviour
         PlayerPrefs.SetInt("TankSkin0", 1);
         PlayerPrefs.SetInt("PlainSkin0", 1);
     }
-    private void SoldierInit()
+    public static void SoldierInit()
     {
         int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
         SoldierSkin = new List<(string, Sprite, int, bool)>();
@@ -39,7 +45,7 @@ public class SkinManager : MonoBehaviour
             Debug.Log(SoldierSkin[i]);
         }
     }
-    private void TankInit()
+    public static void TankInit()
     {
         int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
         TankSkin = new List<(string, Sprite, int, bool)>();
@@ -54,7 +60,7 @@ public class SkinManager : MonoBehaviour
                 PlayerPrefs.GetInt("TankSkin" + i.ToString(), 0) == 1));
         }
     }
-    private void PlainInit()
+    public static void PlainInit()
     {
         int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
         TankSkin = new List<(string, Sprite, int, bool)>();
@@ -106,9 +112,12 @@ public class SkinManager : MonoBehaviour
             Skin = PlainSkin[index];
         }
         var (a, b, c, d) = Skin;
+        Debug.Log(Skin);
         price = c;
         int coin = PlayerPrefs.GetInt("coin", 0);
+        Debug.Log(coin);
         PlayerPrefs.SetInt("coin", coin - price);
+        Debug.Log(price);
         Skin = (a, b, c, true);
         if (type == "soldier")
         {

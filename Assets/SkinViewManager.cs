@@ -19,6 +19,12 @@ public class SkinViewManager : MonoBehaviour
         SkinView();
     }
 
+    private void OnEnable()
+    {
+        page = 1;
+        SkinView();
+        Debug.Log("onenable");
+    }
     // Update is called once per frame
     void Update()
     {
