@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class SkinViewManager : MonoBehaviour
 {
-    private Sprite currentSkinImage;
-    private string currentSkinName;
-    public GameObject currentSkin;
+    public static GameObject currentSkin;
     public GameObject skinMatrix;
     public static int page;
     public string charaName;
@@ -15,6 +13,9 @@ public class SkinViewManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentSkin = GameObject.Find("CurrentSkin");
+        var (name,sprite,price,flag) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("SoldierSetSkin", 0)];
+        SkinSet("soldier", name, sprite);
         page = 1;
         SkinView();
     }
@@ -28,7 +29,12 @@ public class SkinViewManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        SkinView();
+    }
+    public static void SkinSet(string type,string name,Sprite skin)
+    {
+        currentSkin.transform.GetChild(0).GetComponent<Image>().sprite = skin;
+        currentSkin.transform.GetChild(1).GetComponent<Text>().text = name;
     }
 
     public void SkinView()
@@ -55,6 +61,11 @@ public class SkinViewManager : MonoBehaviour
             {
                 skinMatrix.transform.GetChild(i).transform.GetChild(1).gameObject.SetActive(false);
                 skinMatrix.transform.GetChild(i).transform.GetChild(2).gameObject.SetActive(true);
+            }
+            else
+            {
+                skinMatrix.transform.GetChild(i).transform.GetChild(1).gameObject.SetActive(true);
+                skinMatrix.transform.GetChild(i).transform.GetChild(2).gameObject.SetActive(false);
             }
         }
     }

@@ -24,6 +24,7 @@ public class SkinMatrixWindowManager : MonoBehaviour
     public void ViewPurchaseWindow()
     {
         if (SkinManager.BuyFlag("soldier", (SkinViewManager.page - 1) * 6 + index)){
+            SkinManager.SkinChange("soldier", (SkinViewManager.page - 1) * 6 + index);
         }
         else
         {
@@ -34,6 +35,13 @@ public class SkinMatrixWindowManager : MonoBehaviour
     public void Purchase()
     {
         Debug.Log(index);
-        SkinManager.Purchase("soldier", (SkinViewManager.page - 1) * 6 + index);
+        if(SkinManager.Available("soldier", (SkinViewManager.page - 1) * 6 + index))
+        {
+            SkinManager.Purchase("soldier", (SkinViewManager.page - 1) * 6 + index);
+        }
+        else
+        {
+            SkinManager.SkinChange("soldier", (SkinViewManager.page - 1) * 6 + index);
+        }
     }
 }
