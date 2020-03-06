@@ -15,7 +15,8 @@ public class SkinViewManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        page = 1;
+        SkinView();
     }
 
     // Update is called once per frame
@@ -27,20 +28,21 @@ public class SkinViewManager : MonoBehaviour
     public void SkinView()
     {
         //装備中のスキン画像と名前を表示
+        /*
         currentSkin.transform.GetChild(0).GetComponent<Image>().sprite = currentSkinImage;
         currentSkin.transform.GetChild(1).GetComponent<Text>().text = currentSkinName;
-
+        */
         //表示する6要素をリストから選択
-        List<(string, Sprite, int, bool)> skinInfo = SkinManager.GetSoldier().GetRange((page-1)*6,page*6-1);
+        List<(string, Sprite, int, bool)> skinInfo = SkinManager.SoldierSkin.GetRange((page-1)*6,6);
 
         //行列に各々表示
         for(int i=0;i<6; i++)
         {
-            var (name, image, price, flug) = skinInfo[0];
+            var (name, image, price, flug) = skinInfo[i];
 
             
             skinMatrix.transform.GetChild(i).transform.GetChild(0).GetComponent<Image>().sprite = image;
-            skinMatrix.transform.GetChild(i).transform.GetChild(1).transform.GetChild(0).GetComponent<Text>().text = price.ToString();
+            skinMatrix.transform.GetChild(i).transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = price.ToString();
 
             //買ってたら"Parchased"を表示
             if (flug)

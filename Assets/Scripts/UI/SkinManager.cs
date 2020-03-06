@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class SkinManager : MonoBehaviour
 {
     Transform SkinData;
-    List<(string, Sprite, int, bool)> SoldierSkin;
-    List<(string, Sprite, int, bool)> TankSkin;
-    List<(string, Sprite, int, bool)> PlainSkin;
+    public static List<(string, Sprite, int, bool)> SoldierSkin;
+    public static List<(string, Sprite, int, bool)> TankSkin;
+    public static List<(string, Sprite, int, bool)> PlainSkin;
     private void Awake()
     {
         SkinData = this.gameObject.transform;
@@ -69,17 +69,6 @@ public class SkinManager : MonoBehaviour
                 PlayerPrefs.GetInt("PlainSkin" + i.ToString(), 0) == 1));
         }
     }
-    public List<(string, Sprite, int, bool)> GetSoldier()
-    {
-        return SoldierSkin;
-    }
-    public List<(string, Sprite, int, bool)> GetTank()
-    {
-        return TankSkin;
-    }
-    public List<(string, Sprite, int, bool)> GetPlain()
-    {
-        return PlainSkin;
-    }
+    
 
 }
