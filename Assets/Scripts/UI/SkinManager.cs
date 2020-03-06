@@ -92,23 +92,40 @@ public class SkinManager : MonoBehaviour
     public static void Purchase(string type, int index)
     {
         int price;
+        (string, Sprite, int, bool) Skin;
         if (type == "soldier")
         {
-            var (a, b, p, c) = SoldierSkin[index];
-            price = p;
+            Skin = SoldierSkin[index];
         }
         else if (type == "tank")
         {
-            var (a, b, p, c) = TankSkin[index];
-            price = p;
+            Skin = TankSkin[index];
         }
         else
         {
-            var (a, b, p, c) = PlainSkin[index];
-            price = p;
+            Skin = PlainSkin[index];
         }
+        var (a, b, c, d) = Skin;
+        price = c;
         int coin = PlayerPrefs.GetInt("coin", 0);
         PlayerPrefs.SetInt("coin", coin - price);
+        Skin = (a, b, c, true);
+        if (type == "soldier")
+        {
+            SoldierSkin[index] = Skin;
+            PlayerPrefs.SetInt("SoldierSkin" + index.ToString(), 1);
+        }
+        else if (type == "tank")
+        {
+            TankSkin[index] = Skin;
+            PlayerPrefs.SetInt("TankSkin" + index.ToString(), 1);
+        }
+        else
+        {
+            PlainSkin[index] = Skin;
+            PlayerPrefs.SetInt("PlainSkin" + index.ToString(), 1);
+        }
+
     }
 
     public static bool BuyFlag(string type,int index)
