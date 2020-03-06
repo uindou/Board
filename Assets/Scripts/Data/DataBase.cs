@@ -48,6 +48,8 @@ public class DataBase : MonoBehaviour
         tank = 1,
         tankA1 = 9,
         tankA2 = 12,
+        tankA3 = 15,
+        tankA4 = 16,
         plain = 14,
         plainA1 = 10,
         plainA2 = 13,
@@ -226,8 +228,10 @@ public class DataBase : MonoBehaviour
         images[(int)im.soldierA2] = Effects.GetChild(1).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.tankA1] = Effects.GetChild(2).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.tankA2] = Effects.GetChild(3).GetComponent<SpriteRenderer>().sprite;
-        images[(int)im.plainA1] = Effects.GetChild(4).GetComponent<SpriteRenderer>().sprite;
-        images[(int)im.plainA2] = Effects.GetChild(5).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.tankA3] = Effects.GetChild(4).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.tankA4] = Effects.GetChild(5).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.plainA1] = Effects.GetChild(6).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.plainA2] = Effects.GetChild(7).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.heart] = Others.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.brokenheart] = Others.GetChild(1).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.moveSelection] = Others.GetChild(2).GetComponent<SpriteRenderer>().sprite;
