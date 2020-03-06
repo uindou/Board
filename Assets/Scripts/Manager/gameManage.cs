@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static DataBase;
 using static gameManage;
 using static myAI;
@@ -155,6 +156,16 @@ public class gameManage : MonoBehaviour
     public static void FlashControl(GameObject obj,bool isflash)
     {
         List<(int, int)> area = obj.GetComponent<interFace>().Movable();
+        if (isflash)
+        {
+            obj.GetComponent<Image>().color = new Color32(90,177,222,255);
+            Debug.Log(obj.name);
+        }
+        else
+        {
+            obj.GetComponent<Image>().color = Color.white;
+            Debug.Log(obj.name + "stoped");
+        }
         foreach ((int, int) T in area)
         {
             var (i2, j2) = T;
@@ -172,6 +183,14 @@ public class gameManage : MonoBehaviour
     public static void AttackFlash(GameObject obj,bool isflash)
     {
         List<(int, int)> area = obj.GetComponent<interFace>().Attackable();
+        if (isflash)
+        {
+            obj.GetComponent<Image>().color = new Color32(221, 101,90, 255);
+        }
+        else
+        {
+            obj.GetComponent<Image>().color = Color.white;
+        }
         foreach ((int, int) T in area)
         {
             var (i2, j2) = T;
@@ -413,7 +432,7 @@ public class PreEnd : State
         else
         {
             DataBase.winner = gameManage.turn;
-            DataBase.preStage = AImode ? "AIStage" : "Game";
+            DataBase.preStage = DataBase.SceneName;
 
             switch (DataBase.SceneName)
             {
@@ -457,7 +476,6 @@ public class AI : State
     {
         GameObject obj = objs[0, 0];
         obj.GetComponent<clickReceiver>().ChangeAct();//クリックレシーバーのモードを変えるための処理
-        Debug.Log(1);
         if (DataBase.EndWarn())
         {
             gameManage.turn = !gameManage.turn;

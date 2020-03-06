@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -9,6 +10,7 @@ public class DangerForAI : MonoBehaviour
     public static bool overDanger;
     public static List<(int, int)> dangerList;
     public static (int, int) dangerEnemy;
+    public static bool isNextDead;
     public static GameObject dangerEnemyG;
     private void Start()
     {
@@ -20,10 +22,12 @@ public class DangerForAI : MonoBehaviour
         dangerEnemy = S;
         dangerEnemyG = G;
         dangerList.Add(T);
+        
         if (dangerList.Count() > 1) overDanger = true;
     }
     public static void DangerReset()
     {
+        isNextDead = false;
         danger = false;
         overDanger = false;
         dangerList = new List<(int, int)>();

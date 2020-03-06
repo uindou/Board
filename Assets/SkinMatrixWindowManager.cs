@@ -23,7 +23,7 @@ public class SkinMatrixWindowManager : MonoBehaviour
 
     public void ViewPurchaseWindow()
     {
-        if (SkinManager.BuyFlug("soldier", (SkinViewManager.page - 1) * 6 + index)){
+        if (SkinManager.BuyFlag("soldier", (SkinViewManager.page - 1) * 6 + index)){
             parchaseWindow.gameObject.SetActive(true);
         }
         else
