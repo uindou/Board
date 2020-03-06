@@ -466,7 +466,7 @@ public class AI : State
         else
         {
             gameManage.turn = !gameManage.turn;
-            myAI.StartAI(4);
+            myAI.StartAI(6);
         }
         
         return new Start();

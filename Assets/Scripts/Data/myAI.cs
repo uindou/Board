@@ -14,6 +14,145 @@ public class myAI : MonoBehaviour
         tank
     }
 
+    private async static void RandomAI2()
+    {
+        List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
+        int power1 = 50;
+        if (!res.Any())
+        {
+            aiPlaying = false;
+            gameManage.Skip();
+            aiPlaying = true;
+            await Task.Delay(100);
+            if (gameManage.receiveMode != gameManage.situation.attackselect)
+            {
+                return;
+            }
+            else
+            {
+                (GameObject, GameObject) Act = (null, null);
+                int ActionPoint = -1000;
+                List<GameObject> res1 = DataBase.MyKoma(gameManage.turn, false);
+                for (int k = 0; k < res1.Count(); k++)
+                {
+
+                    GameObject obj2 = res1[k];
+                    List<(int, int)> attackRange = obj2.GetComponent<interFace>().Attackable();
+                    for (int l = 0; l < attackRange.Count(); l++)
+                    {
+                        var (x3, y3) = attackRange[l];
+                        GameObject obj3 = DataBase.objs[k, l];
+                        int evaAtc = obj3.GetComponent<interFace>().AtcEvaluation();
+                        int actPt = evaAtc;
+                        if (actPt > ActionPoint)
+                        {
+                            ActionPoint = actPt;
+                            Act = (obj2, obj3);
+                        }
+                    }
+                }
+                var (Robj, Robj1) = Act;
+                Debug.Log("評価値は" + ActionPoint.ToString());
+                gameManage.requestEnqueue(Robj);
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj1);
+                await Task.Delay(100);
+            }
+        }
+        else
+        {
+            (GameObject, GameObject, GameObject, GameObject) Act = (null, null, null, null);
+            int ActionPoint = -1000;
+            bool afterSkip = false;
+            for (int t = 0; t < power1; t++)
+            {
+                GameObject myobj = res[Random.Range(0, res.Count() - 1)];
+                List<(int, int)> moveRange = myobj.GetComponent<interFace>().Movable();
+                var (i0, j0) = DataBase.objSearch(myobj);
+                var (i, j) = moveRange[Random.Range(0, moveRange.Count() - 1)];
+                GameObject myobj1 = DataBase.objs[i, j];
+                myobj.GetComponent<interFace>().Move(i, j);
+                DataBase.Set(i0, j0, 0);
+                DataBase.Set(i, j, 2);
+                DataBase.objs[i0, j0] = myobj1;
+                DataBase.objs[i, j] = myobj;
+                int eva0 = myobj.GetComponent<interFace>().Evaluation(i0, j0);
+                int eva1 = myobj.GetComponent<interFace>().Evaluation(i, j);
+                int movePt = eva1 - eva0;
+                List<GameObject> res1 = DataBase.MyKoma(gameManage.turn, false);
+                if (!res1.Any())
+                {
+
+                    if (movePt > ActionPoint)
+                    {
+                        ActionPoint = movePt;
+                        Act = (myobj, myobj1, null, null);
+                        afterSkip = true;
+                    }
+                }
+                else
+                {
+                    for (int k = 0; k < res1.Count(); k++)
+                    {
+                        GameObject obj2 = res1[k];
+                        List<(int, int)> attackRange = obj2.GetComponent<interFace>().Attackable();
+                        for (int l = 0; l < attackRange.Count(); l++)
+                        {
+                            var (x3, y3) = attackRange[l];
+                            GameObject obj3 = DataBase.objs[x3, y3];
+                            int evaAtc = obj3.GetComponent<interFace>().AtcEvaluation();
+                            int actPt = movePt * 10 + evaAtc;
+                            if (actPt > ActionPoint)
+                            {
+                                ActionPoint = actPt;
+                                Act = (myobj, myobj1, obj2, obj3);
+                                afterSkip = false;
+                            }
+                        }
+                    }
+
+                }
+                myobj.GetComponent<interFace>().Move(i0, j0);
+                DataBase.Set(i0, j0, 2);
+                DataBase.Set(i, j, 0);
+                DataBase.objs[i, j] = myobj1;
+                DataBase.objs[i0, j0] = myobj;
+            }
+            var (Robj1, Robj2, Robj3, Robj4) = Act;
+            if (afterSkip)
+            {
+                Debug.Log("評価値は" + ActionPoint.ToString());
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj1);
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj2);
+                await Task.Delay(100);
+                if (gameManage.receiveMode != gameManage.situation.attackselect)
+                {
+                    return;
+                }
+                else
+                {
+                    gameManage.Skip();//何か問題が生じた時に止まらないための処置.正しく動けばこれは起きない
+                }
+            }
+            else
+            {
+                Debug.Log("評価値は" + ActionPoint.ToString());
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj1);
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj2);
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj3);
+                await Task.Delay(1000);
+                gameManage.requestEnqueue(Robj4);
+                await Task.Delay(100);
+                DangerForAI.DangerReset();
+            }
+        }
+    }
+
     private async static void WarikomiAI()
     {
         if (DangerForAI.overDanger)
@@ -23,28 +162,37 @@ public class myAI : MonoBehaviour
         }
         else if (DangerForAI.danger)
         {
-            List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
-            foreach(GameObject obj in res)
-            {
-                foreach((int,int) T in obj.GetComponent<interFace>().Movable())
+            var (x1, y1) = DangerForAI.dangerList[0];
+                if (DataBase.BoardInfo(x1,y1)==1)
                 {
-                    if (T == DangerForAI.dangerList[0])
-                    {
-                        var (x, y) = T;
-                        GameObject obj1 = DataBase.objs[x, y];
-                        await Task.Delay(1000);
-                        gameManage.requestEnqueue(obj);
-                        await Task.Delay(1000);
-                        gameManage.requestEnqueue(obj1);
-                        await Task.Delay(100);
-
-                        DangerForAI.DangerReset();
-                        return;
-                    }
+                    
                 }
-            }
-            ReadAI(true);
-            return;
+                else
+                {
+                    List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
+                    foreach (GameObject obj in res)
+                    {
+                        foreach ((int, int) T in obj.GetComponent<interFace>().Movable())
+                        {
+                            if (T == DangerForAI.dangerList[0])
+                            {
+                                var (x, y) = T;
+                                GameObject obj1 = DataBase.objs[x, y];
+                                await Task.Delay(1000);
+                                gameManage.requestEnqueue(obj);
+                                await Task.Delay(1000);
+                                gameManage.requestEnqueue(obj1);
+                                await Task.Delay(100);
+
+                                DangerForAI.DangerReset();
+                                return;
+                            }
+                        }
+                    }
+                    ReadAI(true);
+                    return;
+                }
+            
         }
         else
         {
@@ -53,6 +201,7 @@ public class myAI : MonoBehaviour
             return;
         }
     }
+
     private async static void ReadAI(bool mode)
     {
         List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
@@ -208,7 +357,7 @@ public class myAI : MonoBehaviour
         int power1 = 200;
         int power2 = 20;
         List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);//自分の駒のリスト
-        if (res == null)
+        if (!res.Any())
         {
             aiPlaying = false;
             gameManage.Skip();
@@ -381,6 +530,9 @@ public class myAI : MonoBehaviour
                 break;
             case 5:
                 WarikomiAI();
+                break;
+            case 6:
+                RandomAI2();
                 break;
             default:
                 break;

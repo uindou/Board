@@ -88,14 +88,6 @@ public class DataBase : MonoBehaviour
                 AImode = true;
                 break;
             default:
-                vertical = 9;
-                horizontal = 7;
-                board = new int[vertical, horizontal];
-                objs = new GameObject[vertical, horizontal];
-                objInit();
-                ImageInit();
-                firstImage = objs[0, 0].transform.GetChild(0).GetComponent<Image>().sprite;
-                AImode = false;
                 break;
         }
 
@@ -265,6 +257,10 @@ public class DataBase : MonoBehaviour
         {
             return false;
         }
+    }
+    public static int BoardInfo(int x,int y)
+    {
+        return board[x, y];
     }
     public static void GameEnd(bool turn)
     {
