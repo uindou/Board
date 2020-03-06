@@ -6,7 +6,8 @@ public class ReStart : MonoBehaviour
 {
     public void OnClick()
     {
-        SceneManager.LoadScene(DataBase.preStage);
+        DataBase.SceneName = DataBase.preStage;
+        SceneManager.LoadScene("Game");
     }
     // Start is called before the first frame update
     void Start()

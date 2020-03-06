@@ -34,12 +34,7 @@ public class Fighter : CharaParent
         }
         this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image((int)DataBase.im.transParent);
     }
-    public async override void DamageImage()
-    {
-        this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.red;
-        await Task.Delay(200);
-        this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.white;
-    }
+  
 
     public override int Evaluation(int x, int y)
     {

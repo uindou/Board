@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 using static DataBase;
 
 public class CharaParent : MonoBehaviour,interFace
@@ -117,9 +118,16 @@ public class CharaParent : MonoBehaviour,interFace
     {
 
     }
-    public async virtual void DamageImage()
+    public async  void DamageImage()
     {
+        for (int i = 0; i < 2; i++)
+        {
+            this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.red;
+            await Task.Delay(100);
+            this.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.white;
+            await Task.Delay(100);
 
+        }
     }
     public virtual List<(int,int)> Movable()
     {
