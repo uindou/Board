@@ -5323,6 +5323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d13687a821eccf4e86d2d20dbff8c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
+  charaName: soldier
+  parchaseWindow: {fileID: 0}
 --- !u!1 &97383765
 GameObject:
   m_ObjectHideFlags: 0
@@ -5674,6 +5677,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d13687a821eccf4e86d2d20dbff8c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 1
+  charaName: soldier
+  parchaseWindow: {fileID: 0}
 --- !u!1 &98994920
 GameObject:
   m_ObjectHideFlags: 0
@@ -29655,6 +29661,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d13687a821eccf4e86d2d20dbff8c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 3
+  charaName: soldier
+  parchaseWindow: {fileID: 0}
 --- !u!1 &496832491
 GameObject:
   m_ObjectHideFlags: 0
@@ -32711,6 +32720,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d13687a821eccf4e86d2d20dbff8c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 2
+  charaName: soldier
+  parchaseWindow: {fileID: 0}
 --- !u!1 &543308292
 GameObject:
   m_ObjectHideFlags: 0
@@ -62122,6 +62134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d13687a821eccf4e86d2d20dbff8c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 4
+  charaName: soldier
+  parchaseWindow: {fileID: 0}
 --- !u!1 &1084288714
 GameObject:
   m_ObjectHideFlags: 0
@@ -103138,6 +103153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d13687a821eccf4e86d2d20dbff8c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 5
+  charaName: soldier
+  parchaseWindow: {fileID: 0}
 --- !u!1 &1808948629
 GameObject:
   m_ObjectHideFlags: 0
