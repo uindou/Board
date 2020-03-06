@@ -26,13 +26,16 @@ public class Tank : CharaParent
     /*--------------------------------------------------OVERRIDE ZONE-----------------------------------------------------*/
     public async override void AttackImage()
     {
-        for (int i = 0; i < 2; i++)
-        {
+        
             this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image(9);
             await Task.Delay(200);
             this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image(12);
             await Task.Delay(200);
-        }
+        this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image((int)DataBase.im.tankA3);
+        await Task.Delay(200);
+        this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image((int)DataBase.im.tankA4);
+        await Task.Delay(200);
+
         this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image((int)DataBase.im.transParent);
     }
     public async override void DamageImage()
