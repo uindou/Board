@@ -13,11 +13,14 @@ public class SkinViewManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentSkin = GameObject.Find("CurrentSkin");
-        var (name,sprite,price,flag) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("SoldierSetSkin", 0)];
-        SkinSet("soldier", name, sprite);
+        currentSkin = GameObject.Find("CurrentSkin"); 
         page = 1;
         SkinView();
+    }
+    public static void DefaultSkinSet()
+    {
+        var (name, sprite, price, flag) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("SoldierSetSkin", 0)];
+        SkinSet("soldier", name, sprite);
     }
 
     private void OnEnable()

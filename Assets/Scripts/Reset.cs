@@ -19,6 +19,7 @@ public class Reset : MonoBehaviour
         PlayerPrefs.SetInt("SoldierSkin3", 0);
         PlayerPrefs.SetInt("SoldierSkin4", 0);
         PlayerPrefs.SetInt("SoldierSkin5", 0);
+        SkinViewManager.DefaultSkinSet();
         SkinManager.Init();
     }
 }

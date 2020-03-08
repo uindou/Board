@@ -31795,7 +31795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &525372535
 RectTransform:
   m_ObjectHideFlags: 0
@@ -58445,7 +58445,6 @@ GameObject:
   - component: {fileID: 1017436458}
   - component: {fileID: 1017436457}
   - component: {fileID: 1017436456}
-  - component: {fileID: 1017436455}
   m_Layer: 5
   m_Name: Next
   m_TagString: Untagged
@@ -58473,19 +58472,6 @@ RectTransform:
   m_AnchoredPosition: {x: 31.460388, y: -11.748779}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1017436455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1017436453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31b69c7b6f8652a45859bb23f3b3ad3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vector: 0
 --- !u!114 &1017436456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58529,7 +58515,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1017436455}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -69021,7 +69007,6 @@ GameObject:
   - component: {fileID: 1203264493}
   - component: {fileID: 1203264492}
   - component: {fileID: 1203264491}
-  - component: {fileID: 1203264490}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -69049,19 +69034,6 @@ RectTransform:
   m_AnchoredPosition: {x: -31.401276, y: -11.672241}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1203264490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203264488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31b69c7b6f8652a45859bb23f3b3ad3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vector: 1
 --- !u!114 &1203264491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69105,7 +69077,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1203264490}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
