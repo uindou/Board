@@ -136,36 +136,11 @@ public class SkinManager : MonoBehaviour
         }
 
     }
-    public static void SkinChange(string type,int index)
+    public static void SkinSet()
     {
-        if (type == "soldier")
-        {
-            var (a, b, c, flag) = SoldierSkin[index];
-            if (flag)
-            {
-                PlayerPrefs.SetInt("SoldierSetSkin", index);
-                SkinViewManager.SkinSet(type,a, b);
-            }
-        }
-        else if (type == "tank")
-        {
-            var (a, b, c, flag) = TankSkin[index];
-            if (flag)
-            {
-                PlayerPrefs.GetInt("TankSetSkin", index);
-                SkinViewManager.SkinSet(type, a, b);
-            }
-        }
-        else
-        {
-            var (a, b, c, flag) = PlainSkin[index];
-            if (flag)
-            {
-                PlayerPrefs.GetInt("PlainSetSkin", index);
-                SkinViewManager.SkinSet(type, a, b);
-            }
-        }
+
     }
+
     public static bool BuyFlag(string type,int index)
     {
         if (type == "soldier")
