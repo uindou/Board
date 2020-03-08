@@ -136,6 +136,10 @@ public class SkinManager : MonoBehaviour
         }
 
     }
+    public static void SkinSet()
+    {
+
+    }
 
     public static bool BuyFlag(string type,int index)
     {

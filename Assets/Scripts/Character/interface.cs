@@ -6,6 +6,7 @@ public interface interFace /* CharaParentにかく関数は全部ここに書く
 {
     void Init(int x, int y,bool team);
     bool IsTeam();
+    int ShowHP();
     void Move(int i,int j);
     void AddDamage(int damage);
     string GetName();

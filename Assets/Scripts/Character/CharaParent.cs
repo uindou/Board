@@ -21,6 +21,10 @@ public class CharaParent : MonoBehaviour,interFace
         now.yAxis = y;
         this.team = team;
     }
+    public int ShowHP()
+    {
+        return HitPoint;
+    }
     public void Move(int i,int j)
     {
         now.xAxis = i;

@@ -7,6 +7,7 @@ using System.Linq;
 public class DangerForAI : MonoBehaviour
 {
     public static bool danger;
+    public static int HP;
     public static bool overDanger;
     public static List<(int, int)> dangerList;
     public static (int, int) dangerEnemy;
@@ -22,6 +23,7 @@ public class DangerForAI : MonoBehaviour
         dangerEnemy = S;
         dangerEnemyG = G;
         dangerList.Add(T);
+        HP = G.GetComponent<interFace>().ShowHP();
         
         if (dangerList.Count() > 1) overDanger = true;
     }

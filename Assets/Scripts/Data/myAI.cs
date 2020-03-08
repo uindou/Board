@@ -160,6 +160,11 @@ public class myAI : MonoBehaviour
             ReadAI(true);
             return;
         }
+        else if(DangerForAI.HP == 1)
+        {
+            ReadAI(true);
+            return;
+        }
         else if (DangerForAI.danger)
         {
             var (x1, y1) = DangerForAI.dangerList[0];
@@ -231,7 +236,6 @@ public class myAI : MonoBehaviour
                     ReadAI(true);
                     return;
                 }
-            
         }
         else
         {
