@@ -34,7 +34,18 @@ public class CharaParent : MonoBehaviour,interFace
     {
         return AttackPower;
     }
-    
+    public async void EraseEffect()
+    {
+        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.images[(int)DataBase.im.exp1];
+        await Task.Delay(100);
+        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.images[(int)DataBase.im.exp2];
+        await Task.Delay(100);
+        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.images[(int)DataBase.im.exp3];
+        await Task.Delay(100);
+        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.images[(int)DataBase.im.exp4];
+        await Task.Delay(100);
+        Erase();
+    }
     public void Erase()
     {
         DataBase.Set(now.xAxis,now.yAxis,0);
@@ -77,7 +88,7 @@ public class CharaParent : MonoBehaviour,interFace
         makeHP();
         if (HitPoint <= 0)
         {
-            Erase();
+            EraseEffect();
         }
         else
         {

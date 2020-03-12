@@ -18,8 +18,8 @@ public class DataBase : MonoBehaviour
     [SerializeField] static GameObject turnPhase;
     public static bool AImode;
     private static int[,] board;
-    public static int vertical;
-    public static int horizontal;
+    public static int vertical=9;
+    public static int horizontal=7;
     public static bool selectFlug;
     public static (int, int) selectMove;
     public static bool moveFlug;
@@ -58,7 +58,11 @@ public class DataBase : MonoBehaviour
         moveSelection = 4,
         attackSelection = 6,
         transParent = 5,
-        simpleFrame = 7
+        simpleFrame = 7,
+        exp1=17,
+        exp2=18,
+        exp3=19,
+        exp4=20
 
     }
 
@@ -87,6 +91,9 @@ public class DataBase : MonoBehaviour
                 AImode = true;
                 break;
             case "AIStage2":
+                AImode = true;
+                break;
+            case "AIStage3":
                 AImode = true;
                 break;
             default:
@@ -221,6 +228,7 @@ public class DataBase : MonoBehaviour
         Transform FighterParent = imageParent.GetChild(2);
         Transform Effects = imageParent.GetChild(3);
         Transform Others = imageParent.GetChild(4);
+        Transform Explode = imageParent.GetChild(5);
         images[(int)im.soldier] = SoldierParent.GetChild(PlayerPrefs.GetInt("SoldierSetSkin", 0)).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.tank] = TankParent.GetChild(PlayerPrefs.GetInt("tankSkin", 0)).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.plain] = FighterParent.GetChild(PlayerPrefs.GetInt("plainSkin", 0)).GetComponent<SpriteRenderer>().sprite;
@@ -238,6 +246,10 @@ public class DataBase : MonoBehaviour
         images[(int)im.attackSelection] = Others.GetChild(3).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.transParent] = Others.GetChild(4).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.simpleFrame] = Others.GetChild(5).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.exp1] = Explode.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.exp2] = Explode.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.exp3] = Explode.GetChild(2).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.exp4] = Explode.GetChild(3).GetComponent<SpriteRenderer>().sprite;
     }
 
     
@@ -361,6 +373,21 @@ public class DataBase : MonoBehaviour
             case "AIStage2":
                 return Stage2MakeStage();
             case "AIStage3":
+                return Stage3MakeStage();
+            default:
+                return Stage1MakeStage();
+        }
+    }
+    public static List<(int, int, bool, string)> ForInitMakeStage(int stageNum)
+    {
+        stage = new List<(int, int, bool, string)>();
+        switch (stageNum)
+        {
+            case 1:
+                return Stage1MakeStage();
+            case 2:
+                return Stage2MakeStage();
+            case 3:
                 return Stage3MakeStage();
             default:
                 return Stage1MakeStage();

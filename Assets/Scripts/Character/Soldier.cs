@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class Soldier : CharaParent
 {
+
     private List<(int, int)> MArange;
     // Start is called before the first frame update
     void Start()
@@ -57,7 +58,7 @@ public class Soldier : CharaParent
     }*/
     public override int Evaluation(int x, int y)
     {
-        return -1;
+        return 1;
     }
 
     /*public override List<(int, int)> Movable()

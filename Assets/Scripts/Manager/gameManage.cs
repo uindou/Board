@@ -164,7 +164,6 @@ public class gameManage : MonoBehaviour
         else
         {
             obj.GetComponent<Image>().color = Color.white;
-            Debug.Log(obj.name + "stoped");
         }
         foreach ((int, int) T in area)
         {
@@ -451,6 +450,9 @@ public class PreEnd : State
                 case "AIStage2":
                     DataBase.bonusCoin = 20;
                     break;
+                case "AIStage3":
+                    DataBase.bonusCoin = 30;
+                    break;
                 default:
                     DataBase.bonusCoin = 0;
                     break;
@@ -506,6 +508,8 @@ public class Free : State
             case "AIStage1":
                 return new Start();
             case "AIStage2":
+                return new Start();
+            case "AIStage3":
                 return new Start();
             default:
                 return this;

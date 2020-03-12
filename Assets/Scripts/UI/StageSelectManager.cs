@@ -12,31 +12,34 @@ public class StageSelectManager : MonoBehaviour
     public static GameObject parent;
     public static GameObject stageImageParent;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        parent = GameObject.Find("Stages");
+        parent = GameObject.Find("PlayerStages");
         Length = stageNumbers.Count;
-        stageImageParent = GameObject.Find("StageImageParent");
         stageNumbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         for (int i = 0; i < Length; i++)
         {
-            //stages.Add(GameObject.Find("Image").GetComponent<Image>().sprite);
-            //Debug.Log(stageImageParent.transform.GetChild(i).GetComponent<Image>().sprite);
+            
         }
         
-        Draw();
     }
 
+    private void Start()
+    {
+    }
     // Update is called once per frame
     void Update()
     {
 
     }
 
-    private static void Draw()
-    {       
-        parent.transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
+    public static void Draw()
+    {
+        parent.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
+        Debug.Log("draw");
+        StageSelectInit.StageInit(stageNumbers[0]);
         /*
+         * 
         parent.transform.GetChild(1).transform.GetChild(1).gameObject.GetComponent<Image>().sprite = stages[9];
         parent.transform.GetChild(1).transform.GetChild(1).gameObject.GetComponent<Image>().sprite = stages[0];
         parent.transform.GetChild(1).transform.GetChild(1).gameObject.GetComponent<Image>().sprite = stages[1];
@@ -75,6 +78,5 @@ public class StageSelectManager : MonoBehaviour
 
     private void OnEnable()
     {
-
     }
 }

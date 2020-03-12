@@ -17,7 +17,7 @@ public class myAI : MonoBehaviour
     private async static void RandomAI2()
     {
         List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
-        int power1 = 7;
+        int power1 = 5;
         if (!res.Any())
         {
             aiPlaying = false;

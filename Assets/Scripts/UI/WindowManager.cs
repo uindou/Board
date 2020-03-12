@@ -7,14 +7,7 @@ public class WindowManager : MonoBehaviour
 {
     public GameObject targetWindow;
 
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    
 
     public void OnClick()
     {

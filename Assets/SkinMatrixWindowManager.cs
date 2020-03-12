@@ -38,6 +38,7 @@ public class SkinMatrixWindowManager : MonoBehaviour
         if(SkinManager.Available("soldier", (SkinViewManager.page - 1) * 6 + index))
         {
             SkinManager.Purchase("soldier", (SkinViewManager.page - 1) * 6 + index);
+            SkinManager.SkinChange("soldier", (SkinViewManager.page - 1) * 6 + index);
         }
         else
         {

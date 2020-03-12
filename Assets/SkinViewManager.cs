@@ -9,13 +9,16 @@ public class SkinViewManager : MonoBehaviour
     public GameObject skinMatrix;
     public static int page;
     public string charaName;
+    static Transform SkinWindow;
 
     // Start is called before the first frame update
     void Start()
     {
         currentSkin = GameObject.Find("CurrentSkin");
+        if (currentSkin == null) Debug.Log("skin search failed");
+        SkinWindow = GameObject.Find("SkinWindow").transform.GetChild(1).GetChild(2).GetChild(2);
         var (name,sprite,price,flag) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("SoldierSetSkin", 0)];
-        SkinSet("soldier", name, sprite);
+        SkinSet("soldier", name, sprite, PlayerPrefs.GetInt("SoldierSetSkin", 0));
         page = 1;
         SkinView();
     }
@@ -31,19 +34,21 @@ public class SkinViewManager : MonoBehaviour
     {
         SkinView();
     }
-    public static void SkinSet(string type,string name,Sprite skin)
+    public static void SkinSet(string type,string name,Sprite skin,int index)
     {
         currentSkin.transform.GetChild(0).GetComponent<Image>().sprite = skin;
         currentSkin.transform.GetChild(1).GetComponent<Text>().text = name;
+        
+        SkinWindow.GetChild(index).GetChild(2).gameObject.SetActive(true);
+        for(int i = 0; i < 6; i++)
+        {
+            if (i != index)
+            {
+                SkinWindow.GetChild(i).GetChild(2).gameObject.SetActive(false);
+            }
+        }
     }
-    public void Equip()
-    {
-
-        //装備中のスキン画像と名前を表示
-        currentSkin.transform.GetChild(0).GetComponent<Image>().sprite = currentSkinImage;
-        currentSkin.transform.GetChild(1).GetComponent<Text>().text = currentSkinName;
-    }
-
+    
     public void SkinView()
     {
         //表示する6要素をリストから選択
@@ -62,12 +67,12 @@ public class SkinViewManager : MonoBehaviour
             if (flug)
             {
                 skinMatrix.transform.GetChild(i).transform.GetChild(1).gameObject.SetActive(false);
-                skinMatrix.transform.GetChild(i).transform.GetChild(2).gameObject.SetActive(true);
+                //skinMatrix.transform.GetChild(i).transform.GetChild(2).gameObject.SetActive(true);
             }
             else
             {
                 skinMatrix.transform.GetChild(i).transform.GetChild(1).gameObject.SetActive(true);
-                skinMatrix.transform.GetChild(i).transform.GetChild(2).gameObject.SetActive(false);
+                //skinMatrix.transform.GetChild(i).transform.GetChild(2).gameObject.SetActive(false);
             }
         }
     }

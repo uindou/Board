@@ -136,9 +136,11 @@ public class SkinManager : MonoBehaviour
         }
 
     }
-    public static void SkinSet()
+    public static void SkinChange(string type,int index)
     {
-
+        PlayerPrefs.SetInt("SoldierSetSkin", index);
+        var (a, b, c, d) = SoldierSkin[index];
+        SkinViewManager.SkinSet(type, a, b,index);
     }
 
     public static bool BuyFlag(string type,int index)

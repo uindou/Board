@@ -20,20 +20,33 @@ public class ResultManager : MonoBehaviour
     {
         int coin = 0;
         Transform Rewards = this.transform.GetChild(3);
-
         Rewards.GetChild(0).GetChild(2).GetComponent<Text>().text = "+" + DataBase.bonusCoin.ToString();
-        
-        coin += DataBase.bonusCoin;
-
-        Rewards.GetChild(1).GetChild(2).GetComponent<Text>().text = "+" + winReward.ToString();
-        if (!DataBase.winner)
+        if (DataBase.preStage == "AIStage")
         {
-            coin += winReward;
+            Rewards.GetChild(0).gameObject.SetActive(true);
+            coin += DataBase.bonusCoin;
+        }
+        else 
+        {
+            Rewards.GetChild(0).gameObject.SetActive(false);
+        }
+
+        if (DataBase.preStage == "AIStage")
+        {
+            if (!DataBase.winner)
+            {
+                Rewards.GetChild(1).GetChild(2).GetComponent<Text>().text = "+" + winReward.ToString();
+                coin += winReward;
+            }
+            else
+            {
+                Rewards.GetChild(1).GetChild(2).GetComponent<Text>().text = "";
+                Rewards.GetChild(1).GetChild(1).GetChild(0).gameObject.SetActive(false);
+            }
         }
         else
         {
-            Rewards.GetChild(1).GetChild(2).GetComponent<Text>().color = new Color(0,0,0,80);
-            Rewards.GetChild(1).GetChild(1).GetChild(0).gameObject.SetActive(false);
+            Rewards.GetChild(1).gameObject.SetActive(false);
         }
         Rewards.GetChild(2).GetChild(2).GetComponent<Text>().text = "+" + onlineReward.ToString();
         if (DataBase.isOnline)
@@ -42,7 +55,7 @@ public class ResultManager : MonoBehaviour
         }
         else
         {
-            Rewards.GetChild(2).GetChild(2).GetComponent<Text>().color = new Color(0, 0, 0, 80);
+            Rewards.GetChild(2).GetChild(2).GetComponent<Text>().text = "";
             Rewards.GetChild(2).GetChild(1).GetChild(0).gameObject.SetActive(false);
         }
         CoinManager.SetBonus(coin);
