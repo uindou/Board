@@ -22,7 +22,13 @@ public class SkinViewManager : MonoBehaviour
         page = 1;
         SkinView();
     }
-
+    public static void DefaultSkinSet()
+    {
+        var(name, skin, price, flag) = SkinManager.SoldierSkin[0];
+        
+        currentSkin.transform.GetChild(0).GetComponent<Image>().sprite = skin;
+        currentSkin.transform.GetChild(1).GetComponent<Text>().text = name;
+    }
     private void OnEnable()
     {
         page = 1;
