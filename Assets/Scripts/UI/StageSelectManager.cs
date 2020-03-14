@@ -9,17 +9,22 @@ public class StageSelectManager : MonoBehaviour
 {
     private static List<Sprite> stages;
     private static List<int> stageNumbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-    public static int stageNum;
     private static int Length;
     
     public static GameObject stageImageParent;
-    public static Transform Parent;
+    public static Transform PParent;
+    public static Transform AIParent;
     public static Transform Left;
     public static Transform Center;
     public static Transform Right;
+    public static Transform AILeft;
+    public static Transform AICenter;
+    public static Transform AIRight;
 
     public static GameObject PlayerStage;
-    public static GameObject Parents;
+    public static GameObject AIStage;
+    public static GameObject PParents;
+    public static GameObject AIParents;
     public Transform ImageData;
 
     public static Sprite SoldierSkin;
@@ -31,13 +36,16 @@ public class StageSelectManager : MonoBehaviour
     void Awake()
     {
         PlayerStage = GameObject.Find("PlayerStages");
-        Length = stageNumbers.Count;
+        AIStage = GameObject.Find("AIStages");
+        Debug.Log(PlayerStage);
         stageNumbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        stageNum = stageNumbers.Count();
-        Parents = GameObject.Find("StageSelectWindow");
-        Parent = Parents.transform.GetChild(1);
-        changeFlag = new bool[stageNum, DataBase.vertical, DataBase.horizontal];
-        for (int i = 0; i < stageNum; i++)
+        Length = stageNumbers.Count;
+        PParents = GameObject.Find("StageSelectWindow");
+        AIParents = GameObject.Find("AIStageSelectWindow");
+        PParent = PParents.transform.GetChild(1);
+        AIParent = AIParents.transform.GetChild(1);
+        changeFlag = new bool[Length, DataBase.vertical, DataBase.horizontal];
+        for (int i = 0; i < Length; i++)
         {
             for (int j = 0; i < DataBase.vertical; i++)
             {
@@ -52,10 +60,15 @@ public class StageSelectManager : MonoBehaviour
 
     private void Start()
     {
-        Parents.SetActive(false);
-        Left = Parent.GetChild(0).GetChild(0);
-        Center = Parent.GetChild(1).GetChild(0);
-        Right = Parent.GetChild(2).GetChild(0);
+        PParents.SetActive(false);
+        AIParents.SetActive(false);
+        Left = PParent.GetChild(0).GetChild(0);
+        Center = PParent.GetChild(1).GetChild(0);
+        Right = PParent.GetChild(2).GetChild(0);
+        AILeft = AIParent.GetChild(0).GetChild(0);
+        AICenter = AIParent.GetChild(1).GetChild(0);
+        AIRight = AIParent.GetChild(2).GetChild(0);
+
         SoldierSkin = ImageData.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         TankSkin = ImageData.GetChild(1).GetComponent<SpriteRenderer>().sprite;
         FighterSkin = ImageData.GetChild(2).GetComponent<SpriteRenderer>().sprite;
@@ -69,11 +82,25 @@ public class StageSelectManager : MonoBehaviour
 
     public static void Draw()
     {
-        PlayerStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
-        Debug.Log("draw");
-        StageInit(stageNumbers[stageNum - 1], Left);
-        StageInit(stageNumbers[0],Center);
-        StageInit(stageNumbers[1], Right);
+        if (PParents.activeSelf)
+        {
+            PlayerStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
+            Debug.Log("draw");
+            StageInit(stageNumbers[Length - 1], Left);
+            StageInit(stageNumbers[0], Center);
+            StageInit(stageNumbers[1], Right);
+        }else if (AIParents.activeSelf)
+        {
+            AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
+            Debug.Log("draw");
+            StageInit(stageNumbers[Length - 1], AILeft);
+            StageInit(stageNumbers[0], AICenter);
+            StageInit(stageNumbers[1], AIRight);
+        }
+        else
+        {
+            Debug.Log("image draw failed");
+        }
         
     }
     public static void StageInit(int stage, Transform Parent)
