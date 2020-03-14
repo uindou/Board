@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class ResultManager : MonoBehaviour
 {
-    public int winReward;
-    public int onlineReward;
+    public static string StageName;
+    public static int winReward;
+    public static int onlineReward;
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,7 +22,7 @@ public class ResultManager : MonoBehaviour
         int coin = 0;
         Transform Rewards = this.transform.GetChild(1);
         Rewards.GetChild(0).GetChild(2).GetComponent<Text>().text = "+" + DataBase.bonusCoin.ToString();
-        if (DataBase.preStage == "AIStage")
+        if (StageName == "AIStage")
         {
             Rewards.GetChild(0).gameObject.SetActive(true);
             coin += DataBase.bonusCoin;
@@ -31,7 +32,7 @@ public class ResultManager : MonoBehaviour
             Rewards.GetChild(0).gameObject.SetActive(false);
         }
 
-        if (DataBase.preStage == "AIStage")
+        if (StageName == "AIStage")
         {
             if (!DataBase.winner)
             {
@@ -62,15 +63,15 @@ public class ResultManager : MonoBehaviour
     }
     void WinnerDisplay()
     {
-        if (DataBase.preStage == "AIStage" & !DataBase.winner)
+        if (StageName == "AIStage" & !DataBase.winner)
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "You Win!";
         }
-        else if(DataBase.preStage == "AIStage")
+        else if(StageName == "AIStage")
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "You Lose";
         }
-        else if (DataBase.preStage == "Game" & DataBase.winner)
+        else if (StageName == "Game" & DataBase.winner)
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Player2 Win!";
         }
