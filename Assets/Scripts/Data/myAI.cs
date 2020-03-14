@@ -56,7 +56,7 @@ public class myAI : MonoBehaviour
                 gameManage.requestEnqueue(Robj);
                 await Task.Delay(600);
                 gameManage.requestEnqueue(Robj1);
-                await Task.Delay(100);
+                await Task.Delay(200);
             }
         }
         else
@@ -126,7 +126,7 @@ public class myAI : MonoBehaviour
                 gameManage.requestEnqueue(Robj1);
                 await Task.Delay(600);
                 gameManage.requestEnqueue(Robj2);
-                await Task.Delay(100);
+                await Task.Delay(200);
                 if (gameManage.receiveMode != gameManage.situation.attackselect)
                 {
                     return;
@@ -148,8 +148,9 @@ public class myAI : MonoBehaviour
                 await Task.Delay(600);
                 gameManage.requestEnqueue(Robj4);
                 await Task.Delay(100);
-                DangerForAI.DangerReset();
+                
             }
+            DangerForAI.DangerReset();
         }
     }
 
@@ -168,10 +169,12 @@ public class myAI : MonoBehaviour
         else if (DangerForAI.danger)
         {
             var (x1, y1) = DangerForAI.dangerList[0];
-                if (DataBase.BoardInfo(x1,y1)==1)
-                {
-                    
-                }
+            if (DataBase.BoardInfo(x1,y1)==1)
+            { 
+            DangerForAI.DangerReset();
+            ReadAI(true);
+            return;
+            }
                 else
                 {
                     List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
@@ -197,6 +200,7 @@ public class myAI : MonoBehaviour
                             else
                             {
                                 List<GameObject> res1 = DataBase.MyKoma(gameManage.turn, false);
+                                
                                 (GameObject, GameObject) Act = (null,null);
                                 int ActionPoint = -1000;
                                 for (int k = 0; k < res1.Count(); k++)
@@ -233,8 +237,7 @@ public class myAI : MonoBehaviour
                             }
                         }
                     }
-                    ReadAI(true);
-                    return;
+                    
                 }
         }
         else

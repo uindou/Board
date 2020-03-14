@@ -159,7 +159,7 @@ public class gameManage : MonoBehaviour
         if (isflash)
         {
             obj.GetComponent<Image>().color = new Color32(90,177,222,255);
-            Debug.Log(obj.name);
+
         }
         else
         {
@@ -431,35 +431,41 @@ public class PreEnd : State
         else
         {
             DataBase.winner = gameManage.turn;
-            DataBase.preStage = DataBase.SceneName;
 
             switch (DataBase.SceneName)
             {
                 case "Stage1":
+                    DataBase.preStage = "Game";
                     DataBase.bonusCoin=1;
                     break;
                 case "Stage2":
+                    DataBase.preStage = "Game";
                     DataBase.bonusCoin=2;
                     break;
                 case "Stage3":
+                    DataBase.preStage = "Game";
                     DataBase.bonusCoin = 3;
                     break;
                 case "AIStage1":
+                    DataBase.preStage = "AIStage";
                     DataBase.bonusCoin = 10;
                     break;
                 case "AIStage2":
+                    DataBase.preStage = "AIStage";
                     DataBase.bonusCoin = 20;
                     break;
                 case "AIStage3":
+                    DataBase.preStage = "AIStage";
                     DataBase.bonusCoin = 30;
                     break;
                 default:
+                    DataBase.preStage = "Game";
                     DataBase.bonusCoin = 0;
                     break;
             }
             DataBase.SceneName = "";
             SceneManager.LoadScene("Win");
-            //ゲーム終了した後にしたい処理をここに全部書く、他スクリプトの呼び出しとかがいいかも
+            
             InterstitialManager.GameOver();
             return new End();
         }
@@ -481,11 +487,13 @@ public class AI : State
         if (DataBase.EndWarn())
         {
             gameManage.turn = !gameManage.turn;
+            Debug.Log("割り込み");
             myAI.StartAI(5);//割り込み
         }
         else
         {
             gameManage.turn = !gameManage.turn;
+            Debug.Log("通常モード");
             myAI.StartAI(6);
         }
         

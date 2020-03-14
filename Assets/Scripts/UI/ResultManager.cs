@@ -19,7 +19,7 @@ public class ResultManager : MonoBehaviour
     void CoinCulculate()
     {
         int coin = 0;
-        Transform Rewards = this.transform.GetChild(3);
+        Transform Rewards = this.transform.GetChild(1);
         Rewards.GetChild(0).GetChild(2).GetComponent<Text>().text = "+" + DataBase.bonusCoin.ToString();
         if (DataBase.preStage == "AIStage")
         {
