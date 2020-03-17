@@ -6,7 +6,7 @@ using GoogleMobileAds.Api;
 
 public class AdMobManager: MonoBehaviour
 {
-    private float timeOut = 30.0f;
+    private float timeOut = 30.1f;
     private float timeElapsed;
     private BannerView bannerView;
     //private static InterstitialAd interstitial;
@@ -21,7 +21,6 @@ public class AdMobManager: MonoBehaviour
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(appId);
 
-        //RequestInterstitial();
     }
 
     
@@ -43,26 +42,11 @@ public class AdMobManager: MonoBehaviour
 
     }
 
-    /*
-    //インタースティシャル広告のリクエスト
-    private void RequestInterstitial()
-    {
-        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
-
-        // Initialize an InterstitialAd.
-        interstitial = new InterstitialAd(adUnitId);
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
-        // Load the interstitial with the request.
-        interstitial.LoadAd(request);
-    }
-    */
-
     // Update is called once per frame
     void Update()
     {
         
-        //30秒に1回バナー広告を更新
+        //最初の1フレームおよび30秒に1回バナー広告を更新
         timeElapsed += Time.deltaTime;
 
         if (timeElapsed >= timeOut)
@@ -76,7 +60,7 @@ public class AdMobManager: MonoBehaviour
             // Do anything
             RequestBanner();
             Debug.Log("バナー更新");
-            timeElapsed = 0.0f;
+            timeElapsed = 0.1f;
         }
 
     }

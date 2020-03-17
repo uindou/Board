@@ -9,6 +9,7 @@ public class CreditManager : MonoBehaviour
 {
     public GameObject targetText;
     public GameObject ghostText;
+    public GameObject rewardWindow;
     private Vector3 startVector;
     //　テキストのスクロールスピード
     public float textScrollSpeed = 100;
@@ -57,16 +58,16 @@ public class CreditManager : MonoBehaviour
 
     private async void IsStopEndroll()
     {
+        await Task.Delay(1000);
         firstFlag = PlayerPrefs.GetInt("endFirst", 0) == 0;
         PlayerPrefs.SetInt("endFirst", 1);
         if (firstFlag)
         {
+            rewardWindow.gameObject.SetActive(true);
             CoinManager.SetBonus(500);
             CoinManager.SetCoin();
             firstFlag = false;
         }
-
-        await Task.Delay(1000);
         this.gameObject.SetActive(false);
     }
 }

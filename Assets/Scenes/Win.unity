@@ -547,7 +547,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6a6de5597b4367b49881d7bdbe5304c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64ef82691734c08489e3fa2796d1ec68, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -977,8 +977,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942150a57b32003429b3920469957db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winReward: 30
-  onlineReward: 10
 --- !u!1 &822361579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,7 +1032,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6a6de5597b4367b49881d7bdbe5304c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64ef82691734c08489e3fa2796d1ec68, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
