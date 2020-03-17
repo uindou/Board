@@ -18,6 +18,7 @@ public class gameManage : MonoBehaviour
     public static bool turn;
     public static bool selectFlag;
     public static bool attackFlag;
+    public static bool AIWaiting;
     public static bool endWaiting;
     public static bool aiPlaying;
 
@@ -63,6 +64,12 @@ public class gameManage : MonoBehaviour
     {
         await Task.Delay(500);
         endWaiting = true;
+    }
+    public static async void AIWait()
+    {
+        await Task.Delay(500);
+        AIWaiting = true;
+        
     }
     public static void requestEnqueue(GameObject obj)
     {
@@ -407,6 +414,8 @@ public class Final :State
             if (DataBase.AImode && !turn)
             {
                 aiPlaying = true;
+                AIWaiting = false;
+                gameManage.AIWait();
                 return new AI();//2ターンに一度呼ばれる
             }
             else
@@ -483,22 +492,26 @@ public class AI : State
 {
     public State Execute()
     {
-        GameObject obj = objs[0, 0];
-        obj.GetComponent<clickReceiver>().ChangeAct();//クリックレシーバーのモードを変えるための処理
-        if (DataBase.EndWarn())
-        {
-            gameManage.turn = !gameManage.turn;
-            Debug.Log("割り込み");
-            myAI.StartAI(5);//割り込み
-        }
+        if (!AIWaiting) return this;
         else
         {
-            gameManage.turn = !gameManage.turn;
-            Debug.Log("通常モード");
-            myAI.StartAI(6);
+            GameObject obj = objs[0, 0];
+            obj.GetComponent<clickReceiver>().ChangeAct();//クリックレシーバーのモードを変えるための処理
+            if (DataBase.EndWarn())
+            {
+                gameManage.turn = !gameManage.turn;
+                Debug.Log("割り込み");
+                myAI.StartAI(5);//割り込み
+            }
+            else
+            {
+                gameManage.turn = !gameManage.turn;
+                Debug.Log("通常モード");
+                myAI.StartAI(6);
+            }
+
+            return new Start();
         }
-        
-        return new Start();
     }
 }
 

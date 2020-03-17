@@ -20,6 +20,7 @@ public class myAI : MonoBehaviour
         int power1 = 5;
         if (!res.Any())
         {
+
             aiPlaying = false;
             gameManage.Skip();
             aiPlaying = true;
@@ -122,7 +123,7 @@ public class myAI : MonoBehaviour
             if (afterSkip)
             {
                 Debug.Log("評価値は" + ActionPoint.ToString());
-                await Task.Delay(600);
+                await Task.Delay(100);
                 gameManage.requestEnqueue(Robj1);
                 await Task.Delay(600);
                 gameManage.requestEnqueue(Robj2);
@@ -139,7 +140,7 @@ public class myAI : MonoBehaviour
             else
             {
                 Debug.Log("評価値は" + ActionPoint.ToString());
-                await Task.Delay(600);
+                await Task.Delay(100);
                 gameManage.requestEnqueue(Robj1);
                 await Task.Delay(600);
                 gameManage.requestEnqueue(Robj2);
@@ -158,11 +159,13 @@ public class myAI : MonoBehaviour
     {
         if (DangerForAI.overDanger)
         {
+            DangerForAI.DangerReset();
             ReadAI(true);
             return;
         }
         else if(DangerForAI.HP == 1)
         {
+            DangerForAI.DangerReset();
             ReadAI(true);
             return;
         }
@@ -187,9 +190,9 @@ public class myAI : MonoBehaviour
                                 var (x, y) = T;
                                 GameObject obj1 = DataBase.objs[x, y];
                                 
-                            await Task.Delay(1000);
+                            await Task.Delay(500);
                             gameManage.requestEnqueue(obj);
-                            await Task.Delay(1000);
+                            await Task.Delay(600);
                             gameManage.requestEnqueue(obj1);
                             await Task.Delay(100);
                             if (gameManage.receiveMode != gameManage.situation.attackselect)
@@ -224,7 +227,7 @@ public class myAI : MonoBehaviour
                                 }
                                 var (Robj3, Robj4) = Act;
                                 gameManage.requestEnqueue(Robj3);
-                                await Task.Delay(1000);
+                                await Task.Delay(600);
                                 gameManage.requestEnqueue(Robj4);
                                 await Task.Delay(100);
                                 DangerForAI.DangerReset();
@@ -368,9 +371,9 @@ public class myAI : MonoBehaviour
             if (afterSkip)
             {
                 Debug.Log("評価値は" + ActionPoint.ToString());
-                await Task.Delay(1000);
+                await Task.Delay(100);
                 gameManage.requestEnqueue(Robj1);
-                await Task.Delay(1000);
+                await Task.Delay(600);
                 gameManage.requestEnqueue(Robj2);
                 await Task.Delay(100);
                 if (gameManage.receiveMode != gameManage.situation.attackselect)
@@ -385,13 +388,13 @@ public class myAI : MonoBehaviour
             else
             {
                 Debug.Log("評価値は"+ActionPoint.ToString());
-                await Task.Delay(1000);
+                await Task.Delay(100);
                 gameManage.requestEnqueue(Robj1);
-                await Task.Delay(1000);
+                await Task.Delay(600);
                 gameManage.requestEnqueue(Robj2);
-                await Task.Delay(1000);
+                await Task.Delay(600);
                 gameManage.requestEnqueue(Robj3);
-                await Task.Delay(1000);
+                await Task.Delay(600);
                 gameManage.requestEnqueue(Robj4);
                 await Task.Delay(100);
                 DangerForAI.DangerReset();
