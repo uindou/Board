@@ -31,7 +31,7 @@ public class SkinManager : MonoBehaviour
     }
     public static void SoldierInit()
     {
-        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
+        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
         SoldierSkin = new List<(string, Sprite, int, bool)>();
         Transform Soldier = SkinData.GetChild(0);
         int skinCount = Soldier.childCount;
@@ -47,7 +47,7 @@ public class SkinManager : MonoBehaviour
     }
     public static void TankInit()
     {
-        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
+        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 ,100,100};
         TankSkin = new List<(string, Sprite, int, bool)>();
         Transform Tank = SkinData.GetChild(1);
         int skinCount = Tank.childCount;
@@ -62,7 +62,7 @@ public class SkinManager : MonoBehaviour
     }
     public static void PlainInit()
     {
-        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
+        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 ,100,100};
         TankSkin = new List<(string, Sprite, int, bool)>();
         Transform Plain = SkinData.GetChild(2);
         int skinCount = Plain.childCount;
@@ -81,16 +81,16 @@ public class SkinManager : MonoBehaviour
         int price;
         if (type == "soldier")
         {
-            var (a, b, p, c) = SoldierSkin[index];
+            var (_, _, p, _) = SoldierSkin[index];
             price = p;
         }else if(type == "tank")
         {
-            var (a, b, p, c) = TankSkin[index];
+            var (_, _, p, _) = TankSkin[index];
             price = p;
         }
         else
         {
-            var (a, b, p, c) = PlainSkin[index];
+            var (_, _, p, _) = PlainSkin[index];
             price = p;
         }
         return coin >= price;
@@ -111,7 +111,7 @@ public class SkinManager : MonoBehaviour
         {
             Skin = PlainSkin[index];
         }
-        var (a, b, c, d) = Skin;
+        var (a, b, c, _) = Skin;
         Debug.Log(Skin);
         price = c;
         int coin = PlayerPrefs.GetInt("coin", 0);
@@ -139,7 +139,7 @@ public class SkinManager : MonoBehaviour
     public static void SkinChange(string type,int index)
     {
         PlayerPrefs.SetInt("SoldierSetSkin", index);
-        var (a, b, c, d) = SoldierSkin[index];
+        var (a, b, _, _) = SoldierSkin[index];
         SkinViewManager.SkinSet(type, a, b,index);
     }
 
@@ -147,17 +147,17 @@ public class SkinManager : MonoBehaviour
     {
         if (type == "soldier")
         {
-            var (a, b, c, flag) = SoldierSkin[index];
+            var (_, _, _, flag) = SoldierSkin[index];
             return flag;
         }
         else if (type == "tank")
         {
-            var (a, b, c, flag) = TankSkin[index];
+            var (_, _, _, flag) = TankSkin[index];
             return flag;
         }
         else
         {
-            var (a, b, c, flag) = PlainSkin[index];
+            var (_, _, _, flag) = PlainSkin[index];
             return flag;
         }
     }

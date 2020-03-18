@@ -21,5 +21,6 @@ public class SkinSelectButton : MonoBehaviour
     public void OnClick()
     {
         SkinViewManager.pageInc(vector);
+
     }
 }
