@@ -8,25 +8,37 @@ public class TitleAnimationManager : MonoBehaviour
 {
     public GameObject movingObject;
     public GameObject endGhost;
-    private Sprite Move0;
-    private Sprite Move1;
+    private Sprite usingMove0;
+    private Sprite usingMove1;
+    private Sprite move0;
+    private Sprite move1;
+    private Sprite move2;
+    private Sprite move3;
     public int dl = 50;
     public float moveSpeed = 100;
     private Vector3 startPosition;
-    public bool moveVector = true;
-    public int subStartdl = 5; 
+    public bool moveVector = true; //右から左がtrue
+    public int subStartdl = 5;
+    private int rndint = 0;
+    private int count = 0;
     // Start is called before the first frame update
     void Start()
     {
+        rndint = Random.Range(0,5);
+        Debug.Log(rndint);
         startPosition = movingObject.transform.position;
-        Move0 = movingObject.transform.GetChild(0).GetComponent<Image>().sprite;
-        Move1 = movingObject.transform.GetChild(1).GetComponent<Image>().sprite;
+        move0 = movingObject.transform.GetChild(0).GetComponent<Image>().sprite;
+        move1 = movingObject.transform.GetChild(1).GetComponent<Image>().sprite;
+        //move2 = movingObject.transform.GetChild(2).GetComponent<Image>().sprite;
+        //move3 = movingObject.transform.GetChild(3).GetComponent<Image>().sprite;
+        usingMove0 = move0;
+        usingMove1 = move1;
         MovingAnime();
     }
 
-    private void SubStart()
+    private async void SubStart()
     {
-        movingObject.gameObject.SetActive(true);
+        await Task.Delay(subStartdl*1000);
         movingObject.transform.position = startPosition;
     }
 
@@ -41,11 +53,9 @@ public class TitleAnimationManager : MonoBehaviour
             }
             else
             {
-                movingObject.gameObject.SetActive(false);
-                Invoke("SubStart", subStartdl);
+                SubStart();
             }
         }
-
         else
         {
             if (movingObject.transform.position.x <= endGhost.transform.position.x)
@@ -54,25 +64,20 @@ public class TitleAnimationManager : MonoBehaviour
             }
             else
             {
-                movingObject.gameObject.SetActive(false);
-                Invoke("SubStart", subStartdl);
+                SubStart();
             }
         }
     }
 
     public async void MovingAnime()
     {
+        Debug.Log("呼ばれた");
         while (true)
         {
-            movingObject.GetComponent<Image>().sprite = Move0;
+            movingObject.GetComponent<Image>().sprite = usingMove0;
             await Task.Delay(dl);
-            movingObject.GetComponent<Image>().sprite = Move1;
+            movingObject.GetComponent<Image>().sprite = usingMove1;
             await Task.Delay(dl);
         }
-    }
-
-    private void OnDisable()
-    {
-        movingObject.transform.position = startPosition;
     }
 }

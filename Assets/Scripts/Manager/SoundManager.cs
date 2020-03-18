@@ -9,25 +9,30 @@ public class SoundManager : MonoBehaviour
     public Slider bgmSlider;
     public Slider seSlider;
     public AudioSource bgm;
-    public float bgmVolume = 1;
-    public float seVolume = 1;
 
     void Start()
     {
-        bgmSlider.value = bgmVolume;
-        seSlider.value = seVolume;
+        if (PlayerPrefs.HasKey("bgmVolume")) 
+        {
+            bgm.volume = PlayerPrefs.GetFloat("bgmVolume");
+            bgmSlider.value = PlayerPrefs.GetFloat("bgmVolume");
+        }
+        else　//音量の調整を一度もしていない場合
+        {
+            bgm.volume = 1;
+            bgmSlider.value = 1;
+        }
+        
     }
 
     public void ChangeVolume()
     {
-        bgmVolume = bgmSlider.GetComponent<Slider>().normalizedValue;
-        seVolume = seSlider.GetComponent<Slider>().normalizedValue;
-        Debug.Log(bgmVolume);
+        PlayerPrefs.SetFloat("bgmVolume", bgmSlider.GetComponent<Slider>().normalizedValue);
     }
 
     // Update is called once per frame
     void Update()
     {
-        bgm.volume = bgmVolume;
+        bgm.volume = PlayerPrefs.GetFloat("bgmVolume");
     }
 }
