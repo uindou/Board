@@ -36,6 +36,7 @@ public class SkinViewManager : MonoBehaviour
         SkinView();
         isStart = true;
     }
+
     public static void DefaultSkinSet()
     {
         string name = "";
@@ -85,6 +86,29 @@ public class SkinViewManager : MonoBehaviour
             SkinPageText.PageChange(page);
         }
     }
+    public static void ModeChange(int mode)
+    {
+        nowSkin = mode;
+        page = 1;
+        Debug.Log("onenable");
+        switch (nowSkin)
+        {
+            case (int)skinType.soldier:
+                var (name, sprite, _, _) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("SoldierSetSkin", 0)];
+                SkinSet("soldier", name, sprite, PlayerPrefs.GetInt("SoldierSetSkin", 0));
+                break;
+            case (int)skinType.tank:
+                var (nam, sprit, _, _) = SkinManager.TankSkin[PlayerPrefs.GetInt("TankSetSkin", 0)];
+                SkinSet("tank", nam, sprit, PlayerPrefs.GetInt("TankSetSkin", 0));
+                break;
+            case (int)skinType.fighter:
+                var (na, spri, _, _) = SkinManager.FighterSkin[PlayerPrefs.GetInt("FighterSetSkin", 0)];
+                SkinSet("fighter", na, spri, PlayerPrefs.GetInt("FighterSetSkin", 0));
+                break;
+        }
+        SkinPageText.PageChange(page);
+    }
+    
     // Update is called once per frame
     void Update()
     {

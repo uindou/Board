@@ -54,7 +54,7 @@ public class SkinManager : MonoBehaviour
         for (int i = 0; i < skinCount; i++)
         {
             Transform thisTank = Tank.GetChild(i);
-            SoldierSkin.Add((thisTank.name,
+            TankSkin.Add((thisTank.name,
                 thisTank.GetComponent<SpriteRenderer>().sprite,
                 Prices[i],
                 PlayerPrefs.GetInt("TankSkin" + i.ToString(), 0) == 1));
@@ -63,13 +63,13 @@ public class SkinManager : MonoBehaviour
     public static void PlainInit()
     {
         int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 ,100,100};
-        TankSkin = new List<(string, Sprite, int, bool)>();
+        FighterSkin = new List<(string, Sprite, int, bool)>();
         Transform Plain = SkinData.GetChild(2);
         int skinCount = Plain.childCount;
         for (int i = 0; i < skinCount; i++)
         {
             Transform thisPlain = Plain.GetChild(i);
-            SoldierSkin.Add((thisPlain.name,
+            FighterSkin.Add((thisPlain.name,
                 thisPlain.GetComponent<SpriteRenderer>().sprite,
                 Prices[i],
                 PlayerPrefs.GetInt("FighterSkin" + i.ToString(), 0) == 1));

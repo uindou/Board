@@ -23,26 +23,80 @@ public class SkinMatrixWindowManager : MonoBehaviour
 
     public void ViewPurchaseWindow()
     {
-        if (SkinManager.BuyFlag("soldier", (SkinViewManager.page - 1) * 6 + index)){
-            SkinManager.SkinChange("soldier", (SkinViewManager.page - 1) * 6 + index);
-        }
-        else
+        switch (SkinViewManager.nowSkin)
         {
-            parchaseWindow.gameObject.SetActive(true);
+            case (int)SkinViewManager.skinType.soldier:
+                if (SkinManager.BuyFlag("soldier", (SkinViewManager.page - 1) * 6 + index))
+                {
+                    SkinManager.SkinChange("soldier", (SkinViewManager.page - 1) * 6 + index);
+                }
+                else
+                {
+                    parchaseWindow.gameObject.SetActive(true);
+                }
+                break;
+            case (int)SkinViewManager.skinType.tank:
+                if (SkinManager.BuyFlag("tank", (SkinViewManager.page - 1) * 6 + index))
+                {
+                    SkinManager.SkinChange("tank", (SkinViewManager.page - 1) * 6 + index);
+                }
+                else
+                {
+                    parchaseWindow.gameObject.SetActive(true);
+                }
+                break;
+            case (int)SkinViewManager.skinType.fighter:
+                if (SkinManager.BuyFlag("fighter", (SkinViewManager.page - 1) * 6 + index))
+                {
+                    SkinManager.SkinChange("fighter", (SkinViewManager.page - 1) * 6 + index);
+                }
+                else
+                {
+                    parchaseWindow.gameObject.SetActive(true);
+                }
+                break;
         }
+        
     }
 
     public void Purchase()
     {
-        Debug.Log(index);
-        if(SkinManager.Available("soldier", (SkinViewManager.page - 1) * 6 + index))
+        switch (SkinViewManager.nowSkin)
         {
-            SkinManager.Purchase("soldier", (SkinViewManager.page - 1) * 6 + index);
-            SkinManager.SkinChange("soldier", (SkinViewManager.page - 1) * 6 + index);
+            case (int)SkinViewManager.skinType.soldier:
+                if (SkinManager.Available("soldier", (SkinViewManager.page - 1) * 6 + index))
+                {
+                    SkinManager.Purchase("soldier", (SkinViewManager.page - 1) * 6 + index);
+                    SkinManager.SkinChange("soldier", (SkinViewManager.page - 1) * 6 + index);
+                }
+                else
+                {
+                    SkinManager.SkinChange("soldier", (SkinViewManager.page - 1) * 6 + index);
+                }
+                break;
+            case (int)SkinViewManager.skinType.tank:
+                if (SkinManager.Available("tank", (SkinViewManager.page - 1) * 6 + index))
+                {
+                    SkinManager.Purchase("tank", (SkinViewManager.page - 1) * 6 + index);
+                    SkinManager.SkinChange("tank", (SkinViewManager.page - 1) * 6 + index);
+                }
+                else
+                {
+                    SkinManager.SkinChange("tank", (SkinViewManager.page - 1) * 6 + index);
+                }
+                break;
+            case (int)SkinViewManager.skinType.fighter:
+                if (SkinManager.Available("fighter", (SkinViewManager.page - 1) * 6 + index))
+                {
+                    SkinManager.Purchase("fighter", (SkinViewManager.page - 1) * 6 + index);
+                    SkinManager.SkinChange("fighter", (SkinViewManager.page - 1) * 6 + index);
+                }
+                else
+                {
+                    SkinManager.SkinChange("fighter", (SkinViewManager.page - 1) * 6 + index);
+                }
+                break;
         }
-        else
-        {
-            SkinManager.SkinChange("soldier", (SkinViewManager.page - 1) * 6 + index);
-        }
+        
     }
 }

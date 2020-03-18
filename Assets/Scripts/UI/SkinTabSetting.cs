@@ -7,6 +7,6 @@ public class SkinTabSetting : MonoBehaviour
     public int mode;
     public void OnClick()
     {
-        SkinViewManager.nowSkin = mode;
+        SkinViewManager.ModeChange(mode);
     }
 }
