@@ -11,3 +11,4 @@ TankSkin(番号),FighterSkin(番号):兵士と同様
 
 ・その他
 endFirst:エンドロールを見たことがあるか(初回コイン獲得と関係)
+bgmVolume:BGMの音量(0~1のfloat型)
