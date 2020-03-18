@@ -230,8 +230,8 @@ public class DataBase : MonoBehaviour
         Transform Others = imageParent.GetChild(4);
         Transform Explode = imageParent.GetChild(5);
         images[(int)im.soldier] = SoldierParent.GetChild(PlayerPrefs.GetInt("SoldierSetSkin", 0)).GetComponent<SpriteRenderer>().sprite;
-        images[(int)im.tank] = TankParent.GetChild(PlayerPrefs.GetInt("tankSkin", 0)).GetComponent<SpriteRenderer>().sprite;
-        images[(int)im.plain] = FighterParent.GetChild(PlayerPrefs.GetInt("plainSkin", 0)).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.tank] = TankParent.GetChild(PlayerPrefs.GetInt("TankSetSkin", 0)).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.plain] = FighterParent.GetChild(PlayerPrefs.GetInt("FighterSetSkin", 0)).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.soldierA1] = Effects.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.soldierA2] = Effects.GetChild(1).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.tankA1] = Effects.GetChild(2).GetComponent<SpriteRenderer>().sprite;

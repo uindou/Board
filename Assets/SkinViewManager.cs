@@ -8,13 +8,21 @@ public class SkinViewManager : MonoBehaviour
     public static GameObject currentSkin;
     public GameObject skinMatrix;
     public static int page;
+    public static int nowSkin;
     public string charaName;
     public bool isStart;
     static Transform SkinWindow;
 
     // Start is called before the first frame update
+    public enum skinType
+    {
+        soldier=0,
+        tank=1,
+        fighter=2
+    } 
     private void Awake()
     {
+        nowSkin = (int)skinType.soldier;
         isStart = false;
     }
     void Start()
@@ -27,11 +35,27 @@ public class SkinViewManager : MonoBehaviour
         page = 1;
         SkinView();
         isStart = true;
-        
     }
     public static void DefaultSkinSet()
     {
-        var(name, skin, _, _) = SkinManager.SoldierSkin[0];
+        string name = "";
+        Sprite skin = null;
+        switch (nowSkin)
+        {
+            case (int)skinType.soldier:
+                (name, skin, _, _) = SkinManager.SoldierSkin[0];
+                break;
+            case (int)skinType.tank:
+                (name, skin, _, _) = SkinManager.TankSkin[0];
+                break;
+            case (int)skinType.fighter:
+                (name, skin, _, _) = SkinManager.FighterSkin[0];
+                break;
+            default:
+                (name, skin, _, _) = SkinManager.SoldierSkin[0];
+                break;
+        }
+        
         
         currentSkin.transform.GetChild(0).GetComponent<Image>().sprite = skin;
         currentSkin.transform.GetChild(1).GetComponent<Text>().text = name;
@@ -43,8 +67,21 @@ public class SkinViewManager : MonoBehaviour
             page = 1;
             SkinView();
             Debug.Log("onenable");
-            var (name, sprite, _, _) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("SoldierSetSkin", 0)];
-            SkinSet("soldier", name, sprite, PlayerPrefs.GetInt("SoldierSetSkin", 0));
+            switch (nowSkin)
+            {
+                case (int)skinType.soldier:
+                    var (name, sprite, _, _) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("SoldierSetSkin", 0)];
+                    SkinSet("soldier", name, sprite, PlayerPrefs.GetInt("SoldierSetSkin", 0));
+                    break;
+                case (int)skinType.tank:
+                    var (nam, sprit, _, _) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("TankSetSkin", 0)];
+                    SkinSet("tank", nam, sprit, PlayerPrefs.GetInt("TankSetSkin", 0));
+                    break;
+                case (int)skinType.fighter:
+                    var (na, spri, _, _) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("FighterSetSkin", 0)];
+                    SkinSet("fighter", na, spri, PlayerPrefs.GetInt("FighterSetSkin", 0));
+                    break;
+            }
             SkinPageText.PageChange(page);
         }
     }
@@ -69,8 +106,21 @@ public class SkinViewManager : MonoBehaviour
     
     public void SkinView()
     {
+        List<(string, Sprite, int, bool)> skinInfo = new List<(string, Sprite, int, bool)>();
+        switch (nowSkin)
+        {
+            case (int)skinType.soldier:
+                skinInfo = SkinManager.SoldierSkin.GetRange((page - 1) * 6, 6);
+                break;
+            case (int)skinType.tank:
+                skinInfo = SkinManager.TankSkin.GetRange((page - 1) * 6, 6);
+                break;
+            case (int)skinType.fighter:
+                skinInfo = SkinManager.FighterSkin.GetRange((page - 1) * 6, 6);
+                break;
+        }
         //表示する6要素をリストから選択
-        List<(string, Sprite, int, bool)> skinInfo = SkinManager.SoldierSkin.GetRange((page-1)*6,6);
+        
 
         //行列に各々表示
         for(int i=0;i<6; i++)
@@ -102,7 +152,21 @@ public class SkinViewManager : MonoBehaviour
         if (page == 0) page = 3;
         if (page == 4) page = 1;
         SkinPageText.PageChange(page);
-        var (name, sprite, _, _) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("SoldierSetSkin", 0)];
-        SkinSet("soldier", name, sprite, PlayerPrefs.GetInt("SoldierSetSkin", 0));
+
+        switch (nowSkin)
+        {
+            case (int)skinType.soldier:
+                var (name, sprite, _, _) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("SoldierSetSkin", 0)];
+                SkinSet("soldier", name, sprite, PlayerPrefs.GetInt("SoldierSetSkin", 0));
+                break;
+            case (int)skinType.tank:
+                var (nam, sprit, _, _) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("TankSetSkin", 0)];
+                SkinSet("tank", nam, sprit, PlayerPrefs.GetInt("TankSetSkin", 0));
+                break;
+            case (int)skinType.fighter:
+                var (na, spri, _, _) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("FighterSetSkin", 0)];
+                SkinSet("fighter", na, spri, PlayerPrefs.GetInt("FighterSetSkin", 0));
+                break;
+        }
     }
 }

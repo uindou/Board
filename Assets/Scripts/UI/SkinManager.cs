@@ -8,7 +8,7 @@ public class SkinManager : MonoBehaviour
     public static Transform SkinData;
     public static List<(string, Sprite, int, bool)> SoldierSkin;
     public static List<(string, Sprite, int, bool)> TankSkin;
-    public static List<(string, Sprite, int, bool)> PlainSkin;
+    public static List<(string, Sprite, int, bool)> FighterSkin;
     private void Awake()
     {
         SkinData = this.gameObject.transform;
@@ -27,7 +27,7 @@ public class SkinManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("SoldierSkin0",1);
         PlayerPrefs.SetInt("TankSkin0", 1);
-        PlayerPrefs.SetInt("PlainSkin0", 1);
+        PlayerPrefs.SetInt("FighterSkin0", 1);
     }
     public static void SoldierInit()
     {
@@ -72,7 +72,7 @@ public class SkinManager : MonoBehaviour
             SoldierSkin.Add((thisPlain.name,
                 thisPlain.GetComponent<SpriteRenderer>().sprite,
                 Prices[i],
-                PlayerPrefs.GetInt("PlainSkin" + i.ToString(), 0) == 1));
+                PlayerPrefs.GetInt("FighterSkin" + i.ToString(), 0) == 1));
         }
     }
     public static bool Available(string type,int index)
@@ -90,7 +90,7 @@ public class SkinManager : MonoBehaviour
         }
         else
         {
-            var (_, _, p, _) = PlainSkin[index];
+            var (_, _, p, _) = FighterSkin[index];
             price = p;
         }
         return coin >= price;
@@ -109,7 +109,7 @@ public class SkinManager : MonoBehaviour
         }
         else
         {
-            Skin = PlainSkin[index];
+            Skin = FighterSkin[index];
         }
         var (a, b, c, _) = Skin;
         Debug.Log(Skin);
@@ -131,16 +131,32 @@ public class SkinManager : MonoBehaviour
         }
         else
         {
-            PlainSkin[index] = Skin;
-            PlayerPrefs.SetInt("PlainSkin" + index.ToString(), 1);
+            FighterSkin[index] = Skin;
+            PlayerPrefs.SetInt("FighterSkin" + index.ToString(), 1);
         }
 
     }
     public static void SkinChange(string type,int index)
     {
-        PlayerPrefs.SetInt("SoldierSetSkin", index);
-        var (a, b, _, _) = SoldierSkin[index];
-        SkinViewManager.SkinSet(type, a, b,index);
+        switch (SkinViewManager.nowSkin)
+        {
+            case (int)SkinViewManager.skinType.soldier:
+                PlayerPrefs.SetInt("SoldierSetSkin", index);
+                var (a, b, _, _) = SoldierSkin[index];
+                SkinViewManager.SkinSet(type, a, b, index);
+                break;
+            case (int)SkinViewManager.skinType.tank:
+                PlayerPrefs.SetInt("TankSetSkin", index);
+                var (c, d, _, _) = TankSkin[index];
+                SkinViewManager.SkinSet(type, c, d, index);
+                break;
+            case (int)SkinViewManager.skinType.fighter:
+                PlayerPrefs.SetInt("FighterSetSkin", index);
+                var (e, f, _, _) = FighterSkin[index];
+                SkinViewManager.SkinSet(type, e, f, index);
+                break;
+
+        }
     }
 
     public static bool BuyFlag(string type,int index)
@@ -157,7 +173,7 @@ public class SkinManager : MonoBehaviour
         }
         else
         {
-            var (_, _, _, flag) = PlainSkin[index];
+            var (_, _, _, flag) = FighterSkin[index];
             return flag;
         }
     }
