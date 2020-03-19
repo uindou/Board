@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class SoundPlay : MonoBehaviour
 {
+    //Gameなど、音量を変えないシーンで用いる。音量を変えるシーンではSoundManagerが付いてる。
+
     public AudioSource bgm;
-    // Update is called once per frame
+    private AudioSource se;
+
     void Start()
     {
-        Debug.Log(PlayerPrefs.GetFloat("bgmVolume"));
-        if (PlayerPrefs.HasKey("bgmVolume"))
+        if (PlayerPrefs.HasKey("bgmVolume"))　//BGM音量のPlayerPrefがある場合
         {
             bgm.volume = PlayerPrefs.GetFloat("bgmVolume");
         }
-        else　//音量の調整を一度もしていない場合
+        else　//PlayerPrefが無い場合
         {
             bgm.volume = 1;
         }
+
+    }
+
+    //
+    public void SEPlay(int i)　//効果音を再生するときに呼び出される
+    {
+        se = this.transform.GetChild(i).GetComponent<AudioSource>();
+        se.volume = PlayerPrefs.GetFloat("seVolume");
+        se.Play();
     }
 }

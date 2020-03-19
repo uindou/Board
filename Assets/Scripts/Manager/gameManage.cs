@@ -141,7 +141,6 @@ public class gameManage : MonoBehaviour
                         DataBase.Reset(DataBase.situation.attackselect);
                         DataBase.Request(s, t, DataBase.situation.attackselect);
                         attackReset = true;
-                        
                     }
 
                     else if (obj.GetComponent<clickReceiver>().IsRange())
