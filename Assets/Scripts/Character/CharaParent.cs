@@ -82,6 +82,10 @@ public class CharaParent : MonoBehaviour,interFace
             }
         }
     }
+    public virtual void AttackSound()
+    {
+
+    }
     public void AddDamage(int damage)
     {
         HitPoint -= damage;

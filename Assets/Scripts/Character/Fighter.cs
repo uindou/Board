@@ -23,6 +23,10 @@ public class Fighter : CharaParent
         if (SceneManager.GetActiveScene().name == "AIStage1" || SceneManager.GetActiveScene().name == "AIStage2") initAIRange();
     }
     /*--------------------------------------------------OVERRIDE ZONE-----------------------------------------------------*/
+    public override void AttackSound()
+    {
+        SoundPlay.FighterPlay();
+    }
     public async override void AttackImage()
     {
         for (int i = 0; i < 2; i++)

@@ -38,7 +38,10 @@ public class Tank : CharaParent
 
         this.gameObject.transform.GetChild(3).GetComponent<Image>().sprite = DataBase.image((int)DataBase.im.transParent);
     }
-    
+    public override void AttackSound()
+    {
+        SoundPlay.TankPlay();
+    }
     public override int Evaluation(int x, int y)
     {
         return eva[x, y];

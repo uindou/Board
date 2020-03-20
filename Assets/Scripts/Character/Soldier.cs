@@ -56,6 +56,10 @@ public class Soldier : CharaParent
             return -1;
         }
     }*/
+    public override void AttackSound()
+    {
+        SoundPlay.SoldierPlay();
+    }
     public override int Evaluation(int x, int y)
     {
         return 1;
