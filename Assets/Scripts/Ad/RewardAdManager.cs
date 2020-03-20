@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GoogleMobileAds.Api;
+using System;
 
 public class RewardAdManager:MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class RewardAdManager:MonoBehaviour
     public GameObject waitWindow;
     public GameObject errorWindow;
     public GameObject confirmWindow;
+    public GameObject timeLimitPanel;
+    private DateTime startTime;
+
     //AndroidAdUnit ID
     private string AndroidUnitId = "ca-app-pub-3940256099942544/5224354917";
     
@@ -61,7 +65,18 @@ public class RewardAdManager:MonoBehaviour
         Debug.Log("AdLoaded");
         //Justincase.
         if (RewardAd.IsLoaded() == true)
+        {
             RewardAd.Show();
+            timeLimitPanel.SetActive(true);
+            startTime = System.DateTime.Now;
+            PlayerPrefs.SetString("rewardAdLimitStart", startTime.ToBinary().ToString());
+        }
+
+        else
+        {
+            waitWindow.SetActive(false);
+            errorWindow.SetActive(true);
+        }
     }
 
     protected　void　OnAdLoadFailed(object　_sender, AdFailedToLoadEventArgs　_args)
@@ -96,7 +111,7 @@ public class RewardAdManager:MonoBehaviour
         }
 
 
-        CoinManager.SetBonus(50);
+        CoinManager.SetBonus(200);
         CoinManager.SetCoin();
 
         waitWindow.SetActive(false);
