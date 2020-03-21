@@ -463,7 +463,36 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 7, false, "PlainFighter"));
         return stage;
     }
-    
+
+    /*
+    飛行機なしステージの候補
+
+    public static List<(int, int, bool, string)> Stage4MakeStage()
+    {
+        stage = new List<(int, int, bool, string)>();
+        stage.Add((1, 1, true, "Tank"));
+        stage.Add((1, 2, true, "Soldier"));
+        stage.Add((2, 2, true, "Tank"));
+        stage.Add((1, 3, true, "Tank"));
+        stage.Add((1, 4, true, "Soldier"));
+        stage.Add((1, 5, true, "Tank"));
+        stage.Add((1, 6, true, "Soldier"));
+        stage.Add((2, 6, true, "Tank"));
+        stage.Add((1, 7, true, "Tank"));
+
+        stage.Add((9, 1, false, "Tank"));
+        stage.Add((9, 2, false, "Soldier"));
+        stage.Add((8, 2, false, "Tank"));
+        stage.Add((9, 3, false, "Tank"));
+        stage.Add((9, 4, false, "Soldier"));
+        stage.Add((9, 5, false, "Tank"));
+        stage.Add((9, 6, false, "Soldier"));
+        stage.Add((8, 6, false, "Tank"));
+        stage.Add((9, 7, false, "Tank"));
+        return stage;
+    }
+    */
+
     /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/
     public static bool CantAttack(bool turn)
     {
