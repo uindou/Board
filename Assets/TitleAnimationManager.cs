@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 public class TitleAnimationManager : MonoBehaviour
 {
     public GameObject movingObject;
+    public GameObject pairMovingObject;
     public GameObject endGhost;
     private Sprite usingMove0;
     private Sprite usingMove1;
     private Sprite move0;
     private Sprite move1;
-    private Sprite move2;
-    private Sprite move3;
+    //private Sprite move2;
+    //private Sprite move3;
     public int dl = 50;
     public float moveSpeed = 100;
     private Vector3 startPosition;
@@ -24,8 +25,8 @@ public class TitleAnimationManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rndint = Random.Range(0,5);
-        Debug.Log(rndint);
+        //rndint = Random.Range(0,5);
+        //Debug.Log(rndint);
         startPosition = movingObject.transform.position;
         move0 = movingObject.transform.GetChild(0).GetComponent<Image>().sprite;
         move1 = movingObject.transform.GetChild(1).GetComponent<Image>().sprite;
@@ -36,10 +37,12 @@ public class TitleAnimationManager : MonoBehaviour
         MovingAnime();
     }
 
-    private async void SubStart()
+    private void SubStart()
     {
-        await Task.Delay(subStartdl*1000);
+        //await Task.Delay(subStartdl*1000);
         movingObject.transform.position = startPosition;
+        pairMovingObject.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
