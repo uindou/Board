@@ -21,7 +21,7 @@ public class TimeLimitPanalManager : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        paretButton.interactable = false;
     }
     // Update is called once per frame
     void Update()
