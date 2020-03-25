@@ -12,6 +12,8 @@ public class SkinViewManager : MonoBehaviour
     public string charaName;
     public bool isStart;
     static Transform SkinWindow;
+    public GameObject leftArrow;
+    public GameObject rightArrow;
 
     // Start is called before the first frame update
     public enum skinType
@@ -113,6 +115,21 @@ public class SkinViewManager : MonoBehaviour
     void Update()
     {
         SkinView();
+        if (page == 1)
+        {
+            leftArrow.SetActive(false);
+            rightArrow.SetActive(true);
+        }
+        else if (page == 3)
+        {
+            leftArrow.SetActive(true);
+            rightArrow.SetActive(false);
+        }
+        else
+        {
+            leftArrow.SetActive(true);
+            rightArrow.SetActive(true);
+        }
     }
     public static void SkinSet(string type,string name,Sprite skin,int index)
     {
