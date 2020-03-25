@@ -559,8 +559,17 @@ public class myAI : MonoBehaviour
         await Task.Delay(1000);
         gameManage.Skip();
     }
+    public async static void AIStopMeasure()
+    {
+        await Task.Delay(3000);
+        if (gameManage.turn)
+        {
+            PowerfulRandomAI();
+        }
+    }
     public static void StartAI(int mode)
     {
+        AIStopMeasure();
         switch (mode)
         {
             case 0:
