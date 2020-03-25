@@ -87,6 +87,12 @@ public class DataBase : MonoBehaviour
             case "Stage3":
                 AImode = false;
                 break;
+            case "Stage4":
+                AImode = false;
+                break;
+            case "Stage5":
+                AImode = false;
+                break;
             case "AIStage1":
                 AImode = true;
                 break;
@@ -94,6 +100,12 @@ public class DataBase : MonoBehaviour
                 AImode = true;
                 break;
             case "AIStage3":
+                AImode = true;
+                break;
+            case "AIStage4":
+                AImode = true;
+                break;
+            case "AIStage5":
                 AImode = true;
                 break;
             default:
@@ -368,12 +380,20 @@ public class DataBase : MonoBehaviour
                 return Stage2MakeStage();
             case "Stage3":
                 return Stage3MakeStage();
+            case "Stage4":
+                return Stage4MakeStage();
+            case "Stage5":
+                return Stage5MakeStage();
             case "AIStage1":
                 return Stage1MakeStage();
             case "AIStage2":
                 return Stage2MakeStage();
             case "AIStage3":
                 return Stage3MakeStage();
+            case "AIStage4":
+                return Stage4MakeStage();
+            case "AIStage5":
+                return Stage5MakeStage();
             default:
                 return Stage1MakeStage();
         }
@@ -389,6 +409,10 @@ public class DataBase : MonoBehaviour
                 return Stage2MakeStage();
             case 3:
                 return Stage3MakeStage();
+            case 4:
+                return Stage4MakeStage();
+            case 5:
+                return Stage5MakeStage();
             default:
                 return Stage1MakeStage();
         }
@@ -463,7 +487,55 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 7, false, "PlainFighter"));
         return stage;
     }
-    
+    public static List<(int, int, bool, string)> Stage4MakeStage()
+    {
+        stage = new List<(int, int, bool, string)>();
+        stage.Add((2, 1, true, "PlainFighter"));
+        stage.Add((2, 3, true, "Soldier"));
+        stage.Add((2, 2, true, "Soldier"));
+        stage.Add((3, 3, true, "Tank"));
+        stage.Add((3, 4, true, "Tank"));
+        stage.Add((3, 5, true, "Tank"));
+        stage.Add((2, 6, true, "Soldier"));
+        stage.Add((2, 4, true, "Soldier"));
+        stage.Add((2, 7, true, "PlainFighter"));
+
+        stage.Add((8, 1, false, "PlainFighter"));
+        stage.Add((8, 3, false, "Soldier"));
+        stage.Add((8, 2, false, "Soldier"));
+        stage.Add((7, 3, false, "Tank"));
+        stage.Add((7, 4, false, "Tank"));
+        stage.Add((7, 5, false, "Tank"));
+        stage.Add((8, 6, false, "Soldier"));
+        stage.Add((8, 4, false, "Soldier"));
+        stage.Add((8, 7, false, "PlainFighter"));
+        return stage;
+    }
+    public static List<(int, int, bool, string)> Stage5MakeStage()
+    {
+        stage = new List<(int, int, bool, string)>();
+        stage.Add((2, 1, true, "Soldier"));
+        stage.Add((2, 3, true, "Soldier"));
+        stage.Add((2, 2, true, "Soldier"));
+        stage.Add((3, 3, true, "Tank"));
+        stage.Add((3, 4, true, "PlainFighter"));
+        stage.Add((3, 5, true, "Tank"));
+        stage.Add((2, 6, true, "Soldier"));
+        stage.Add((2, 4, true, "Soldier"));
+        stage.Add((2, 7, true, "Soldier"));
+
+        stage.Add((8, 1, false, "Soldier"));
+        stage.Add((8, 3, false, "Soldier"));
+        stage.Add((8, 2, false, "Soldier"));
+        stage.Add((7, 3, false, "Tank"));
+        stage.Add((7, 4, false, "PlainFighter"));
+        stage.Add((7, 5, false, "Tank"));
+        stage.Add((8, 6, false, "Soldier"));
+        stage.Add((8, 4, false, "Soldier"));
+        stage.Add((8, 7, false, "Soldier"));
+        return stage;
+    }
+
     /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/
     public static bool CantAttack(bool turn)
     {

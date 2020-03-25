@@ -8,7 +8,7 @@ using System.Linq;
 public class StageSelectManager : MonoBehaviour
 {
     private static List<Sprite> stages;
-    private static List<int> stageNumbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    private static List<int> stageNumbers = new List<int>() { 1, 2, 3, 4, 5};
     private static int Length;
     
     public static GameObject stageImageParent;
@@ -38,7 +38,7 @@ public class StageSelectManager : MonoBehaviour
         PlayerStage = GameObject.Find("PlayerStages");
         AIStage = GameObject.Find("AIStages");
         Debug.Log(PlayerStage);
-        stageNumbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        stageNumbers = new List<int>() { 1, 2, 3, 4, 5 };
         Length = stageNumbers.Count;
         PParents = GameObject.Find("StageSelectWindow");
         AIParents = GameObject.Find("AIStageSelectWindow");

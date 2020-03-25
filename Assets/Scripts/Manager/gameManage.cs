@@ -455,6 +455,14 @@ public class PreEnd : State
                     ResultManager.StageName = "Game";
                     DataBase.bonusCoin = 3;
                     break;
+                case "Stage4":
+                    ResultManager.StageName = "Game";
+                    DataBase.bonusCoin = 3;
+                    break;
+                case "Stage5":
+                    ResultManager.StageName = "Game";
+                    DataBase.bonusCoin = 3;
+                    break;
                 case "AIStage1":
                     ResultManager.StageName = "AIStage";
                     DataBase.bonusCoin = 10;
@@ -464,6 +472,14 @@ public class PreEnd : State
                     DataBase.bonusCoin = 20;
                     break;
                 case "AIStage3":
+                    ResultManager.StageName = "AIStage";
+                    DataBase.bonusCoin = 30;
+                    break;
+                case "AIStage4":
+                    ResultManager.StageName = "AIStage";
+                    DataBase.bonusCoin = 30;
+                    break;
+                case "AIStage5":
                     ResultManager.StageName = "AIStage";
                     DataBase.bonusCoin = 30;
                     break;
@@ -527,11 +543,19 @@ public class Free : State
                 return new Start();
             case "Stage3":
                 return new Start();
+            case "Stage4":
+                return new Start();
+            case "Stage5":
+                return new Start();
             case "AIStage1":
                 return new Start();
             case "AIStage2":
                 return new Start();
             case "AIStage3":
+                return new Start();
+            case "AIStage4":
+                return new Start();
+            case "AIStage5":
                 return new Start();
             default:
                 return this;
