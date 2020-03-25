@@ -34,6 +34,7 @@ public class SkinTabSetting : MonoBehaviour
     public void OnClick()
     {
         SkinViewManager.ModeChange(mode);
+        Debug.Log(mode);
         foreach(var(obj,num) in TabList)
         {
             if (this.mode == num)
