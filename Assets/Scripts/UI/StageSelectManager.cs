@@ -21,6 +21,16 @@ public class StageSelectManager : MonoBehaviour
     public static Transform AICenter;
     public static Transform AIRight;
 
+    public GameObject leftImage;
+    public GameObject leftArrow;
+    public GameObject rightImage;
+    public GameObject rightArrow;
+
+    public GameObject leftImage2;
+    public GameObject leftArrow2;
+    public GameObject rightImage2;
+    public GameObject rightArrow2;
+
     public static GameObject PlayerStage;
     public static GameObject AIStage;
     public static GameObject PParents;
@@ -80,7 +90,55 @@ public class StageSelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (stageNumbers[0] == 1)
+        {
+            leftImage.SetActive(false);
+            leftArrow.SetActive(false);
 
+            rightImage.SetActive(true);
+            rightArrow.SetActive(true);
+        }
+        else if(stageNumbers[0] == 5)
+        {
+            leftImage.SetActive(true);
+            leftArrow.SetActive(true);
+
+            rightImage.SetActive(false);
+            rightArrow.SetActive(false);
+        }
+        else
+        {
+            leftImage.SetActive(true);
+            leftArrow.SetActive(true);
+
+            rightImage.SetActive(true);
+            rightArrow.SetActive(true);
+        }
+
+        if (stageNumbers[0] == 1)
+        {
+            leftImage2.SetActive(false);
+            leftArrow2.SetActive(false);
+
+            rightImage2.SetActive(true);
+            rightArrow2.SetActive(true);
+        }
+        else if (stageNumbers[0] == 5)
+        {
+            leftImage2.SetActive(true);
+            leftArrow2.SetActive(true);
+
+            rightImage2.SetActive(false);
+            rightArrow2.SetActive(false);
+        }
+        else
+        {
+            leftImage2.SetActive(true);
+            leftArrow2.SetActive(true);
+
+            rightImage2.SetActive(true);
+            rightArrow2.SetActive(true);
+        }
     }
     public static void MyInit()
     {
