@@ -9,6 +9,7 @@ public class StageWindowManager : MonoBehaviour
     public void OnClick()
     {
         targetWindow.SetActive(true);
+        StageSelectManager.MyInit();
         StageSelectManager.Draw();
 
     }

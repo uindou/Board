@@ -8,7 +8,7 @@ using System.Linq;
 public class StageSelectManager : MonoBehaviour
 {
     private static List<Sprite> stages;
-    private static List<int> stageNumbers = new List<int>() { 1, 2, 3, 4, 5};
+    public static List<int> stageNumbers = new List<int>() { 1, 2, 3, 4, 5};
     private static int Length;
     
     public static GameObject stageImageParent;
@@ -32,6 +32,7 @@ public class StageSelectManager : MonoBehaviour
     public static Sprite FighterSkin;
     public static Sprite DefaultSkin;
     public static bool[,,] changeFlag;
+    public static bool[,,] AIchangeFlag;
     // Start is called before the first frame update
     void Awake()
     {
@@ -45,6 +46,7 @@ public class StageSelectManager : MonoBehaviour
         PParent = PParents.transform.GetChild(1);
         AIParent = AIParents.transform.GetChild(1);
         changeFlag = new bool[Length, DataBase.vertical, DataBase.horizontal];
+        AIchangeFlag = new bool[Length, DataBase.vertical, DataBase.horizontal];
         for (int i = 0; i < Length; i++)
         {
             for (int j = 0; i < DataBase.vertical; i++)
@@ -52,6 +54,7 @@ public class StageSelectManager : MonoBehaviour
                 for (int k = 0; j < DataBase.horizontal; j++)
                 {
                     changeFlag[i, j, k] = false;
+                    AIchangeFlag[i, j, k] = false;
                 }
             }
         }
@@ -79,23 +82,47 @@ public class StageSelectManager : MonoBehaviour
     {
 
     }
+    public static void MyInit()
+    {
+        if (PParents.activeSelf)
+        {
+            PlayerStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
+            Debug.Log("draw");
+            StageInit(stageNumbers[Length - 1], Left,false);
+            StageInit(stageNumbers[0], Center,false);
+            StageInit(stageNumbers[1], Right,false);
 
+        }
+        else if (AIParents.activeSelf)
+        {
+            AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
+            Debug.Log("draw");
+            StageInit(stageNumbers[Length - 1], AILeft,true);
+            StageInit(stageNumbers[0], AICenter,true);
+            StageInit(stageNumbers[1], AIRight,true);
+        }
+        else
+        {
+            Debug.Log("image draw failed");
+        }
+    }
     public static void Draw()
     {
         if (PParents.activeSelf)
         {
             PlayerStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
             Debug.Log("draw");
-            StageInit(stageNumbers[Length - 1], Left);
-            StageInit(stageNumbers[0], Center);
-            StageInit(stageNumbers[1], Right);
+            StageDraw(stageNumbers[Length - 1], Left,false);
+            StageDraw(stageNumbers[0], Center,false);
+            StageDraw(stageNumbers[1], Right,false);
+            
         }else if (AIParents.activeSelf)
         {
             AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
             Debug.Log("draw");
-            StageInit(stageNumbers[Length - 1], AILeft);
-            StageInit(stageNumbers[0], AICenter);
-            StageInit(stageNumbers[1], AIRight);
+            StageDraw(stageNumbers[Length - 1], AILeft,true);
+            StageDraw(stageNumbers[0], AICenter,true);
+            StageDraw(stageNumbers[1], AIRight,true);
         }
         else
         {
@@ -103,25 +130,37 @@ public class StageSelectManager : MonoBehaviour
         }
         
     }
-    public static void StageInit(int stage, Transform Parent)
+    public static void StageInit(int stage, Transform Parent,bool isAI)
     {
         List<(int, int, bool, string)> res = DataBase.ForInitMakeStage(stage);
         for (int i = 0; i < DataBase.vertical; i++)
         {
             for (int j = 0; j < DataBase.horizontal; j++)
             {
-                Debug.Log((i, j));
                 Transform obj = Parent.GetChild(i).GetChild(j);
-                if (changeFlag[stage-1,i, j])
+                if (isAI)
                 {
-                    obj.Rotate(0, 0, 180f);
-                    changeFlag[stage-1,i, j] = false;
+                    if (AIchangeFlag[stage - 1, i, j])
+                    {
+                        obj.Rotate(0, 0, 180f);
+                        AIchangeFlag[stage - 1, i, j] = false;
+                    }
+                }
+                else
+                {
+                    if (changeFlag[stage - 1, i, j])
+                    {
+                        obj.Rotate(0, 0, 180f);
+                        changeFlag[stage - 1, i, j] = false;
+                    }
                 }
                 obj.GetChild(0).GetComponent<Image>().sprite = DefaultSkin;
-
-
             }
         }
+    }
+    public static void StageDraw(int stage, Transform Parent,bool isAI)
+    {
+        List<(int, int, bool, string)> res = DataBase.ForInitMakeStage(stage);
         foreach ((int, int, bool, string) T in res)
         {
             var (i, j, team, name) = T;
@@ -132,7 +171,14 @@ public class StageSelectManager : MonoBehaviour
             if (team)
             {
                 obj.Rotate(0, 0, 180f);
-                changeFlag[stage-1,i, j] = true;
+                if (isAI)
+                {
+                    AIchangeFlag[stage - 1, i, j] = true;
+                }
+                else
+                {
+                    changeFlag[stage - 1, i, j] = true;
+                }
             }
             switch (name)
             {
@@ -156,7 +202,9 @@ public class StageSelectManager : MonoBehaviour
 
     public static void StageRotate(bool vector)
     {
+        MyInit();
         if (vector) {
+            
             int movingNum = stageNumbers[Length -1];
             stageNumbers.RemoveAt(Length -1);
             stageNumbers.Insert(0,movingNum);

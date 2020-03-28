@@ -26,6 +26,7 @@ public class WindowCloser : MonoBehaviour
     {
         Debug.Log("押された");
         closeWindow.SetActive(false);
+        
     }
 
     public void Close2()
