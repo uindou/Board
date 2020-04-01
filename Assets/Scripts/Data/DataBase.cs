@@ -62,7 +62,10 @@ public class DataBase : MonoBehaviour
         exp1=17,
         exp2=18,
         exp3=19,
-        exp4=20
+        exp4=20,
+        enemySoldier = 21,
+        enemyTank=22,
+        enemyFighter=23
 
     }
 
@@ -262,6 +265,9 @@ public class DataBase : MonoBehaviour
         images[(int)im.exp2] = Explode.GetChild(1).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.exp3] = Explode.GetChild(2).GetComponent<SpriteRenderer>().sprite;
         images[(int)im.exp4] = Explode.GetChild(3).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.enemySoldier] = SoldierParent.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.enemyTank] = TankParent.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        images[(int)im.enemyFighter] = FighterParent.GetChild(0).GetComponent<SpriteRenderer>().sprite;
     }
 
     
@@ -503,17 +509,17 @@ public class DataBase : MonoBehaviour
         stage.Add((1, 6, true, "PlainFighter"));
         stage.Add((1, 7, true, "PlainFighter"));
 
-        stage.Add((8, 1, false, "PlainFighter"));
-        stage.Add((8, 3, false, "Soldier"));
-        stage.Add((8, 2, false, "Soldier"));
-        stage.Add((8, 4, false, "PlainFighter"));
-        stage.Add((7, 3, false, "PlainFighter"));
-        stage.Add((7, 4, false, "Tank"));
-        stage.Add((6, 4, false, "Tank"));
-        stage.Add((7, 5, false, "PlainFighter"));
-        stage.Add((8, 6, false, "Soldier"));
-        stage.Add((8, 5, false, "Soldier"));
-        stage.Add((8, 7, false, "PlainFighter"));
+        stage.Add((9, 1, false, "PlainFighter"));
+        stage.Add((9, 3, false, "Soldier"));
+        stage.Add((9, 2, false, "Soldier"));
+        stage.Add((9, 4, false, "PlainFighter"));
+        stage.Add((8, 3, false, "PlainFighter"));
+        stage.Add((8, 4, false, "Tank"));
+        stage.Add((7, 4, false, "Soldier"));
+        stage.Add((8, 5, false, "PlainFighter"));
+        stage.Add((9, 6, false, "Soldier"));
+        stage.Add((9, 5, false, "Soldier"));
+        stage.Add((9, 7, false, "PlainFighter"));
         return stage;
     }
     public static List<(int, int, bool, string)> Stage5MakeStage()

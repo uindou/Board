@@ -9,7 +9,7 @@ public class Reset : MonoBehaviour
     public void OnClick()
     {
         Debug.Log(1);
-        PlayerPrefs.SetInt("coin", 10000);
+        PlayerPrefs.SetInt("coin", 0);
         PlayerPrefs.SetInt("endFirst", 0);
         PlayerPrefs.SetInt("SoldierSetSkin", 0);
         PlayerPrefs.SetInt("TankSetSkin", 0);
@@ -28,7 +28,6 @@ public class Reset : MonoBehaviour
             PlayerPrefs.SetInt(tankName, 0);
             PlayerPrefs.SetInt(fighterName, 0);
         }
-        
         SkinViewManager.DefaultSkinSet();
         SkinManager.Init();
     }
