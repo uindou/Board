@@ -161,11 +161,15 @@ public class gameManage : MonoBehaviour
     }
     public static void FlashControl(GameObject obj,bool isflash)
     {
+        
         List<(int, int)> area = obj.GetComponent<interFace>().Movable();
+        if (area == null)
+        {
+            return;
+        }
         if (isflash)
         {
             obj.GetComponent<Image>().color = new Color32(90,177,222,255);
-
         }
         else
         {
@@ -445,27 +449,27 @@ public class PreEnd : State
             {
                 case "Stage1":
                     ResultManager.StageName = "Game";
-                    DataBase.bonusCoin=1;
+                    DataBase.bonusCoin=0;
                     break;
                 case "Stage2":
                     ResultManager.StageName = "Game";
-                    DataBase.bonusCoin=2;
+                    DataBase.bonusCoin=0;
                     break;
                 case "Stage3":
                     ResultManager.StageName = "Game";
-                    DataBase.bonusCoin = 3;
+                    DataBase.bonusCoin = 0;
                     break;
                 case "Stage4":
                     ResultManager.StageName = "Game";
-                    DataBase.bonusCoin = 3;
+                    DataBase.bonusCoin = 0;
                     break;
                 case "Stage5":
                     ResultManager.StageName = "Game";
-                    DataBase.bonusCoin = 3;
+                    DataBase.bonusCoin = 0;
                     break;
                 case "AIStage1":
                     ResultManager.StageName = "AIStage";
-                    DataBase.bonusCoin = 10;
+                    DataBase.bonusCoin = 20;
                     break;
                 case "AIStage2":
                     ResultManager.StageName = "AIStage";
@@ -473,15 +477,15 @@ public class PreEnd : State
                     break;
                 case "AIStage3":
                     ResultManager.StageName = "AIStage";
-                    DataBase.bonusCoin = 30;
+                    DataBase.bonusCoin = 20;
                     break;
                 case "AIStage4":
                     ResultManager.StageName = "AIStage";
-                    DataBase.bonusCoin = 30;
+                    DataBase.bonusCoin = 20;
                     break;
                 case "AIStage5":
                     ResultManager.StageName = "AIStage";
-                    DataBase.bonusCoin = 30;
+                    DataBase.bonusCoin = 20;
                     break;
                 default:
                     
@@ -525,7 +529,6 @@ public class AI : State
                 Debug.Log("通常モード");
                 myAI.StartAI(6);
             }
-
             return new Start();
         }
     }
