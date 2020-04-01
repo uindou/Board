@@ -16,7 +16,7 @@ public class myAI : MonoBehaviour
 
     private async static void RandomAI2()
     {
-        await Task.Delay(100);
+        await Task.Delay(500);
         List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
         int power1 = 5;
         if (!res.Any())
@@ -159,6 +159,7 @@ public class myAI : MonoBehaviour
 
     private async static void WarikomiAI()
     {
+        await Task.Delay(500);
         if (DangerForAI.overDanger)
         {
             Debug.Log("case 1");
