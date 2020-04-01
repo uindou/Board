@@ -11,6 +11,7 @@ public class RewardAdManager:MonoBehaviour
     public GameObject confirmWindow;
     public GameObject timeLimitPanel;
     private DateTime startTime;
+    private bool IsAdPlayed;
 
     //AndroidAdUnit ID
     private string AndroidUnitId = "ca-app-pub-3940256099942544/5224354917";
@@ -23,18 +24,13 @@ public class RewardAdManager:MonoBehaviour
     // Start
     void Start()
     {
+        IsAdPlayed = false;
         requestRewardAd();
-    }
-
-// OnDestroy
-    void　OnDestroy()
-    {
-
     }
 
     public bool IsActive{private　set;get;}
     
-    //requestRewardMovie Ad。
+    //リワード広告をリクエスト
     private void requestRewardAd()
     {
         AdUnitID = AndroidUnitId;
@@ -47,9 +43,9 @@ public class RewardAdManager:MonoBehaviour
         RewardAd.OnAdClosed += OnAdClosed;
         RewardAd.OnAdRewarded += OnAdRewarded;
         RewardAd.OnAdLeavingApplication += OnAdLeavingApp;
-
     }
 
+    //広告の読み込みおよび再生
     public void LoadStart()
     {
         confirmWindow.SetActive(false);
@@ -60,18 +56,17 @@ public class RewardAdManager:MonoBehaviour
         IsActive = true;
     }
 
+    //広告が読み込まれた後に実行
     protected　void　OnAdLoaded(object　_sender, System.EventArgs　_args)
     {
         Debug.Log("AdLoaded");
-        //Justincase.
+
+        //念のため分岐
         if (RewardAd.IsLoaded() == true)
         {
+            Invoke("LoadButNotPlay",7.0f);
             RewardAd.Show();
-            timeLimitPanel.SetActive(true);
-            startTime = System.DateTime.Now;
-            PlayerPrefs.SetString("rewardAdLimitStart", startTime.ToBinary().ToString());
         }
-
         else
         {
             waitWindow.SetActive(false);
@@ -79,6 +74,7 @@ public class RewardAdManager:MonoBehaviour
         }
     }
 
+    //読み込みに失敗したときに実行
     protected　void　OnAdLoadFailed(object　_sender, AdFailedToLoadEventArgs　_args)
     {
         Debug.Log("AdLoadFailed");
@@ -87,12 +83,15 @@ public class RewardAdManager:MonoBehaviour
         IsActive = true;
     }
 
+    //広告が再生したときに実行
     protected　void　OnAdStarted(object　_sender, System.EventArgs　_args)
     {
         Debug.Log("AdStarted");
         IsActive = true;
+        IsAdPlayed = true;
     }
 
+    //広告が終了前に閉じられたときに実行
     protected　void　OnAdClosed(object　_sender, System.EventArgs　_args)
     {
         Debug.Log("AdClosed");
@@ -100,6 +99,7 @@ public class RewardAdManager:MonoBehaviour
         IsActive = false;
     }
 
+    //広告を最後まで見たときに実行
     protected　void　OnAdRewarded(object　_sender, Reward　_args)
     {
         Debug.Log("AdRewarded!!!");
@@ -114,14 +114,30 @@ public class RewardAdManager:MonoBehaviour
         CoinManager.SetBonus(200);
         CoinManager.SetCoin();
 
+        timeLimitPanel.SetActive(true);
+        startTime = System.DateTime.Now;
+        PlayerPrefs.SetString("rewardAdLimitStart", startTime.ToBinary().ToString());
+
         waitWindow.SetActive(false);
         rewardWindow.SetActive(true);
         IsActive = true;
     }
 
+    //広告再生中にアプリを閉じたときなどに実行
     protected　void　OnAdLeavingApp(object　_sender, System.EventArgs　_args)
     {
         Debug.Log("AdLeavingApplication");
         IsActive = false;
+    }
+
+    //広告がロードされても流れないバグ対策
+    protected void LoadButNotPlay()
+    {
+        if (!IsAdPlayed)
+        {
+            waitWindow.SetActive(false);
+            errorWindow.SetActive(true);
+        }
+        
     }
 }
