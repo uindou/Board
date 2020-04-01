@@ -8,6 +8,9 @@ public class ResultManager : MonoBehaviour
     public static string StageName;
     public static int winReward;
     public static int onlineReward;
+    public GameObject winParticle;
+    public GameObject loseParticle;
+  
     // Start is called before the first frame update
     void Awake()
     {
@@ -66,18 +69,22 @@ public class ResultManager : MonoBehaviour
         if (StageName == "AIStage" & !DataBase.winner)
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "You Win!";
+            winParticle.SetActive(true);
         }
         else if(StageName == "AIStage")
         {
-            this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "You Lose";
+            this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "You Lose...";
+            loseParticle.SetActive(true);
         }
         else if (StageName == "Game" & DataBase.winner)
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Player2 Win!";
+            winParticle.SetActive(true);
         }
         else
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Player1 Win!";
+            winParticle.SetActive(true);
         }
     }
 
