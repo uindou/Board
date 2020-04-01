@@ -16,7 +16,10 @@ public class ResultManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        winReward = 20;
+        onlineReward = 10;
         CoinCulculate();
+        
     }
     void Start()
     {
