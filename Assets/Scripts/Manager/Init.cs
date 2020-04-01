@@ -24,29 +24,44 @@ public class Init : MonoBehaviour
                 case "Soldier":
                     obj.AddComponent<Soldier>();
                     obj.GetComponent<interFace>().Init(i, j,team);
-                    obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(0);
+                    
                     if (team)
                     {
+                        obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image((int)DataBase.im.enemySoldier);
                         obj.transform.Rotate(0, 0, 180f);
+                    }
+                    else
+                    {
+                        obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(0);
                     }
                     break;
 
                 case "Tank":
                     obj.AddComponent<Tank>();
                     obj.GetComponent<interFace>().Init(i, j, team);
-                    obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(1);
+                    
                     if (team)
                     {
                         obj.transform.Rotate(0, 0, 180f);
+                        obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image((int)DataBase.im.enemyTank);
+                    }
+                    else
+                    {
+                        obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(1);
                     }
                     break;
                 case "PlainFighter":
                     obj.AddComponent<Fighter>();
                     obj.GetComponent<interFace>().Init(i, j, team);
-                    obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(14);
+                    
                     if (team)
                     {
                         obj.transform.Rotate(0, 0, 180f);
+                        obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image((int)DataBase.im.enemyFighter);
+                    }
+                    else
+                    {
+                        obj.transform.GetChild(0).GetComponent<Image>().sprite = DataBase.image(14);
                     }
                     break;
                 default:
