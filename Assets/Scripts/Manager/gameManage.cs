@@ -67,7 +67,7 @@ public class gameManage : MonoBehaviour
     }
     public static async void AIWait()
     {
-        await Task.Delay(500);
+        await Task.Delay(0);
         AIWaiting = true;
         
     }

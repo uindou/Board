@@ -7,6 +7,7 @@ using System.Linq;
 
 public class myAI : MonoBehaviour
 {
+    private static GameObject Goal1, Goal2;
     private enum KomaNum
     {
         empty,
@@ -16,7 +17,7 @@ public class myAI : MonoBehaviour
 
     private async static void RandomAI2()
     {
-        await Task.Delay(100);
+        await Task.Delay(500);
         List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
         int power1 = 5;
         if (!res.Any())
@@ -151,14 +152,40 @@ public class myAI : MonoBehaviour
                 await Task.Delay(600);
                 gameManage.requestEnqueue(Robj4);
                 await Task.Delay(100);
-                
+
             }
             DangerForAI.DangerReset();
         }
     }
+    public static bool GoalCheck()
+    {
+        foreach(GameObject obj in DataBase.MyKoma(gameManage.turn, true))
+        {
+            List<(int, int)> moveRange = obj.GetComponent<interFace>().Movable();
+            foreach(var(x,y)in moveRange)
+            {
+                if (x == 8)
+                {
+                    Goal1 = obj;
+                    Goal2 = DataBase.objs[x, y];
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static async void GoalExecute()
+    {
+        await Task.Delay(600);
+        gameManage.requestEnqueue(Goal1);
+        await Task.Delay(600);
+        gameManage.requestEnqueue(Goal2);
+        await Task.Delay(100);
+    }
 
     private async static void WarikomiAI()
     {
+        await Task.Delay(500);
         if (DangerForAI.overDanger)
         {
             Debug.Log("case 1");
@@ -580,32 +607,39 @@ public class myAI : MonoBehaviour
     }
     public static void StartAI(int mode)
     {
-        //AIStopMeasure();
-        switch (mode)
+        if (GoalCheck())
         {
-            case 0:
-                RandomAI();
-                break;
-            case 1:
-                PassAI();
-                break;
-            case 2:
-                FixedRandomAI();
-                break;
-            case 3:
-                PowerfulRandomAI();
-                break;
-            case 4:
-                ReadAI(false);
-                break;
-            case 5:
-                WarikomiAI();
-                break;
-            case 6:
-                RandomAI2();
-                break;
-            default:
-                break;
+            GoalExecute();
+        }
+        else
+        {
+            //AIStopMeasure();
+            switch (mode)
+            {
+                case 0:
+                    RandomAI();
+                    break;
+                case 1:
+                    PassAI();
+                    break;
+                case 2:
+                    FixedRandomAI();
+                    break;
+                case 3:
+                    PowerfulRandomAI();
+                    break;
+                case 4:
+                    ReadAI(false);
+                    break;
+                case 5:
+                    WarikomiAI();
+                    break;
+                case 6:
+                    RandomAI2();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
