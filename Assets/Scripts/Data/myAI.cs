@@ -16,6 +16,7 @@ public class myAI : MonoBehaviour
 
     private async static void RandomAI2()
     {
+        await Task.Delay(100);
         List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
         int power1 = 5;
         if (!res.Any())
@@ -27,6 +28,7 @@ public class myAI : MonoBehaviour
             await Task.Delay(100);
             if (gameManage.receiveMode != gameManage.situation.attackselect)
             {
+                Debug.Log("a");
                 return;
             }
             else
@@ -159,18 +161,21 @@ public class myAI : MonoBehaviour
     {
         if (DangerForAI.overDanger)
         {
+            Debug.Log("case 1");
             DangerForAI.DangerReset();
             ReadAI(true);
             return;
         }
         else if(DangerForAI.HP == 1)
         {
+            Debug.Log("case 2");
             DangerForAI.DangerReset();
             ReadAI(true);
             return;
         }
         else if (DangerForAI.danger)
         {
+            Debug.Log("case 3");
             var (x1, y1) = DangerForAI.dangerList[0];
             if (DataBase.BoardInfo(x1,y1)==1)
             { 
@@ -178,8 +183,9 @@ public class myAI : MonoBehaviour
             ReadAI(true);
             return;
             }
-                else
-                {
+            else
+            {
+                Debug.Log("case 4");
                     List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
                     foreach (GameObject obj in res)
                     {
@@ -190,42 +196,43 @@ public class myAI : MonoBehaviour
                                 var (x, y) = T;
                                 GameObject obj1 = DataBase.objs[x, y];
                                 
-                            await Task.Delay(500);
-                            gameManage.requestEnqueue(obj);
-                            await Task.Delay(600);
-                            gameManage.requestEnqueue(obj1);
-                            await Task.Delay(100);
-                            if (gameManage.receiveMode != gameManage.situation.attackselect)
-                            {
-                                DangerForAI.DangerReset();
-                                return;
-                            }
-                            else
-                            {
-                                List<GameObject> res1 = DataBase.MyKoma(gameManage.turn, false);
-                                
-                                (GameObject, GameObject) Act = (null,null);
-                                int ActionPoint = -1000;
-                                for (int k = 0; k < res1.Count(); k++)
+                                await Task.Delay(500);
+                                gameManage.requestEnqueue(obj);
+                                await Task.Delay(600);
+                                gameManage.requestEnqueue(obj1);
+                                await Task.Delay(100);
+                                if (gameManage.receiveMode != gameManage.situation.attackselect)
                                 {
-                                    GameObject obj2 = res1[k];
-                                    List<(int, int)> attackRange = obj2.GetComponent<interFace>().Attackable();
-                                    for (int l = 0; l < attackRange.Count(); l++)
+                                     DangerForAI.DangerReset();
+                                     return;
+                                }
+                                else
+                                {
+                                    List<GameObject> res1 = DataBase.MyKoma(gameManage.turn, false);
+                                
+                                    (GameObject, GameObject) Act = (null,null);
+                                    int ActionPoint = -1000;
+                                    for (int k = 0; k < res1.Count(); k++)
                                     {
-                                        var (x3, y3) = attackRange[l];
-                                        GameObject obj3 = DataBase.objs[x3, y3];
-                                        int evaAtc;
-                                        evaAtc = obj3 == DangerForAI.dangerEnemyG ? 10000000 : obj3.GetComponent<interFace>().AtcEvaluation();
-                                        
-                                        int actPt = evaAtc;
-                                        if (actPt > ActionPoint)
+                                        GameObject obj2 = res1[k];
+                                        List<(int, int)> attackRange = obj2.GetComponent<interFace>().Attackable();
+                                        for (int l = 0; l < attackRange.Count(); l++)
                                         {
-                                            ActionPoint = actPt;
-                                            Act = (obj2, obj3);
+                                            var (x3, y3) = attackRange[l];
+                                            GameObject obj3 = DataBase.objs[x3, y3];
+                                            int evaAtc;
+                                            evaAtc = obj3 == DangerForAI.dangerEnemyG ? 10000000 : obj3.GetComponent<interFace>().AtcEvaluation();
+                                        
+                                            int actPt = evaAtc;
+                                            if (actPt > ActionPoint)
+                                            {
+                                                ActionPoint = actPt;
+                                                Act = (obj2, obj3);
+                                            }
                                         }
                                     }
-                                }
                                 var (Robj3, Robj4) = Act;
+                                
                                 gameManage.requestEnqueue(Robj3);
                                 await Task.Delay(600);
                                 gameManage.requestEnqueue(Robj4);
@@ -233,15 +240,18 @@ public class myAI : MonoBehaviour
                                 DangerForAI.DangerReset();
                                 return;
 
-                            }
+                                }
                             
                             
                                 
                             }
                         }
                     }
-                    
-                }
+                ReadAI(true);
+                DangerForAI.DangerReset();
+                return;
+
+            }
         }
         else
         {
@@ -256,6 +266,7 @@ public class myAI : MonoBehaviour
         List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
         if (!res.Any())
         {
+            Debug.Log("case 5");
             aiPlaying = false;
             gameManage.Skip();
             aiPlaying = true;
@@ -298,6 +309,7 @@ public class myAI : MonoBehaviour
         }
         else
         {
+            Debug.Log("case 7");
             (GameObject, GameObject, GameObject, GameObject) Act = (null, null, null, null);
             int ActionPoint = -1000;
             bool afterSkip = false;
@@ -346,7 +358,6 @@ public class myAI : MonoBehaviour
                                 }
                                 else
                                 {
-
                                     evaAtc = obj3.GetComponent<interFace>().AtcEvaluation();
                                 }
                                 int actPt = movePt * 10 + evaAtc;
@@ -569,7 +580,7 @@ public class myAI : MonoBehaviour
     }
     public static void StartAI(int mode)
     {
-        AIStopMeasure();
+        //AIStopMeasure();
         switch (mode)
         {
             case 0:
