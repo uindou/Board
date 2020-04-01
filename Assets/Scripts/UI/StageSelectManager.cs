@@ -9,6 +9,7 @@ public class StageSelectManager : MonoBehaviour
 {
     private static List<Sprite> stages;
     public static List<int> stageNumbers = new List<int>() { 1, 2, 3, 4, 5};
+    public static List<int> AIstageNumbers;
     private static int Length;
     
     public static GameObject stageImageParent;
@@ -50,6 +51,7 @@ public class StageSelectManager : MonoBehaviour
         AIStage = GameObject.Find("AIStages");
         Debug.Log(PlayerStage);
         stageNumbers = new List<int>() { 1, 2, 3, 4, 5 };
+        AIstageNumbers = new List<int>() { 1, 2, 3, 4, 5 };
         Length = stageNumbers.Count;
         PParents = GameObject.Find("StageSelectWindow");
         AIParents = GameObject.Find("AIStageSelectWindow");
@@ -90,55 +92,63 @@ public class StageSelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stageNumbers[0] == 1)
+        if (PParents.activeSelf)
         {
-            leftImage.SetActive(false);
-            leftArrow.SetActive(false);
+            
 
-            rightImage.SetActive(true);
-            rightArrow.SetActive(true);
-        }
-        else if(stageNumbers[0] == 5)
-        {
-            leftImage.SetActive(true);
-            leftArrow.SetActive(true);
+            if (stageNumbers[0] == 1)
+            {
+                leftImage2.SetActive(false);
+                leftArrow2.SetActive(false);
 
-            rightImage.SetActive(false);
-            rightArrow.SetActive(false);
-        }
-        else
-        {
-            leftImage.SetActive(true);
-            leftArrow.SetActive(true);
+                rightImage2.SetActive(true);
+                rightArrow2.SetActive(true);
+            }
+            else if (stageNumbers[0] == 5)
+            {
+                leftImage2.SetActive(true);
+                leftArrow2.SetActive(true);
 
-            rightImage.SetActive(true);
-            rightArrow.SetActive(true);
-        }
+                rightImage2.SetActive(false);
+                rightArrow2.SetActive(false);
+            }
+            else
+            {
+                leftImage2.SetActive(true);
+                leftArrow2.SetActive(true);
 
-        if (stageNumbers[0] == 1)
-        {
-            leftImage2.SetActive(false);
-            leftArrow2.SetActive(false);
-
-            rightImage2.SetActive(true);
-            rightArrow2.SetActive(true);
-        }
-        else if (stageNumbers[0] == 5)
-        {
-            leftImage2.SetActive(true);
-            leftArrow2.SetActive(true);
-
-            rightImage2.SetActive(false);
-            rightArrow2.SetActive(false);
+                rightImage2.SetActive(true);
+                rightArrow2.SetActive(true);
+            }
         }
         else
         {
-            leftImage2.SetActive(true);
-            leftArrow2.SetActive(true);
+            if (AIstageNumbers[0] == 1)
+            {
+                leftImage.SetActive(false);
+                leftArrow.SetActive(false);
 
-            rightImage2.SetActive(true);
-            rightArrow2.SetActive(true);
+                rightImage.SetActive(true);
+                rightArrow.SetActive(true);
+            }
+            else if (AIstageNumbers[0] == 5)
+            {
+                leftImage.SetActive(true);
+                leftArrow.SetActive(true);
+
+                rightImage.SetActive(false);
+                rightArrow.SetActive(false);
+            }
+            else
+            {
+                leftImage.SetActive(true);
+                leftArrow.SetActive(true);
+
+                rightImage.SetActive(true);
+                rightArrow.SetActive(true);
+            }
         }
+
     }
     public static void MyInit()
     {
@@ -153,11 +163,11 @@ public class StageSelectManager : MonoBehaviour
         }
         else if (AIParents.activeSelf)
         {
-            AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
+            AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + AIstageNumbers[0].ToString();
             Debug.Log("draw");
-            StageInit(stageNumbers[Length - 1], AILeft,true);
-            StageInit(stageNumbers[0], AICenter,true);
-            StageInit(stageNumbers[1], AIRight,true);
+            StageInit(AIstageNumbers[Length - 1], AILeft,true);
+            StageInit(AIstageNumbers[0], AICenter,true);
+            StageInit(AIstageNumbers[1], AIRight,true);
         }
         else
         {
@@ -176,11 +186,11 @@ public class StageSelectManager : MonoBehaviour
             
         }else if (AIParents.activeSelf)
         {
-            AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
+            AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + AIstageNumbers[0].ToString();
             Debug.Log("draw");
-            StageDraw(stageNumbers[Length - 1], AILeft,true);
-            StageDraw(stageNumbers[0], AICenter,true);
-            StageDraw(stageNumbers[1], AIRight,true);
+            StageDraw(AIstageNumbers[Length - 1], AILeft,true);
+            StageDraw(AIstageNumbers[0], AICenter,true);
+            StageDraw(AIstageNumbers[1], AIRight,true);
         }
         else
         {
@@ -262,11 +272,18 @@ public class StageSelectManager : MonoBehaviour
     {
         MyInit();
         if (vector) {
-            
-            int movingNum = stageNumbers[Length -1];
-            stageNumbers.RemoveAt(Length -1);
-            stageNumbers.Insert(0,movingNum);
-
+            if (PParents.activeSelf)
+            {
+                int movingNum = stageNumbers[Length - 1];
+                stageNumbers.RemoveAt(Length - 1);
+                stageNumbers.Insert(0, movingNum);
+            }
+            else
+            {
+                int movingNum = AIstageNumbers[Length - 1];
+                AIstageNumbers.RemoveAt(Length - 1);
+                AIstageNumbers.Insert(0, movingNum);
+            }
             /*
             Sprite movingIm = stages[Length - 1];
             stages.RemoveAt(Length - 1);
@@ -276,9 +293,21 @@ public class StageSelectManager : MonoBehaviour
 
         else if (!vector)
         {
-            int movingNum = stageNumbers[0];
-            stageNumbers.RemoveAt(0);
-            stageNumbers.Insert(Length-1, movingNum);
+            
+            if (PParents.activeSelf)
+            {
+                int movingNum = stageNumbers[0];
+                stageNumbers.RemoveAt(0);
+                stageNumbers.Insert(Length - 1, movingNum);
+               
+                
+            }
+            else
+            {
+                int movingNum = AIstageNumbers[0];
+                AIstageNumbers.RemoveAt(0);
+                AIstageNumbers.Insert(Length - 1, movingNum);
+            }
 
             /*
             Sprite movingIm = stages[0];
@@ -287,6 +316,7 @@ public class StageSelectManager : MonoBehaviour
             */
         }
         
+
         Draw();
     }
 
