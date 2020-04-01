@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-    public class SoundPlay : MonoBehaviour
+public class SoundPlay : MonoBehaviour
     {
         //Gameなど、音量を変えないシーンで用いる。音量を変えるシーンではSoundManagerが付いてる。
 
@@ -42,10 +42,10 @@ using UnityEngine;
         DeathBgm.Play();
     }
         //
-        public void SEPlay(int i) //効果音を再生するときに呼び出される
-        {
-            se = this.transform.GetChild(i).GetComponent<AudioSource>();
-            se.volume = PlayerPrefs.GetFloat("seVolume");
-            se.Play();
-        }
+    public void SEPlay(int i) //効果音を再生するときに呼び出される
+    {
+         se = this.transform.GetChild(i).GetComponent<AudioSource>();
+         se.volume = PlayerPrefs.GetFloat("seVolume");
+         se.Play();
     }
+}

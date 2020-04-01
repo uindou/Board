@@ -10,7 +10,9 @@ public class ResultManager : MonoBehaviour
     public static int onlineReward;
     public GameObject winParticle;
     public GameObject loseParticle;
-  
+    public AudioSource winSound;
+    public AudioSource loseSound;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -70,22 +72,33 @@ public class ResultManager : MonoBehaviour
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "You Win!";
             winParticle.SetActive(true);
+            BGMPlay(winSound);
         }
         else if(StageName == "AIStage")
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "You Lose...";
             loseParticle.SetActive(true);
+            BGMPlay(loseSound);
         }
         else if (StageName == "Game" & DataBase.winner)
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Player2 Win!";
             winParticle.SetActive(true);
+            BGMPlay(winSound);
+
         }
         else
         {
             this.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Player1 Win!";
             winParticle.SetActive(true);
+            BGMPlay(winSound);
         }
+    }
+
+    private void BGMPlay(AudioSource bgm) //効果音を再生するときに呼び出される
+    {
+        bgm.volume = PlayerPrefs.GetFloat("bgmVolume");
+        bgm.Play();
     }
 
 }
