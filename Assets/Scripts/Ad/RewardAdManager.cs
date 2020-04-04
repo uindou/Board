@@ -52,7 +52,7 @@ public class RewardAdManager:MonoBehaviour
         waitWindow.SetActive(true);
         AdRequest　request = new　AdRequest.Builder().Build();
         this.RewardAd.LoadAd(request, AdUnitID);
-
+        Invoke("LoadButNotPlay", 7.0f);
         IsActive = true;
     }
 
@@ -64,7 +64,6 @@ public class RewardAdManager:MonoBehaviour
         //念のため分岐
         if (RewardAd.IsLoaded() == true)
         {
-            Invoke("LoadButNotPlay",7.0f);
             RewardAd.Show();
         }
         else
@@ -130,14 +129,9 @@ public class RewardAdManager:MonoBehaviour
         IsActive = false;
     }
 
-    //広告がロードされても流れないバグ対策
+    //広告がロードされても流れないバグ対策。数秒後にwaitWindowを強制的に閉じる。
     protected void LoadButNotPlay()
     {
-        if (!IsAdPlayed)
-        {
-            waitWindow.SetActive(false);
-            errorWindow.SetActive(true);
-        }
-        
+        waitWindow.SetActive(false);
     }
 }
