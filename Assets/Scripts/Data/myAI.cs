@@ -223,7 +223,7 @@ public class myAI : MonoBehaviour
                                 var (x, y) = T;
                                 GameObject obj1 = DataBase.objs[x, y];
                                 
-                                await Task.Delay(500);
+                                await Task.Delay(100);
                                 gameManage.requestEnqueue(obj);
                                 await Task.Delay(600);
                                 gameManage.requestEnqueue(obj1);
@@ -358,6 +358,10 @@ public class myAI : MonoBehaviour
                     int eva0 = obj.GetComponent<interFace>().Evaluation(x0, y0);
                     int eva1 = obj.GetComponent<interFace>().Evaluation(x1, y1);
                     int movePt = eva1 - eva0;
+                    if (x0==0 & DangerForAI.dangers[y0])
+                    {
+                        movePt = -100000000;
+                    }
                     if (!res1.Any())
                     {
                         

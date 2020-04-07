@@ -68,6 +68,7 @@ public class SkinViewManager : MonoBehaviour
     {
         if (isStart)
         {
+            nowSkin = (int)skinType.soldier;
             page = 1;
             SkinView();
             Debug.Log("onenable");

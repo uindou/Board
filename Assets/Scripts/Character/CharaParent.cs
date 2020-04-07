@@ -148,6 +148,22 @@ public class CharaParent : MonoBehaviour,interFace
 
         }
     }
+    public virtual List<int> Possible()
+    {
+        List<int> res = new List<int>();
+        foreach ((int, int) T in moveRange)
+        {
+            var (i, j) = T;
+            i += now.xAxis;
+            j += now.yAxis;
+            if(i >= 0 & i < vertical & j >= 0 & j < horizontal)
+                if (DataBase.BoardInfo(i,j)==2)
+                {
+                    res.Add(j);
+                }
+        }
+        return res;
+    }
     public virtual List<(int,int)> Movable()
     {
         List<(int,int)> res = new List<(int,int)>();

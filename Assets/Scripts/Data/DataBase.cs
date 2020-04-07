@@ -359,19 +359,27 @@ public class DataBase : MonoBehaviour
                 if (board[i, j] == mobcolor)
                 {
                     GameObject obj = objs[i, j];
-                    foreach((int,int) T in obj.GetComponent<interFace>().Movable())
+                    foreach ((int, int) T in obj.GetComponent<interFace>().Movable())
                     {
                         var (x, y) = T;
                         if (x == 0)
                         {
                             Debug.Log("Danger!!");
                             ret = true;
-                            DangerForAI.AddDanger(T, (i,j), obj);
+                            DangerForAI.AddDanger(T, obj);
+                        }
+                    }
+                    foreach(int T in obj.GetComponent<interFace>().Possible())
+                    {
+                        if (j == 0)
+                        {
+                            DangerForAI.AddStopper(j);
                         }
                     }
                 }
+                }
             }
-        }
+        
         return ret;
     }
     /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/

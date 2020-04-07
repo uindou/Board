@@ -10,18 +10,26 @@ public class DangerForAI : MonoBehaviour
     public static int HP;
     public static bool overDanger;
     public static List<(int, int)> dangerList;
-    public static (int, int) dangerEnemy;
+    public static bool[] dangers;
+
+    public static (int, int) dangerEnemyPlace;
     public static bool isNextDead;
     public static GameObject dangerEnemyG;
     private void Start()
     {
+        dangers = new bool[DataBase.horizontal];
         DangerReset();
     }
-    public static void AddDanger((int,int) T,(int,int)S,GameObject G)
+    public static void AddStopper(int y)
+    {
+        dangers[y] = true;
+    }
+    public static void AddDanger((int,int)T,GameObject G)
     {
         danger = true;
-        dangerEnemy = S;
+        
         dangerEnemyG = G;
+
         dangerList.Add(T);
         HP = G.GetComponent<interFace>().ShowHP();
         
@@ -33,6 +41,10 @@ public class DangerForAI : MonoBehaviour
         danger = false;
         overDanger = false;
         dangerList = new List<(int, int)>();
+        for(int i = 0; i < DataBase.horizontal; i++)
+        {
+            dangers[i] = false;
+        }
     }
 
 }

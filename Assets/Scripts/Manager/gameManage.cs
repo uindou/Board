@@ -292,6 +292,8 @@ public class Move:State{
         if (gameManage.selectFlag)
         {
             if (DataBase.CantAttack(gameManage.turn)) {
+                endWaiting = false;
+                gameManage.WaitTime();
                 return new Final();
             }
             else
@@ -321,9 +323,13 @@ public class Move:State{
             DataBase.Set(i3, j3, 0);
             if (DataBase.GameOver(!gameManage.turn))
             {
+                endWaiting = false;
+                gameManage.WaitTime();
                 return new Final();
             }else if (DataBase.CantAttack(gameManage.turn))
             {
+                endWaiting = false;
+                gameManage.WaitTime();
                 return new Final();
             }
             else
@@ -348,6 +354,8 @@ public class AttackSelect : State
     {
         if (attackFlag)
         {
+            endWaiting = false;
+            gameManage.WaitTime();
             return new Final();
         }
         else if (DataBase.attackSelectFlug)
@@ -371,6 +379,8 @@ public class Attack : State
     {
         if (attackFlag)
         {
+            endWaiting = false;
+            gameManage.WaitTime();
             return new Final();
         }
         else if (DataBase.attackFlug)
@@ -387,6 +397,8 @@ public class Attack : State
             obj.GetComponent<interFace>().AddDamage(obj1.GetComponent<interFace>().Power());
 
             gameManage.receiveMode = gameManage.situation.free;
+            endWaiting = false;
+            gameManage.WaitTime();
             return new Final();
         }
         else if (gameManage.attackReset)
@@ -400,16 +412,18 @@ public class Attack : State
         }
     }
 }
-public class Final :State
+public class Final : State
 {
+    
     public State Execute()
     {
+        if (!endWaiting) return this;
+
         if (DataBase.GameOver(!gameManage.turn) || DataBase.NoKoma(gameManage.turn))
         {
             gameManage.receiveMode = gameManage.situation.free;
             DataBase.GameEnd(!gameManage.turn);
-            endWaiting = false;
-            gameManage.WaitTime();
+            
             return new PreEnd();
         }
         else
