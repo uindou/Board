@@ -154,7 +154,7 @@ public class StageSelectManager : MonoBehaviour
     {
         if (PParents.activeSelf)
         {
-            PlayerStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
+            PlayerStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Field" + stageNumbers[0].ToString();
             Debug.Log("draw");
             StageInit(stageNumbers[Length - 1], Left,false);
             StageInit(stageNumbers[0], Center,false);
@@ -163,7 +163,7 @@ public class StageSelectManager : MonoBehaviour
         }
         else if (AIParents.activeSelf)
         {
-            AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + AIstageNumbers[0].ToString();
+            AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Field" + AIstageNumbers[0].ToString();
             Debug.Log("draw");
             StageInit(AIstageNumbers[Length - 1], AILeft,true);
             StageInit(AIstageNumbers[0], AICenter,true);
@@ -178,7 +178,7 @@ public class StageSelectManager : MonoBehaviour
     {
         if (PParents.activeSelf)
         {
-            PlayerStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
+            PlayerStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Field" + stageNumbers[0].ToString();
             Debug.Log("draw");
             StageDraw(stageNumbers[Length - 1], Left,false);
             StageDraw(stageNumbers[0], Center,false);
@@ -186,7 +186,7 @@ public class StageSelectManager : MonoBehaviour
             
         }else if (AIParents.activeSelf)
         {
-            AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + AIstageNumbers[0].ToString();
+            AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Field" + AIstageNumbers[0].ToString();
             Debug.Log("draw");
             StageDraw(AIstageNumbers[Length - 1], AILeft,true);
             StageDraw(AIstageNumbers[0], AICenter,true);
