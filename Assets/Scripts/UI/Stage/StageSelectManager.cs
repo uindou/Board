@@ -11,6 +11,8 @@ public class StageSelectManager : MonoBehaviour
     public static List<int> stageNumbers = new List<int>() { 1, 2, 3, 4, 5};
     public static List<int> AIstageNumbers;
     private static int Length;
+
+    public static bool isBoardChange;
     
     public static GameObject stageImageParent;
     public static Transform PParent;
@@ -47,11 +49,12 @@ public class StageSelectManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        isBoardChange = false;
         PlayerStage = GameObject.Find("PlayerStages");
         AIStage = GameObject.Find("AIStages");
         Debug.Log(PlayerStage);
-        stageNumbers = new List<int>() { 1, 2, 3, 4, 5 };
-        AIstageNumbers = new List<int>() { 1, 2, 3, 4, 5 };
+        stageNumbers = new List<int>() { 1, 2, 3, 4, 5,6,7,8,9,10 };
+        AIstageNumbers = new List<int>() { 1, 2, 3, 4, 5,6,7,8,9,10 };
         Length = stageNumbers.Count;
         PParents = GameObject.Find("StageSelectWindow");
         AIParents = GameObject.Find("AIStageSelectWindow");
@@ -104,7 +107,7 @@ public class StageSelectManager : MonoBehaviour
                 rightImage2.SetActive(true);
                 rightArrow2.SetActive(true);
             }
-            else if (stageNumbers[0] == 5)
+            else if (stageNumbers[0] == 10)
             {
                 leftImage2.SetActive(true);
                 leftArrow2.SetActive(true);
@@ -131,7 +134,7 @@ public class StageSelectManager : MonoBehaviour
                 rightImage.SetActive(true);
                 rightArrow.SetActive(true);
             }
-            else if (AIstageNumbers[0] == 5)
+            else if (AIstageNumbers[0] == 10)
             {
                 leftImage.SetActive(true);
                 leftArrow.SetActive(true);
@@ -235,6 +238,7 @@ public class StageSelectManager : MonoBehaviour
             int teamColor = team ? 2 : 1;
             i -= 1;
             j -= 1;
+
             Transform obj = Parent.GetChild(i).GetChild(j);
             if (team)
             {
@@ -252,15 +256,12 @@ public class StageSelectManager : MonoBehaviour
             {
                 case "Soldier":
                     obj.GetChild(0).GetComponent<Image>().sprite = SoldierSkin;
-
                     break;
-
                 case "Tank":
                     obj.GetChild(0).GetComponent<Image>().sprite = TankSkin;
                     break;
                 case "PlainFighter":
                     obj.GetChild(0).GetComponent<Image>().sprite = FighterSkin;
-
                     break;
                 default:
                     break;
