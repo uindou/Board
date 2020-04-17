@@ -18,7 +18,6 @@ public class ReverceButton : MonoBehaviour
     public void OnClick()
     {
         DataBase.isRev = !DataBase.isRev;
-        StageSelectManager.isReverce = !StageSelectManager.isReverce;
         StageSelectManager.MyInit();
         StageSelectManager.Draw();
     }

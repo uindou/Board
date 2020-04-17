@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using static gameManage;
 public class DataBase : MonoBehaviour
 {
+    public static bool isRev;
     public static string SceneName;
     public static bool isOnline;
     public static bool winner = true;

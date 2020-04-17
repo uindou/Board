@@ -13,9 +13,20 @@ public class Init : MonoBehaviour
         foreach((int, int,bool, string) T in stage)
         {
             var (i, j,team, name) = T;
-            int teamColor = team?2:1;
+
             i -= 1;
             j -= 1;
+            if (!DataBase.isRev)
+            {
+
+            }
+            else
+            {
+                team = !team;
+                i = (DataBase.vertical - 1) - i;
+                j = (DataBase.horizontal - 1) - j;
+            }
+            int teamColor = team ? 2 : 1;
             DataBase.Set(i, j, teamColor);
 
             GameObject obj = objs[i, j];

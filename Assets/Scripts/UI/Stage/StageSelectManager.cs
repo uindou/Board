@@ -47,11 +47,11 @@ public class StageSelectManager : MonoBehaviour
     public static bool[,,] changeFlag;
     public static bool[,,] AIchangeFlag;
 
-    public static bool isReverce;
+    
     // Start is called before the first frame update
     void Awake()
     {
-        isReverce = false;
+        DataBase.isRev = false;
         isBoardChange = false;
         PlayerStage = GameObject.Find("PlayerStages");
         AIStage = GameObject.Find("AIStages");
@@ -186,17 +186,17 @@ public class StageSelectManager : MonoBehaviour
         {
             PlayerStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + stageNumbers[0].ToString();
             Debug.Log("draw");
-            StageDraw(stageNumbers[Length - 1], Left,false,isReverce);
-            StageDraw(stageNumbers[0], Center,false,isReverce);
-            StageDraw(stageNumbers[1], Right,false,isReverce);
+            StageDraw(stageNumbers[Length - 1], Left,false,DataBase.isRev);
+            StageDraw(stageNumbers[0], Center,false, DataBase.isRev);
+            StageDraw(stageNumbers[1], Right,false, DataBase.isRev);
             
         }else if (AIParents.activeSelf)
         {
             AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Stage" + AIstageNumbers[0].ToString();
             Debug.Log("draw");
-            StageDraw(AIstageNumbers[Length - 1], AILeft,true,isReverce);
-            StageDraw(AIstageNumbers[0], AICenter,true,isReverce);
-            StageDraw(AIstageNumbers[1], AIRight,true,isReverce);
+            StageDraw(AIstageNumbers[Length - 1], AILeft,true, DataBase.isRev);
+            StageDraw(AIstageNumbers[0], AICenter,true, DataBase.isRev);
+            StageDraw(AIstageNumbers[1], AIRight,true, DataBase.isRev);
         }
         else
         {
@@ -238,10 +238,20 @@ public class StageSelectManager : MonoBehaviour
         foreach ((int, int, bool, string) T in res)
         {
             var (i, j, team, name) = T;
-            int teamColor = team ? 2 : 1;
+            
             i -= 1;
             j -= 1;
+            if (!DataBase.isRev)
+            {
 
+            }
+            else
+            {
+                team = !team;
+                i = (DataBase.vertical - 1) - i;
+                j = (DataBase.horizontal - 1) - j;
+            }
+            int teamColor = team ? 2 : 1;
             Transform obj = Parent.GetChild(i).GetChild(j);
             if (team)
             {
