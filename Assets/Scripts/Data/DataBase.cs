@@ -97,6 +97,15 @@ public class DataBase : MonoBehaviour
             case "Stage5":
                 AImode = false;
                 break;
+            case "Stage6":
+                AImode = false;
+                break;
+            case "Stage7":
+                AImode = false;
+                break;
+            case "Stage8":
+                AImode = false;
+                break;
             case "AIStage1":
                 AImode = true;
                 break;
@@ -110,6 +119,15 @@ public class DataBase : MonoBehaviour
                 AImode = true;
                 break;
             case "AIStage5":
+                AImode = true;
+                break;
+            case "AIStage6":
+                AImode = true;
+                break;
+            case "AIStage7":
+                AImode = true;
+                break;
+            case "AIStage8":
                 AImode = true;
                 break;
             default:
@@ -520,7 +538,7 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 7, false, "PlainFighter"));
         return stage;
     }
-    public static List<(int, int, bool, string)> Stage4MakeStage()
+    public static List<(int, int, bool, string)> Stage5MakeStage()
     {
         stage = new List<(int, int, bool, string)>();
         stage.Add((1, 1, true, "PlainFighter"));
@@ -549,7 +567,7 @@ public class DataBase : MonoBehaviour
         stage.Add((9, 7, false, "PlainFighter"));
         return stage;
     }
-    public static List<(int, int, bool, string)> Stage5MakeStage()
+    public static List<(int, int, bool, string)> Stage4MakeStage()
     {
         stage = new List<(int, int, bool, string)>();
         stage.Add((1, 1, true, "Soldier"));
@@ -591,10 +609,9 @@ public class DataBase : MonoBehaviour
         stage.Add((8, 4, false, "PlainFighter"));
         stage.Add((8, 5, false, "PlainFighter"));
         stage.Add((9, 2, false, "PlainFighter"));
-        stage.Add((9, 3, false, "PlainFighter"));
+        //stage.Add((9, 3, false, "PlainFighter"));
         stage.Add((9, 4, false, "PlainFighter"));
-        stage.Add((8, 5, false, "PlainFighter"));
-        stage.Add((8, 6, false, "PlainFighter"));
+        stage.Add((9, 6, false, "PlainFighter"));
         return stage;
     }
     
@@ -603,15 +620,15 @@ public class DataBase : MonoBehaviour
     public static List<(int, int, bool, string)> Stage7MakeStage()
     {
     stage = new List<(int, int, bool, string)>();
-    stage.Add((1, 5, true, "PlainFighter"));
-    stage.Add((1, 6, true, "Soldier"));
-    stage.Add((1, 7, true, "Soldier"));
-    stage.Add((2, 5, true, "Tank"));
-    stage.Add((2, 6, true, "PlainFigher"));
-    stage.Add((2, 7, true, "Soldier"));
-    stage.Add((3, 5, true, "Tank"));
-    stage.Add((3, 6, true, "Tank"));
-    stage.Add((3, 7, true, "PlainFighter"));
+    stage.Add((1, 3, true, "PlainFighter"));
+    stage.Add((1, 2, true, "Soldier"));
+    stage.Add((1, 1, true, "Soldier"));
+    stage.Add((2, 3, true, "Tank"));
+    stage.Add((2, 2, true, "PlainFigher"));
+    stage.Add((2, 1, true, "Soldier"));
+    stage.Add((3, 3, true, "Tank"));
+    stage.Add((3, 2, true, "Tank"));
+    stage.Add((3, 1, true, "PlainFighter"));
 
     stage.Add((9, 3, false, "PlainFighter"));
     stage.Add((9, 2, false, "Soldier"));
@@ -633,7 +650,7 @@ public class DataBase : MonoBehaviour
     stage.Add((2, 1, true, "Soldier"));
     stage.Add((2, 3, true, "Tank"));
     stage.Add((2, 5, true, "Tank"));
-    stage.Add((1, 7, true, "Soldier"));
+    stage.Add((2, 7, true, "Soldier"));
     stage.Add((3, 4, true, "PlainFighter"));
     stage.Add((4, 2, true, "Soldier"));
     stage.Add((4, 6, true, "Soldier"));

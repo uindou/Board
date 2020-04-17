@@ -481,6 +481,18 @@ public class PreEnd : State
                     ResultManager.StageName = "Game";
                     DataBase.bonusCoin = 0;
                     break;
+                case "Stage6":
+                    ResultManager.StageName = "Game";
+                    DataBase.bonusCoin = 0;
+                    break;
+                case "Stage7":
+                    ResultManager.StageName = "Game";
+                    DataBase.bonusCoin = 0;
+                    break;
+                case "Stage8":
+                    ResultManager.StageName = "Game";
+                    DataBase.bonusCoin = 0;
+                    break;
                 case "AIStage1":
                     ResultManager.StageName = "AIStage";
                     DataBase.bonusCoin = 20;
@@ -498,6 +510,18 @@ public class PreEnd : State
                     DataBase.bonusCoin = 20;
                     break;
                 case "AIStage5":
+                    ResultManager.StageName = "AIStage";
+                    DataBase.bonusCoin = 20;
+                    break;
+                case "AIStage6":
+                    ResultManager.StageName = "AIStage";
+                    DataBase.bonusCoin = 20;
+                    break;
+                case "AIStage7":
+                    ResultManager.StageName = "AIStage";
+                    DataBase.bonusCoin = 20;
+                    break;
+                case "AIStage8":
                     ResultManager.StageName = "AIStage";
                     DataBase.bonusCoin = 20;
                     break;
@@ -552,27 +576,9 @@ public class Free : State
 {
     public State Execute()
     {
-        switch(DataBase.SceneName)
+        switch(SceneManager.GetActiveScene().name)
         {
-            case "Stage1":
-                return new Start();
-            case "Stage2":
-                return new Start();
-            case "Stage3":
-                return new Start();
-            case "Stage4":
-                return new Start();
-            case "Stage5":
-                return new Start();
-            case "AIStage1":
-                return new Start();
-            case "AIStage2":
-                return new Start();
-            case "AIStage3":
-                return new Start();
-            case "AIStage4":
-                return new Start();
-            case "AIStage5":
+            case "Game":
                 return new Start();
             default:
                 return this;
