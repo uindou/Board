@@ -621,6 +621,7 @@ public class DataBase : MonoBehaviour
     {
         stage = new List<(int, int, bool, string)>();
         stage.Add((1, 3, true, "PlainFighter"));
+        stage.Add((1, 5, true, "Soldier"));
         stage.Add((1, 2, true, "Soldier"));
         stage.Add((1, 1, true, "Soldier"));
         stage.Add((2, 3, true, "Tank"));
@@ -630,9 +631,11 @@ public class DataBase : MonoBehaviour
         stage.Add((3, 2, true, "Tank"));
         stage.Add((3, 1, true, "PlainFighter"));
 
+
         stage.Add((9, 3, false, "PlainFighter"));
         stage.Add((9, 2, false, "Soldier"));
         stage.Add((9, 1, false, "Soldier"));
+        stage.Add((9, 5, false, "Soldier"));
         stage.Add((8, 3, false, "Tank"));
         stage.Add((8, 2, false, "PlainFighter"));
         stage.Add((8, 1, false, "Soldier"));
