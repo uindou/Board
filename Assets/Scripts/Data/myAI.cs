@@ -19,7 +19,7 @@ public class myAI : MonoBehaviour
     {
         await Task.Delay(500);
         List<GameObject> res = DataBase.MyKoma(gameManage.turn, true);
-        int power1 = 5;
+        int power1 = 7;
         if (!res.Any())
         {
 
