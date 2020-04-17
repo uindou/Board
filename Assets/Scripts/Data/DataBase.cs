@@ -606,6 +606,34 @@ public class DataBase : MonoBehaviour
 
     return stage;
     }
+
+    public static List<(int, int, bool, string)> Stage8MakeStage()
+    {
+    stage = new List<(int, int, bool, string)>();
+    stage.Add((1, 4, true, "PlainFighter"));
+    stage.Add((2, 1, true, "Soldier"));
+    stage.Add((2, 3, true, "Tank"));
+    stage.Add((2, 5, true, "Tank"));
+    stage.Add((1, 7, true, "Soldier"));
+    stage.Add((3, 4, true, "PlainFighter"));
+    stage.Add((4, 2, true, "Soldier"));
+    stage.Add((4, 6, true, "Soldier"));
+    stage.Add((5, 3, true, "Soldier"));
+    stage.Add((5, 4, true, "Tank"));
+    stage.Add((5, 5, true, "Soldier"));
+
+    stage.Add((8, 1, false, "Tank"));
+    stage.Add((8, 7, false, "Tank"));
+    stage.Add((9, 1, false, "Soldier"));
+    stage.Add((9, 2, false, "PlainFighter"));
+    stage.Add((9, 3, false, "Tank"));
+    stage.Add((9, 4, false, "Tank"));
+    stage.Add((9, 5, false, "Tank"));
+    stage.Add((9, 6, false, "PlainFighter"));
+    stage.Add((9, 7, false, "Soldier"));
+
+    return stage;
+    }
 */
 
     /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/
