@@ -399,6 +399,12 @@ public class DataBase : MonoBehaviour
                 return Stage4MakeStage();
             case "Stage5":
                 return Stage5MakeStage();
+            case "Stage6":
+                return Stage6MakeStage();
+            case "Stage7":
+                return Stage7MakeStage();
+            case "Stage8":
+                return Stage8MakeStage();
             case "AIStage1":
                 return Stage1MakeStage();
             case "AIStage2":
@@ -409,6 +415,12 @@ public class DataBase : MonoBehaviour
                 return Stage4MakeStage();
             case "AIStage5":
                 return Stage5MakeStage();
+            case "AIStage6":
+                return Stage6MakeStage();
+            case "AIStage7":
+                return Stage7MakeStage();
+            case "AIStage8":
+                return Stage8MakeStage();
             default:
                 return Stage1MakeStage();
         }
@@ -428,6 +440,12 @@ public class DataBase : MonoBehaviour
                 return Stage4MakeStage();
             case 5:
                 return Stage5MakeStage();
+            case 6:
+                return Stage6MakeStage();
+            case 7:
+                return Stage7MakeStage();
+            case 8:
+                return Stage8MakeStage();
             default:
                 return Stage1MakeStage();
         }
@@ -558,7 +576,7 @@ public class DataBase : MonoBehaviour
         return stage;
     }
 
-    /*
+    
     public static List<(int, int, bool, string)> Stage6MakeStage()
     {
         stage = new List<(int, int, bool, string)>();
@@ -579,9 +597,9 @@ public class DataBase : MonoBehaviour
         stage.Add((8, 6, false, "PlainFighter"));
         return stage;
     }
-    */
+    
 
-    /*
+    
     public static List<(int, int, bool, string)> Stage7MakeStage()
     {
     stage = new List<(int, int, bool, string)>();
@@ -635,7 +653,7 @@ public class DataBase : MonoBehaviour
 
     return stage;
     }
-*/
+
 
     /*---------------------------------------------------MAKE STAGE-----------------------------------------------*/
     public static bool CantAttack(bool turn)
