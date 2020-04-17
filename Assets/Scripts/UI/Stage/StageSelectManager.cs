@@ -46,15 +46,18 @@ public class StageSelectManager : MonoBehaviour
     public static Sprite DefaultSkin;
     public static bool[,,] changeFlag;
     public static bool[,,] AIchangeFlag;
+
+    public static bool isReverce;
     // Start is called before the first frame update
     void Awake()
     {
+        isReverce = false;
         isBoardChange = false;
         PlayerStage = GameObject.Find("PlayerStages");
         AIStage = GameObject.Find("AIStages");
         Debug.Log(PlayerStage);
-        stageNumbers = new List<int>() { 1, 2, 3, 4, 5,6,7,8,9,10 };
-        AIstageNumbers = new List<int>() { 1, 2, 3, 4, 5,6,7,8,9,10 };
+        stageNumbers = new List<int>() { 1, 2, 3, 4, 5,6,7,8};
+        AIstageNumbers = new List<int>() { 1, 2, 3, 4, 5,6,7,8};
         Length = stageNumbers.Count;
         PParents = GameObject.Find("StageSelectWindow");
         AIParents = GameObject.Find("AIStageSelectWindow");
@@ -107,7 +110,7 @@ public class StageSelectManager : MonoBehaviour
                 rightImage2.SetActive(true);
                 rightArrow2.SetActive(true);
             }
-            else if (stageNumbers[0] == 10)
+            else if (stageNumbers[0] == Length)
             {
                 leftImage2.SetActive(true);
                 leftArrow2.SetActive(true);
@@ -134,7 +137,7 @@ public class StageSelectManager : MonoBehaviour
                 rightImage.SetActive(true);
                 rightArrow.SetActive(true);
             }
-            else if (AIstageNumbers[0] == 10)
+            else if (AIstageNumbers[0] == Length)
             {
                 leftImage.SetActive(true);
                 leftArrow.SetActive(true);
@@ -183,17 +186,17 @@ public class StageSelectManager : MonoBehaviour
         {
             PlayerStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Field" + stageNumbers[0].ToString();
             Debug.Log("draw");
-            StageDraw(stageNumbers[Length - 1], Left,false);
-            StageDraw(stageNumbers[0], Center,false);
-            StageDraw(stageNumbers[1], Right,false);
+            StageDraw(stageNumbers[Length - 1], Left,false,isReverce);
+            StageDraw(stageNumbers[0], Center,false,isReverce);
+            StageDraw(stageNumbers[1], Right,false,isReverce);
             
         }else if (AIParents.activeSelf)
         {
             AIStage.transform.GetChild(1).GetChild(1).gameObject.GetComponent<Text>().text = "Field" + AIstageNumbers[0].ToString();
             Debug.Log("draw");
-            StageDraw(AIstageNumbers[Length - 1], AILeft,true);
-            StageDraw(AIstageNumbers[0], AICenter,true);
-            StageDraw(AIstageNumbers[1], AIRight,true);
+            StageDraw(AIstageNumbers[Length - 1], AILeft,true,isReverce);
+            StageDraw(AIstageNumbers[0], AICenter,true,isReverce);
+            StageDraw(AIstageNumbers[1], AIRight,true,isReverce);
         }
         else
         {
@@ -229,7 +232,7 @@ public class StageSelectManager : MonoBehaviour
             }
         }
     }
-    public static void StageDraw(int stage, Transform Parent,bool isAI)
+    public static void StageDraw(int stage, Transform Parent,bool isAI,bool isRev)
     {
         List<(int, int, bool, string)> res = DataBase.ForInitMakeStage(stage);
         foreach ((int, int, bool, string) T in res)

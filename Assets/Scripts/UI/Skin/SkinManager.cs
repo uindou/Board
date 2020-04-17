@@ -31,7 +31,7 @@ public class SkinManager : MonoBehaviour
     }
     public static void SoldierInit()
     {
-        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
+        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 200, 200, 200, 200, 200, 200 };
         SoldierSkin = new List<(string, Sprite, int, bool)>();
         Transform Soldier = SkinData.GetChild(0);
         int skinCount = Soldier.childCount;
@@ -47,7 +47,7 @@ public class SkinManager : MonoBehaviour
     }
     public static void TankInit()
     {
-        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 ,100,100};
+        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 200, 200, 200, 200, 200, 200 };
         TankSkin = new List<(string, Sprite, int, bool)>();
         Transform Tank = SkinData.GetChild(1);
         int skinCount = Tank.childCount;
@@ -62,7 +62,7 @@ public class SkinManager : MonoBehaviour
     }
     public static void PlainInit()
     {
-        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 ,100,100};
+        int[] Prices = new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 200, 200, 200, 200, 200, 200 };
         FighterSkin = new List<(string, Sprite, int, bool)>();
         Transform Plain = SkinData.GetChild(2);
         int skinCount = Plain.childCount;

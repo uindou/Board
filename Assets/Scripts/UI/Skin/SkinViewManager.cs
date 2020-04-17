@@ -33,10 +33,12 @@ public class SkinViewManager : MonoBehaviour
         currentSkin = GameObject.Find("CurrentSkin");
         if (currentSkin == null) Debug.Log("skin search failed");
         SkinWindow = GameObject.Find("SkinWindow").transform.GetChild(1).GetChild(2).GetChild(2);
+        page = 1;
         var (name,sprite,_,_) = SkinManager.SoldierSkin[PlayerPrefs.GetInt("SoldierSetSkin", 0)];
         SkinSet("soldier", name, sprite, PlayerPrefs.GetInt("SoldierSetSkin", 0));
-        page = 1;
+        
         SkinView();
+        //GameObject.Find("SkinWindow").SetActive(false);
         isStart = true;
     }
 
@@ -70,7 +72,6 @@ public class SkinViewManager : MonoBehaviour
         {
             nowSkin = (int)skinType.soldier;
             page = 1;
-            SkinView();
             Debug.Log("onenable");
             switch (nowSkin)
             {
@@ -87,6 +88,7 @@ public class SkinViewManager : MonoBehaviour
                     SkinSet("fighter", na, spri, PlayerPrefs.GetInt("FighterSetSkin", 0));
                     break;
             }
+            SkinView();
             SkinPageText.PageChange(page);
         }
     }
