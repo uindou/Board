@@ -14,7 +14,7 @@ public class RewardAdManager:MonoBehaviour
     private bool IsAdPlayed;
 
     //AndroidAdUnit ID
-    private string AndroidUnitId = "ca-app-pub-3940256099942544/5224354917";
+    private string AndroidUnitId = "ca-app-pub-8801150864537344/9098420115";
     
     //RewardVideoAd.
     private RewardBasedVideoAd RewardAd =null;

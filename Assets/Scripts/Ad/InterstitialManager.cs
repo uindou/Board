@@ -24,7 +24,7 @@ public class InterstitialManager: MonoBehaviour
     //インタースティシャル広告のリクエスト
     private void RequestInterstitial()
     {
-        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+        string adUnitId = "ca-app-pub-8801150864537344/9246933230";
 
         // Initialize an InterstitialAd.
         interstitial = new InterstitialAd(adUnitId);
